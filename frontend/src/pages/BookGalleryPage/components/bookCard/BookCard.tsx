@@ -1,5 +1,7 @@
 import "./BookCard.css"
 
+import {Book} from "../../../../types/types.ts";
+import {Link} from "react-router-dom";
 import {Book} from "../../types/types.ts";
 import axios from "axios";
 
@@ -13,6 +15,7 @@ const deleteBook = (id: string) => {
 }
 
 export default function BookCard({book}: BookCardProps) {
+
     return (
 
         <li>
@@ -20,6 +23,7 @@ export default function BookCard({book}: BookCardProps) {
             <p>Title: {book.title}</p>
             <p>Author:{book.author}</p>
             <button onClick={() => deleteBook(book.id)}>Delete</button>
+            <Link to={`/books/${book.id}`}>Details</Link>
         </li>
 
     );

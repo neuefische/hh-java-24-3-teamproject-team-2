@@ -1,11 +1,14 @@
 package com.github.esgoet.backend.services;
 
 import com.github.esgoet.backend.models.Book;
+import com.github.esgoet.backend.models.BookNotFoundException;
 import com.github.esgoet.backend.repositories.BookRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -42,6 +45,31 @@ class BookServiceUnitTest {
 
         assertEquals(expectedBooks, actualBooks);
     }
+
+    @Test
+    void getBook_Test_whenBookExists_thenReturnBook() {
+        //GIVEN
+        Book book = new Book("1", "George Orwell", "1984");
+        when(bookRepo.findById("1")).thenReturn(Optional.of(book));
+        //WHEN
+        Book actual = bookService.getBook("1");
+        //THEN
+        Book expected = new Book("1", "George Orwell", "1984");
+        verify(bookRepo).findById("1");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getBook_Test_whenBookDoesNotExists_thenThrow() {
+        //GIVEN
+        when(bookRepo.findById("1")).thenReturn(Optional.empty());
+        //WHEN
+        //THEN
+        assertThrows(BookNotFoundException.class,() -> bookService.getBook("1"));
+        verify(bookRepo).findById("1");
+    }
+
+
 
     @Test
     void deleteBook_Test() {

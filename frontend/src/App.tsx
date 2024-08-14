@@ -3,7 +3,9 @@ import "./types/types.ts"
 import axios from "axios"
 import {Book} from "./types/types.ts";
 import {useEffect, useState} from "react";
-import BookGallery from "./components/bookGallery/BookGallery.tsx";
+import {Link, Route, Routes} from "react-router-dom";
+import BookDetailsPage from "./pages/BookDetailsPage/bookDetailsPage/BookDetailsPage.tsx";
+import BookGalleryPage from "./pages/BookGalleryPage/bookGalleryPage/BookGalleryPage.tsx";
 
 
 function App() {
@@ -28,7 +30,12 @@ function App() {
     <>
         <h1>LibraryApp</h1>
         <h3>Cool motto ( ͡° ͜ʖ ͡°)</h3>
-        <BookGallery data={data}/>
+        <Link to={"/books"}>All Books</Link>
+        <Routes>
+            <Route path={"/books"} element={<BookGalleryPage data={data}/>}/>
+            <Route path={"/books/:id"} element={<BookDetailsPage/>}/>
+        </Routes>
+
     </>
     )
 }
