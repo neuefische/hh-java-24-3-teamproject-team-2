@@ -24,8 +24,6 @@ function App() {
         fetchBooks()
     }, []);
 
-    console.log(data)
-
     return (
     <>
         <h1>LibraryApp</h1>
