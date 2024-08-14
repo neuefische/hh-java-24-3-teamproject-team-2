@@ -1,6 +1,6 @@
 import "./BookCard.css"
 
-import {Book} from "../../types/types.ts";
+import {Book} from "../../../../types/types.ts";
 import {Link} from "react-router-dom";
 
 type BookCardProps = {

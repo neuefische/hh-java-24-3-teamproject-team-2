@@ -1,5 +1,5 @@
 import "./BookDetailsPage.css";
-import {Book} from "../../types/types.ts";
+import {Book} from "../../../types/types.ts";
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import {useEffect, useState} from "react";
