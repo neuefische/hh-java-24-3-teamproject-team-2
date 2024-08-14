@@ -19,6 +19,11 @@ export default function BookDetailsPage() {
         fetchBook();
     },[])
 
+    const deleteBook = (id: string) => {
+        axios.delete("/api/books/" + id)
+    }
+
+
     return (
         <>
             <article>
@@ -26,6 +31,7 @@ export default function BookDetailsPage() {
                 <p>Author: {book.author}</p>
                 <p>More details...</p>
                 <Link to={"/"}>Back</Link>
+                <button onClick={() => {deleteBook(book.id)}}>Delete</button>
             </article>
         </>
     )
