@@ -8,5 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public record Book(
         String id,
         String author,
-        String title) {
+        String title,
+        String genre,
+        String isbn,
+        String cover,
+        String description
+) {
 }
