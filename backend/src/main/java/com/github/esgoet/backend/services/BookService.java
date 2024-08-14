@@ -1,11 +1,14 @@
 package com.github.esgoet.backend.services;
 
 import com.github.esgoet.backend.models.Book;
+import com.github.esgoet.backend.models.BookNotFoundException;
 import com.github.esgoet.backend.repositories.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -15,5 +18,10 @@ public class BookService {
 
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
+    }
+
+    public Book getBook(String id) {
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException("No book found with id: " + id));
     }
 }
