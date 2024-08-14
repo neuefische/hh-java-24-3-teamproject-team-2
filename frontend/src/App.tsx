@@ -4,6 +4,8 @@ import axios from "axios"
 import {Book} from "./types/types.ts";
 import {useEffect, useState} from "react";
 import BookGallery from "./components/bookGallery/BookGallery.tsx";
+import {Route, Routes} from "react-router-dom";
+import BookDetailsPage from "./components/bookDetailsPage/BookDetailsPage.tsx";
 
 
 function App() {
@@ -30,7 +32,11 @@ function App() {
     <>
         <h1>LibraryApp</h1>
         <h3>Cool motto ( ͡° ͜ʖ ͡°)</h3>
-        <BookGallery data={data}/>
+        <Routes>
+            <Route path={"/"} element={<BookGallery data={data}/>}/>
+            <Route path={"/books/:id"} element={<BookDetailsPage/>}/>
+        </Routes>
+
     </>
     )
 }
