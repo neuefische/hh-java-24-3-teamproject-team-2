@@ -22,9 +22,6 @@ class BookControllerIntegrationTest {
     @Autowired
     BookRepository bookRepository;
 
-    @Autowired
-    BookRepository bookRepository;
-
     @Test
     public void getAllBooks_Test_When_DbEmpty_Then_returnEmptyArray() throws Exception {
 
