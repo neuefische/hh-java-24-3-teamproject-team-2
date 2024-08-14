@@ -2,19 +2,22 @@ import './EditForm.css'
 import {ChangeEvent, FormEvent, useState} from "react";
 import axios from "axios";
 
-export default function EditForm({data}) {
 
-    type BookData = {
-        title?: string,
-        author?: string,
-        description?: string,
-        genre?: string,
-        isbn?: string,
-        cover?: string
+type FormData = {
+    title?: string,
+    author?: string,
+    description?: string,
+    genre?: string,
+    isbn?: string,
+    cover?: string,
+    id?: string
 
-    }
+}
 
-    const [formData, setFormData] = useState<BookData>()
+export default function EditForm() {
+
+
+    const [formData, setFormData] = useState<FormData>()
 
     function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const {name, value} = event.target;
@@ -26,7 +29,7 @@ export default function EditForm({data}) {
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         try {
-            const response = await axios.put(`/api/books/${data.id}/update`, formData);
+            const response = await axios.put(`/api/books/${book.id}/update`, formData);
             console.log('Update successful:', response.data);
         } catch (error) {
             console.error('Update failed:', error);
