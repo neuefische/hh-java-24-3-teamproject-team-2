@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.bind.annotation.PathVariable;
 
-
 import java.util.List;
 
 @RestController
@@ -22,10 +21,14 @@ public class BookController {
 
     private final BookService bookService;
 
-
     @GetMapping
     public List<Book> getBooks() {
         return bookService.getAllBooks();
+    }
+
+    @GetMapping("/{id}")
+    public Book getBook(@PathVariable String id) {
+        return bookService.getBook(id);
     }
 
     @PutMapping(path = {"{id}/update", "{id}"})
@@ -33,12 +36,8 @@ public class BookController {
         if (!book.id().equals(id)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The id in the url does not match the request body's id");
         }
-        return bookService.update(book);
+        return bookService.updateBook(book, id);
     }
 
 
-    @GetMapping("/{id}")
-    public Book getBook(@PathVariable String id) {
-        return bookService.getBook(id);
-    }
 }
