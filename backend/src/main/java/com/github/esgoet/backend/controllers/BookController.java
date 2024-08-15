@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -21,9 +22,15 @@ public class BookController {
 
     private final BookService bookService;
 
+
     @GetMapping
     public List<Book> getBooks() {
         return bookService.getAllBooks();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteBook(@PathVariable String id) {
+        bookService.deleteBook(id);
     }
 
     @GetMapping("/{id}")

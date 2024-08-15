@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 @RequiredArgsConstructor
 public class BookService {
@@ -17,6 +16,10 @@ public class BookService {
 
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
+    }
+
+    public void deleteBook(String id) {
+        bookRepository.deleteById(id);
     }
 
     public Book getBook(String id) {
