@@ -1,0 +1,49 @@
+li {
+    list-style: none;
+    padding: 15px;
+    text-align: left;
+    display: grid;
+    grid-template-areas: "cover info" "cover book-buttons";
+    gap: 15px;
+    justify-content: stretch;
+    background-color: #a27035;
+    border-radius: 15px;
+}
+
+.book-info {
+    grid-area: info;
+    align-self: flex-start;
+    min-width: 170px;
+}
+
+.book-buttons {
+    grid-area: book-buttons;
+    align-self: flex-end;
+    justify-self: flex-end;
+}
+
+.book-button {
+    background-color: #533E2D;
+    color: #DDCA7D;
+    border-radius: 5px;
+    text-align: center;
+    padding: 4px 8px;
+    align-self: flex-end;
+}
+
+.book-button:hover {
+    background-color: #DDCA7D;
+    color: #533E2D;
+    border: 1px solid #533E2D;
+}
+
+.author {
+    font-style: italic;
+}
+
+img {
+    height: 100px;
+    aspect-ratio: 1/1.5;
+    border: 1px solid white;
+    grid-area: cover;
+}
