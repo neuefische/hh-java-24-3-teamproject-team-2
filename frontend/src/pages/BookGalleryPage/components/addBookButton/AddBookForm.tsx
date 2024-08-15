@@ -6,7 +6,9 @@ export default function AddBookForm() {
 
     const [book, setBook] = useState<NewBook>({title: "", author: "", genre: "", publicationDate: ""});
 
-    function handleChange(event: ChangeEvent<HTMLInputElement>): void {
+    const genres: string[] = ["NONE", "FICTION", "MYSTERY", "THRILLER", "FANTASY", "SCIENCE", "NON_FICTION", "HISTORY", "NOVEL"];
+
+    function handleChange(event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>): void {
         setBook({...book, [event.target.name]: event.target.value})
     }
 
@@ -14,6 +16,8 @@ export default function AddBookForm() {
         event.preventDefault();
 
         console.log(book);
+        console.log(event);
+
         axios.post("/api/books", {
             title: book.title,
             author: book.author,
@@ -33,6 +37,7 @@ export default function AddBookForm() {
                 name={"title"}
                 value={book.title}
                 onChange={handleChange}
+                required={true}
             />
             <label>Author</label>
             <input
@@ -40,14 +45,14 @@ export default function AddBookForm() {
                 name={"author"}
                 value={book.author}
                 onChange={handleChange}
+                required={true}
             />
             <label>Genre</label>
-            <input
-                type={"text"}
-                name={"genre"}
-                value={book.genre}
-                onChange={handleChange}
-            />
+            <select required={true} value={book.genre} onChange={handleChange} name={"genre"}>
+                {genres.map(entry => (
+                    <option>{entry}</option>
+                ))}
+            </select>
             <label>Publication Date</label>
             <input
                 type={"date"}
