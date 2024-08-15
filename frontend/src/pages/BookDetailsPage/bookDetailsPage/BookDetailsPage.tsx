@@ -30,12 +30,20 @@ export default function BookDetailsPage({deleteBook}: DeleteProps) {
     },[])
 
     return (
-        <article>
-            <h3>Title: {book.title}</h3>
-            <p>Author: {book.author}</p>
-            <p>More details...</p>
-            <Link to={"/"}>Back</Link>
-            <button onClick={() => {handleDelete(book.id)}}>Delete</button>
+        <article className={"book-details"}>
+            <Link className={"book-button align-left"} to={"/books"}>Back</Link>
+            <h3>{book.title}</h3>
+            <img className={"big-cover"} alt={`${book.title} Book Cover`}/>
+            <div className={"book-details-info"}>
+                <p><span className={"book-label"}>Title:</span> {book.title}</p>
+                <p><span className={"book-label"}>Author:</span> {book.author}</p>
+                <p>More details...</p>
+            </div>
+
+            <button onClick={() => {
+                handleDelete(book.id)
+            }}>Delete
+            </button>
         </article>
     )
-    }
+}

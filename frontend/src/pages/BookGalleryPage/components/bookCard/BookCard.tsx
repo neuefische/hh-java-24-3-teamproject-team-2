@@ -11,13 +11,13 @@ export default function BookCard({book}: BookCardProps) {
         return (
 
         <li>
-            <img alt={`${book.title} Book Cover`}/>
+            <img className={"cover"} alt={`${book.title} Book Cover`}/>
             <div className={"book-info"}>
                 <h4>{book.title}</h4>
                 <p className={"author"}>By {book.author}</p>
             </div>
             <div className={"book-buttons"}>
-                <Link className={"book-button"} to={`/books/${book.id}`}>Details</Link>
+                <Link className={"book-button align-right"} to={`/books/${book.id}`}>Details</Link>
             </div>
         </li>
 

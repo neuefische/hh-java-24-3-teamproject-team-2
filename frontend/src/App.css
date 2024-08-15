@@ -4,3 +4,11 @@
   padding: 2rem;
   text-align: center;
 }
+
+.align-right {
+  align-self: flex-end;
+}
+
+.align-left {
+  align-self: flex-start;
+}
