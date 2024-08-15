@@ -6,7 +6,7 @@ import lombok.With;
 import java.time.LocalDate;
 
 @With
-public record NewBookDto(
+public record BookDto(
         String author,
         String title,
         Genre genre,

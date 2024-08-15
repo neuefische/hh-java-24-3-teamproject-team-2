@@ -123,23 +123,6 @@ class BookControllerIntegrationTest {
                 .andExpect(content().json("[]"));
     }
 
-//    @DirtiesContext
-//    @Test
-//    void getBook_Test_whenIdDoesNotExists() throws Exception {
-//        //WHEN
-//        mockMvc.perform(MockMvcRequestBuilders.get("/api/books/1"))
-//                //THEN
-//                .andExpect(status().isNotFound())
-//                .andExpect(content().json("""
-//                        {
-//                          "message":"No book found with id: 1",
-//                          "statusCode":404
-//                        }
-//                        """))
-//                .andExpect(jsonPath("$.timestamp").exists());
-//    }
-
-
     @DirtiesContext
     @Test
     void updateBook_Test_When_IdMatches() throws Exception {

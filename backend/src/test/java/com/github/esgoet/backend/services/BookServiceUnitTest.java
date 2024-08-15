@@ -1,6 +1,6 @@
 package com.github.esgoet.backend.services;
 
-import com.github.esgoet.backend.dto.NewBookDto;
+import com.github.esgoet.backend.dto.BookDto;
 import com.github.esgoet.backend.models.Book;
 import com.github.esgoet.backend.models.BookNotFoundException;
 import com.github.esgoet.backend.models.Genre;
@@ -76,16 +76,16 @@ class BookServiceUnitTest {
     @Test
     void addABookTest_whenNewBookAsInput_thenReturnNewBook() {
         // GIVEN
-        NewBookDto newBookDto = new NewBookDto("J. K. Rowling", "Harry Potter", Genre.FANTASY, "this is a description", "123456isbn", "https://linkToCover", localDate);
-        Book bookToSave = new Book("1", newBookDto.author(), newBookDto.title(), newBookDto.genre(), newBookDto.description(), newBookDto.isbn(), newBookDto.cover(), newBookDto.publicationDate());
+        BookDto bookDto = new BookDto("J. K. Rowling", "Harry Potter", Genre.FANTASY, "this is a description", "123456isbn", "https://linkToCover", localDate);
+        Book bookToSave = new Book("1", bookDto.author(), bookDto.title(), bookDto.genre(), bookDto.description(), bookDto.isbn(), bookDto.cover(), bookDto.publicationDate());
         when(bookRepo.save(bookToSave)).thenReturn(bookToSave);
         when(idService.randomId()).thenReturn(bookToSave.id());
 
         // WHEN
-        Book actual = bookService.saveBook(newBookDto);
+        Book actual = bookService.saveBook(bookDto);
 
         // THEN
-        Book expected = new Book("1", newBookDto.author(), newBookDto.title(), newBookDto.genre(), newBookDto.description(), newBookDto.isbn(), newBookDto.cover(), newBookDto.publicationDate());
+        Book expected = new Book("1", bookDto.author(), bookDto.title(), bookDto.genre(), bookDto.description(), bookDto.isbn(), bookDto.cover(), bookDto.publicationDate());
         verify(bookRepo).save(bookToSave);
         verify(idService).randomId();
         assertEquals(expected, actual);
@@ -104,7 +104,7 @@ class BookServiceUnitTest {
         // Given
         String id = "1";
         Book existingBook = new Book(id, "author1", "title1", Genre.THRILLER, "description1", "12345678", "cover1", localDate);
-        Book updatedBook = new Book(id, "author2", "title2", Genre.FICTION, "description2", "23456789", "cover2", localDate);
+        BookDto updatedBook = new BookDto("author2", "title2", Genre.FICTION, "description2", "23456789", "cover2", localDate);
 
         // When
         when(bookRepo.findById(id)).thenReturn(Optional.of(existingBook));
@@ -130,7 +130,7 @@ class BookServiceUnitTest {
 
         // Given
         String id = "1";
-        Book updatedBook = new Book(id, "author", "title", Genre.FICTION, "description", "isbn", "cover", localDate);
+        BookDto updatedBook = new BookDto("author", "title", Genre.FICTION, "description", "isbn", "cover", localDate);
 
         //When
         when(bookRepo.findById(id)).thenReturn(Optional.empty());

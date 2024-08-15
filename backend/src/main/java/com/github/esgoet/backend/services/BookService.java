@@ -1,6 +1,6 @@
 package com.github.esgoet.backend.services;
 
-import com.github.esgoet.backend.dto.NewBookDto;
+import com.github.esgoet.backend.dto.BookDto;
 import com.github.esgoet.backend.models.Book;
 import com.github.esgoet.backend.models.BookNotFoundException;
 import com.github.esgoet.backend.repositories.BookRepository;
@@ -29,21 +29,21 @@ public class BookService {
                 .orElseThrow(() -> new BookNotFoundException("No book found with id: " + id));
     }
 
-    public Book saveBook(NewBookDto newBookDto) {
+    public Book saveBook(BookDto bookDto) {
         Book bookToSave = new Book(
                 idService.randomId(),
-                newBookDto.author(),
-                newBookDto.title(),
-                newBookDto.genre(),
-                newBookDto.description(),
-                newBookDto.isbn(),
-                newBookDto.cover(),
-                newBookDto.publicationDate()
+                bookDto.author(),
+                bookDto.title(),
+                bookDto.genre(),
+                bookDto.description(),
+                bookDto.isbn(),
+                bookDto.cover(),
+                bookDto.publicationDate()
         );
         return bookRepository.save(bookToSave);
     }
 
-    public Book updateBook(Book updateBook, String id) {
+    public Book updateBook(BookDto updateBook, String id) {
         Book book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException("No book found with id: " + id))
                 .withAuthor(updateBook.author())
                 .withCover(updateBook.cover())
