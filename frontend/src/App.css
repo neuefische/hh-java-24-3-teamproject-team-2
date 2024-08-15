@@ -11,6 +11,7 @@ main {
   align-content: center;
   place-items: center;
   flex-direction: column;
+  padding: 20px;
 }
 
 .align-right {
