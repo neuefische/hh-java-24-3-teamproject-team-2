@@ -5,6 +5,8 @@ import {useEffect, useState} from "react";
 import {Link, Route, Routes} from "react-router-dom";
 import BookDetailsPage from "./pages/BookDetailsPage/bookDetailsPage/BookDetailsPage.tsx";
 import BookGalleryPage from "./pages/BookGalleryPage/bookGalleryPage/BookGalleryPage.tsx";
+import AddBookForm from "./pages/BookGalleryPage/components/addBookButton/AddBookForm.tsx";
+import Header from "./components/header/Header.tsx";
 
 
 
@@ -36,11 +38,11 @@ function App() {
 
     return (
     <>
-        <h1>LibraryApp</h1>
-        <h3>Cool motto ( ͡° ͜ʖ ͡°)</h3>
+        <Header />
         <Link to={"/books"}>All Books</Link>
         <Routes>
             <Route path={"/books"} element={<BookGalleryPage data={data}/>}/>
+            <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks}/>}/>
             <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook}/>}/>
         </Routes>
     </>
