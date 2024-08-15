@@ -1,12 +1,22 @@
 import {ChangeEvent, FormEvent, useState} from "react";
-import {NewBook} from "../../../../types/types.ts";
+import {Genre, NewBook} from "../../../../types/types.ts";
 import axios from "axios";
 
 export default function AddBookForm() {
 
     const [book, setBook] = useState<NewBook>({title: "", author: "", genre: "", publicationDate: ""});
 
-    const genres: string[] = ["NONE", "FICTION", "MYSTERY", "THRILLER", "FANTASY", "SCIENCE", "NON_FICTION", "HISTORY", "NOVEL"];
+    const genres: Genre = {
+        NONE: "None",
+        FICTION: "Fiction",
+        MYSTERY: "Mystery",
+        THRILLER: "Thriller",
+        FANTASY: "Fantasy",
+        SCIENCE: "Science",
+        NON_FICTION: "Non fiction",
+        HISTORY: "History",
+        NOVEL: "Novel"
+    }
 
     function handleChange(event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>): void {
         setBook({...book, [event.target.name]: event.target.value})
@@ -21,7 +31,8 @@ export default function AddBookForm() {
         axios.post("/api/books", {
             title: book.title,
             author: book.author,
-            genre: book.genre,
+            genre: Object.keys(genres).find(
+                key => genres[key as keyof typeof genres] === book.genre),
             publicationDate: book.publicationDate
         })
             .then(response => console.log(response))
@@ -49,8 +60,10 @@ export default function AddBookForm() {
             />
             <label>Genre</label>
             <select required={true} value={book.genre} onChange={handleChange} name={"genre"}>
-                {genres.map(entry => (
-                    <option>{entry}</option>
+                {Object.values(genres).map((genre, index) => (
+                    <option key={index} value={genre}>
+                        {genre}
+                    </option>
                 ))}
             </select>
             <label>Publication Date</label>
