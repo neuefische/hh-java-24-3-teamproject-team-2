@@ -27,7 +27,6 @@ export default function BookDetailsPage() {
     useEffect(() => {
         fetchBook();
     }, [])
-    console.log(book)
     return (
         <>
             <article>
@@ -39,15 +38,7 @@ export default function BookDetailsPage() {
                 <img width={200} alt={`cover form book ${book.title}`} src={book.cover}/>
                 <Link to={"/"}>Back</Link>
             </article>
-            <EditForm
-                id={book.id}
-                title={book.title}
-                author={book.author}
-                description={book.description}
-                genre={book.genre}
-                isbn={book.isbn}
-                cover={book.cover}
-            />
+            <EditForm book={book}/>
         </>
     )
 }
