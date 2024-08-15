@@ -42,7 +42,7 @@ function App() {
         <Link to={"/books"}>All Books</Link>
         <Routes>
             <Route path={"/books"} element={<BookGalleryPage data={data}/>}/>
-            <Route path={"/books/add"} element={<AddBookForm/>}/>
+            <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks}/>}/>
             <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook}/>}/>
         </Routes>
     </>

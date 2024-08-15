@@ -1,10 +1,16 @@
 import {ChangeEvent, FormEvent, useState} from "react";
 import {Genre, NewBook} from "../../../../types/types.ts";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
-export default function AddBookForm() {
+type FetchProps = {
+    fetchBooks: () => void;
+}
+
+export default function AddBookForm({ fetchBooks }: FetchProps) {
 
     const [book, setBook] = useState<NewBook>({title: "", author: "", genre: "", publicationDate: ""});
+    const navigate = useNavigate();
 
     const genres: Genre = {
         NONE: "None",
@@ -13,7 +19,7 @@ export default function AddBookForm() {
         THRILLER: "Thriller",
         FANTASY: "Fantasy",
         SCIENCE: "Science",
-        NON_FICTION: "Non fiction",
+        NON_FICTION: "Non-fiction",
         HISTORY: "History",
         NOVEL: "Novel"
     }
@@ -35,9 +41,11 @@ export default function AddBookForm() {
                 key => genres[key as keyof typeof genres] === book.genre),
             publicationDate: book.publicationDate
         })
+            .then(() => fetchBooks())
             .then(response => console.log(response))
             .catch(error => console.log(error))
 
+        navigate("/books")
     }
 
     return (
@@ -60,8 +68,8 @@ export default function AddBookForm() {
             />
             <label>Genre</label>
             <select required={true} value={book.genre} onChange={handleChange} name={"genre"}>
-                {Object.values(genres).map((genre, index) => (
-                    <option key={index} value={genre}>
+                {Object.values(genres).map((genre) => (
+                    <option value={genre}>
                         {genre}
                     </option>
                 ))}
