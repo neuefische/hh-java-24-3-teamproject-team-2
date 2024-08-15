@@ -2,6 +2,15 @@
   width: 100%;
 }
 
+main {
+  max-width: 900px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  place-items: center;
+  flex-direction: column;
+}
+
 .align-right {
   align-self: flex-end;
 }
