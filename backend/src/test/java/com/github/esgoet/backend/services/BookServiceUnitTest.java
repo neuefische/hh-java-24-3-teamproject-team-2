@@ -84,8 +84,8 @@ class BookServiceUnitTest {
         Book actual = bookService.saveBook(newBookDto);
 
         // THEN
-        Book expected = bookToSave;
-        verify(bookRepo).save(new Book("1", newBookDto.author(), newBookDto.title(), newBookDto.genre(), newBookDto.publicationDate()));
+        Book expected = new Book("1", newBookDto.author(), newBookDto.title(), newBookDto.genre(), newBookDto.publicationDate());
+        verify(bookRepo).save(bookToSave);
         verify(idService).randomId();
         assertEquals(expected, actual);
     }
