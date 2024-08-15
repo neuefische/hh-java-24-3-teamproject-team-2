@@ -7,13 +7,13 @@ public enum Genre {
     THRILLER("Thriller"),
     FANTASY("Fantasy"),
     SCIENCE("Science"),
-    NON_FICTION("None Fiction"),
+    NON_FICTION("Non-fiction"),
     HISTORY("History"),
     NOVEL("Novel");
 
-    private final String genre;
+    private final String genreValue;
 
-    Genre(String genre) { this.genre = genre; }
+    Genre(String genreValue) { this.genreValue = genreValue; }
 
-    public String getGenre() { return genre; }
+    public String getGenre() { return genreValue; }
 }

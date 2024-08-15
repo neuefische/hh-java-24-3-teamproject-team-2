@@ -50,14 +50,16 @@ class BookControllerIntegrationTest {
                         {
                           "id": "1",
                           "author": "George Orwell",
-                          "title": "1984"
+                          "title": "1984",
+                          "genre": "FANTASY",
+                          "publicationDate": "2024-08-14"
                         }
                         """));
     }
 
     @Test
     @DirtiesContext
-    public void addABookTest_whenNewTodoExists_thenReturnNewTodo() throws Exception {
+    void addABookTest_whenNewTodoExists_thenReturnNewTodo() throws Exception {
         // GIVEN
 
         // WHEN

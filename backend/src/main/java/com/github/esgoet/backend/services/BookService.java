@@ -30,7 +30,7 @@ public class BookService {
                 .orElseThrow(() -> new BookNotFoundException("No book found with id: " + id));
     }
 
-    public Book saveNewABook(NewBookDto newBookDto) {
+    public Book saveBook(NewBookDto newBookDto) {
         Book bookToSave = new Book(
                 idService.randomId(),
                 newBookDto.author(),

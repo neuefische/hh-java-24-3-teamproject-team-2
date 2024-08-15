@@ -76,15 +76,17 @@ class BookServiceUnitTest {
     void addABookTest_whenNewBookAsInput_thenReturnNewBook() {
         // GIVEN
         NewBookDto newBookDto = new NewBookDto("J. K. Rowling", "Harry Potter", Genre.FANTASY, localDate);
-        Book bookToSave = new Book(idService.randomId(), newBookDto.author(), newBookDto.title(), newBookDto.genre(), newBookDto.publicationDate());
+        Book bookToSave = new Book("1", newBookDto.author(), newBookDto.title(), newBookDto.genre(), newBookDto.publicationDate());
         when(bookRepo.save(bookToSave)).thenReturn(bookToSave);
+        when(idService.randomId()).thenReturn(bookToSave.id());
 
         // WHEN
-        Book actual = bookService.saveNewABook(newBookDto);
+        Book actual = bookService.saveBook(newBookDto);
 
         // THEN
         Book expected = bookToSave;
-        verify(bookRepo).save(bookToSave);
+        verify(bookRepo).save(new Book("1", newBookDto.author(), newBookDto.title(), newBookDto.genre(), newBookDto.publicationDate()));
+        verify(idService).randomId();
         assertEquals(expected, actual);
     }
 
