@@ -26,6 +26,7 @@ export default function EditForm() {
         });
     }
 
+// wenn ein feld nicht bearbeitet wird dasnn die alten daten uebernehmen nicht ueberschreiben mit leerem string
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         try {
