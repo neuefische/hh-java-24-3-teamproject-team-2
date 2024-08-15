@@ -8,10 +8,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -25,7 +24,7 @@ class BookControllerIntegrationTest {
     @Test
     public void getAllBooks_Test_When_DbEmpty_Then_returnEmptyArray() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/books"))
+        mockMvc.perform(get("/api/books"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[]"));
 
@@ -37,7 +36,7 @@ class BookControllerIntegrationTest {
         //GIVEN
         bookRepository.save(new Book("1","George Orwell", "1984"));
         //WHEN
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/books/1"))
+        mockMvc.perform(get("/api/books/1"))
                 //THEN
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
@@ -53,7 +52,7 @@ class BookControllerIntegrationTest {
     @Test
     void getBook_Test_whenIdDoesNotExists() throws Exception {
         //WHEN
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/books/1"))
+        mockMvc.perform(get("/api/books/1"))
                 //THEN
                 .andExpect(status().isNotFound())
                 .andExpect(content().json("""
@@ -63,6 +62,19 @@ class BookControllerIntegrationTest {
                         }
                         """))
                 .andExpect(jsonPath("$.timestamp").exists());
+    }
+
+    @Test
+    public void deleteBook() throws Exception {
+
+        bookRepository.save(new Book("1", "Simon", "HowToDeleteBooksFast"));
+
+        mockMvc.perform(delete("/api/books/1"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/books"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
     }
 
 }

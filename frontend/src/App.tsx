@@ -1,11 +1,11 @@
 import './App.css'
-import "./types/types.ts"
 import axios from "axios"
 import {Book} from "./types/types.ts";
 import {useEffect, useState} from "react";
 import {Link, Route, Routes} from "react-router-dom";
 import BookDetailsPage from "./pages/BookDetailsPage/bookDetailsPage/BookDetailsPage.tsx";
 import BookGalleryPage from "./pages/BookGalleryPage/bookGalleryPage/BookGalleryPage.tsx";
+
 
 
 function App() {
@@ -22,11 +22,17 @@ function App() {
             })
     }
 
+    const deleteBook = (id: string) => {
+        axios.delete("/api/books/" + id)
+            .then((response) => response.status === 200 && fetchBooks())
+            .catch((error) => console.log(error.message))
+
+
+    }
+
     useEffect(() => {
         fetchBooks()
     }, []);
-
-    console.log(data)
 
     return (
     <>
@@ -35,9 +41,8 @@ function App() {
         <Link to={"/books"}>All Books</Link>
         <Routes>
             <Route path={"/books"} element={<BookGalleryPage data={data}/>}/>
-            <Route path={"/books/:id"} element={<BookDetailsPage/>}/>
+            <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook}/>}/>
         </Routes>
-
     </>
     )
 }

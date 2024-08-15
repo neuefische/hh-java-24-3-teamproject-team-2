@@ -4,7 +4,7 @@ import com.github.esgoet.backend.models.Book;
 import com.github.esgoet.backend.models.BookNotFoundException;
 import com.github.esgoet.backend.repositories.BookRepository;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,4 +70,11 @@ class BookServiceUnitTest {
     }
 
 
+
+    @Test
+    void deleteBook_Test() {
+        doNothing().when(bookRepo).deleteById("1");
+        bookService.deleteBook("1");
+        verify(bookRepo).deleteById("1");
+    }
 }
