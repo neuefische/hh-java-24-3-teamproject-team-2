@@ -10,8 +10,9 @@ public record Book(
         String author,
         String title,
         String genre,
+        String description,
         String isbn,
-        String cover,
-        String description
+        String cover
+
 ) {
 }
