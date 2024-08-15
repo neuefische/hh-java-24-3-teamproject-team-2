@@ -8,7 +8,8 @@ public enum Genre {
     FANTASY("Fantasy"),
     SCIENCE("Science"),
     NON_FICTION("None Fiction"),
-    HISTORY("History");
+    HISTORY("History"),
+    NOVEL("Novel");
 
     private final String genre;
 
