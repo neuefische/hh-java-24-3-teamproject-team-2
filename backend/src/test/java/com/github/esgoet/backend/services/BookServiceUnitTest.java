@@ -6,7 +6,6 @@ import com.github.esgoet.backend.models.BookNotFoundException;
 import com.github.esgoet.backend.models.Genre;
 import com.github.esgoet.backend.repositories.BookRepository;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,5 +86,12 @@ class BookServiceUnitTest {
         Book expected = bookToSave;
         verify(bookRepo).save(bookToSave);
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void deleteBook_Test() {
+        doNothing().when(bookRepo).deleteById("1");
+        bookService.deleteBook("1");
+        verify(bookRepo).deleteById("1");
     }
 }

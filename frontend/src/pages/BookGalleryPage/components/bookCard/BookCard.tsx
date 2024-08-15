@@ -14,7 +14,7 @@ export default function BookCard({book}: BookCardProps) {
         <li>
             <p>Id: {book.id}</p>
             <p>Title: {book.title}</p>
-            <p>Author:{book.author}</p>
+            <p>Author: {book.author}</p>
             <Link to={`/books/${book.id}`}>Details</Link>
         </li>
 

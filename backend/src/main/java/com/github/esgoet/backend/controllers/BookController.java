@@ -19,9 +19,15 @@ public class BookController {
 
     private final BookService bookService;
 
+
     @GetMapping
     public List<Book> getBooks() {
         return bookService.getAllBooks();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteBook(@PathVariable String id) {
+        bookService.deleteBook(id);
     }
 
     @GetMapping("/{id}")
