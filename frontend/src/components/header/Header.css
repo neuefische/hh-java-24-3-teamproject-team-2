@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cedarville+Cursive&family=Playwrite+DE+LA:wght@100..400&display=swap');
+
+header {
+
+    background-color: #183A37;
+    width: 100%;
+    padding: 15px;
+}
+
+header div {
+    max-width: 900px;
+    margin: auto;
+    display: grid;
+    justify-items: start;
+    align-items: center;
+    grid-template-areas: "logo heading" "tag-line tag-line";
+    justify-content: start;
+}
+
+#logo {
+    width: 50px;
+    grid-area: logo;
+    margin-bottom: -10px;
+}
+
+h1 {
+    color: #C44900;
+    font-size: 35px;
+    padding: 0;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: bold;
+    grid-area: heading;
+    margin-left: -40px;
+    margin-bottom: -15px;
+}
+
+#tag-line {
+    color: #EFD6AC;
+    font-weight: bold;
+    font-variant-caps: all-small-caps;
+    font-size: 14px;
+    grid-area: tag-line;
+
+}
