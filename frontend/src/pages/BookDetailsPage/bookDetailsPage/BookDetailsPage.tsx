@@ -4,6 +4,7 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {FormEvent, useEffect, useState} from "react";
 import BookForm from "../../../components/bookForm/BookForm.tsx";
+import ConfirmationModal from "../../../components/confirmationModal/ConfirmationModal.tsx";
 
 
 type DeleteProps = {
@@ -22,6 +23,9 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
         publicationDate: ""
     })
     const [editable, setEditable ] = useState<boolean>(false);
+
+    const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+
     const params = useParams();
     const navigate = useNavigate();
     const id: string | undefined = params.id;
@@ -35,9 +39,18 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
         fetchBook();
     }, [])
 
-    const handleDelete = (id: string) => {
-        deleteBook(id)
-        navigate("/books")
+    const handleDelete = () => {
+       setShowDeleteModal(true);
+    }
+
+    const handleClose = () => {
+        setShowDeleteModal(false)
+    }
+
+    const handleDeleteConfirm = (id: string) => {
+        deleteBook(id);
+        navigate("/books");
+        setShowDeleteModal(false);
     }
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -64,11 +77,9 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
             <h2>{book.title}</h2>
             <img className={"big-cover"} src={book.cover} alt={`${book.title} Book Cover`}/>
             <BookForm book={book} setBook={setBook} handleSubmit={handleSubmit} action={"Update"} editable={editable}/>
-            <button className={"stretch"} onClick={() => {
-                handleDelete(book.id)
-            }}>Delete
+            <button className={"stretch"} onClick={handleDelete}>Delete
             </button>
+            {showDeleteModal && <ConfirmationModal handleClose={handleClose} handleDeleteConfirm={handleDeleteConfirm} bookToBeDeleted={book}/>}
         </article>
-
     )
 }
