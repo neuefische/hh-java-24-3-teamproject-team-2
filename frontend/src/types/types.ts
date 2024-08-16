@@ -28,7 +28,7 @@ export type Genre = {
     SCIENCE: string,
     NON_FICTION: string,
     HISTORY: string,
-    NOVEL: string
+    NOVEL: string,
     HISTORICAL_FICTION: string,
     SCIENCE_FICTION: string,
     ROMANCE: string,
