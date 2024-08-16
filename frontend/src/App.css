@@ -36,3 +36,43 @@ h2 {
   font-family: "Bebas Neue", sans-serif;
   font-weight: bold;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+form input, select, textarea {
+  background-color: #183A37;
+  padding: 8px 5px;
+  border: 1px solid #5b84ea;
+  border-radius: 5px;
+}
+
+form label {
+  margin-bottom: -10px;
+}
+
+.book-label {
+  font-weight: bold;
+  color: #5B84EA;
+  font-variant-caps: all-small-caps;
+}
+
+
+.book-button {
+  background-color: #C44900;
+  color: #EFD6AC;
+  border-radius: 5px;
+  text-align: center;
+  padding: 6px 12px;
+  font-size: 1em;
+  border: 1px solid transparent;
+  transition: border-color 0.25s;
+}
+
+.book-button:hover {
+  border-color: #EFD6AC;
+  color: #EFD6AC;
+}

@@ -15,12 +15,6 @@
     border: 1px solid #5b84ea;
 }
 
-.book-label {
-    font-weight: bold;
-    color: #5B84EA;
-    font-variant-caps: all-small-caps;
-}
-
 .book-details-info {
     padding: 10px 0;
     display: flex;

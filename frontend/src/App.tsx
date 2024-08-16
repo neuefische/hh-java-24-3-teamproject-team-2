@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {Link, Route, Routes} from "react-router-dom";
 import BookDetailsPage from "./pages/BookDetailsPage/bookDetailsPage/BookDetailsPage.tsx";
 import BookGalleryPage from "./pages/BookGalleryPage/bookGalleryPage/BookGalleryPage.tsx";
-import AddBookForm from "./pages/BookGalleryPage/components/addBookForm/AddBookForm.tsx";
+import AddBookForm from "./pages/BookGalleryPage/components/addBookButton/AddBookForm.tsx";
 import Header from "./components/header/Header.tsx";
 
 
