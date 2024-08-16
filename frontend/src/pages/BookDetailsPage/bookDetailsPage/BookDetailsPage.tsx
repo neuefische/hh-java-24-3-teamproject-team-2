@@ -1,9 +1,10 @@
 import "./BookDetailsPage.css";
 import {Book} from "../../../types/types.ts";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import EditForm from "../../../components/editForm/EditForm.tsx";
+import ConfirmationModal from "../../../components/confirmationModal/ConfirmationModal.tsx";
 
 
 type DeleteProps = {
@@ -21,8 +22,11 @@ export default function BookDetailsPage({deleteBook}: DeleteProps) {
         cover: "",
         publicationDate: ""
     })
+
+    const [showPopup, setShowPopup] = useState<boolean>(false);
+
     const params = useParams();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const id: string | undefined = params.id;
 
     const fetchBook = () => {
@@ -32,9 +36,13 @@ export default function BookDetailsPage({deleteBook}: DeleteProps) {
     }
 
     const handleDelete = (id: string) => {
-        deleteBook(id)
-        navigate("/books")
+        //deleteBook(id)
+        //navigate("/books")
+
+        setShowPopup(true);
     }
+
+    const handleClose = () => {setShowPopup(false)}
 
     useEffect(() => {
         fetchBook();
@@ -56,6 +64,7 @@ export default function BookDetailsPage({deleteBook}: DeleteProps) {
                 }}>Delete
                 </button>
             </article>
+            {showPopup && <ConfirmationModal handleClose={handleClose}/>}
             <EditForm book={book}/>
         </>
     )
