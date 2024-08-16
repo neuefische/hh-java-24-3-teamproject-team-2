@@ -2,7 +2,7 @@ import './App.css'
 import axios from "axios"
 import {Book} from "./types/types.ts";
 import {useEffect, useState} from "react";
-import {Route, Routes} from "react-router-dom";
+import {Link, Route, Routes} from "react-router-dom";
 import BookDetailsPage from "./pages/BookDetailsPage/bookDetailsPage/BookDetailsPage.tsx";
 import BookGalleryPage from "./pages/BookGalleryPage/bookGalleryPage/BookGalleryPage.tsx";
 import AddBookForm from "./pages/BookGalleryPage/components/addBookForm/AddBookForm.tsx";
@@ -28,6 +28,8 @@ export default function App() {
         axios.delete("/api/books/" + id)
             .then((response) => response.status === 200 && fetchBooks())
             .catch((error) => console.log(error.message))
+
+
     }
 
     useEffect(() => {
@@ -36,7 +38,8 @@ export default function App() {
 
     return (
         <>
-            <Header/>
+            <Header />
+            <Link to={"/books"}>All Books</Link>
             <main>
                 <Navigation/>
                 <Routes>
