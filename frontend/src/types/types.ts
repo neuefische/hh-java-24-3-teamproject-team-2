@@ -33,5 +33,6 @@ export type Genre = {
     SCIENCE_FICTION: string,
     ROMANCE: string,
     YOUNG_ADULT: string,
-    ADVENTURE: string
+    ADVENTURE: string,
+    HORROR: string
 }
