@@ -21,7 +21,8 @@ const genres: Genre = {
     SCIENCE_FICTION: "Science fiction",
     ROMANCE: "Romance",
     YOUNG_ADULT: "Young adult",
-    ADVENTURE: "Adventure"
+    ADVENTURE: "Adventure",
+    HORROR: "Horror"
 }
 
 export default function EditForm({book}: Readonly<FormData>) {

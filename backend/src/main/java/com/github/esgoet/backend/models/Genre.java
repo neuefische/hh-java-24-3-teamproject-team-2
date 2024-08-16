@@ -14,7 +14,8 @@ public enum Genre {
     SCIENCE_FICTION("Science fiction"),
     ROMANCE("Romance"),
     YOUNG_ADULT("Young adult"),
-    ADVENTURE("Adventure");
+    ADVENTURE("Adventure"),
+    HORROR("Horror");
 
     private final String genreValue;
 
