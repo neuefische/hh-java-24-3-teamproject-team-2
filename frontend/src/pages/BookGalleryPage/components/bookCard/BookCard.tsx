@@ -7,7 +7,7 @@ type BookCardProps = {
     book: Book
 }
 
-export default function BookCard({book}: BookCardProps) {
+export default function BookCard({book}: Readonly<BookCardProps>) {
 
     return (
 

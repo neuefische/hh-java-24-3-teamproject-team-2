@@ -19,7 +19,7 @@ const genres: Genre = {
     NOVEL: "Novel"
 }
 
-export default function EditForm({book}: FormData) {
+export default function EditForm({book}: Readonly<FormData>) {
 
     const [formData, setFormData] = useState<Book>(book);
 
@@ -46,8 +46,7 @@ export default function EditForm({book}: FormData) {
 
     return (
         <form onSubmit={onSubmit}>
-            <label>Title:
-                <input
+            <label>Title:<input
                     placeholder={book.title}
                     type="text"
                     name="title"
@@ -55,8 +54,7 @@ export default function EditForm({book}: FormData) {
                     onChange={handleChange}
                 />
             </label>
-            <label>Author:
-                <input
+            <label>Author:<input
                     placeholder={book.author}
                     type="text"
                     name="author"
@@ -64,25 +62,22 @@ export default function EditForm({book}: FormData) {
                     onChange={handleChange}
                 />
             </label>
-            <label>Description:
-                <textarea rows={5} cols={30}
+            <label>Description:<textarea rows={5} cols={30}
                           placeholder={book.description}
                           name="description"
                           value={formData.description}
                           onChange={handleChange}
                 />
             </label>
-            <label>Genre:
-                <select required={true} value={formData.genre} onChange={handleChange} name={"genre"}>
+            <label>Genre:<select required={true} value={formData.genre} onChange={handleChange} name={"genre"}>
                     {Object.values(genres).map((genre) => (
-                        <option value={genre}>
+                        <option key={genre} value={genre}>
                             {genre}
                         </option>
                     ))}
                 </select>
             </label>
-            <label>ISBN:
-                <input
+            <label>ISBN:<input
                     placeholder={book.isbn}
                     type="text"
                     name="isbn"
@@ -90,8 +85,7 @@ export default function EditForm({book}: FormData) {
                     onChange={handleChange}
                 />
             </label>
-            <label>Cover:
-                <input
+            <label>Cover:<input
                     placeholder={book.cover}
                     type="text"
                     name="cover"
@@ -99,7 +93,7 @@ export default function EditForm({book}: FormData) {
                     onChange={handleChange}
                 />
             </label>
-            <label>Publication Date: </label>
+            <label htmlFor={"date"}>Publication Date: </label>
             <input
                 placeholder={book.publicationDate}
                 type={"date"}
