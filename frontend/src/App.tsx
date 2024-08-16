@@ -36,13 +36,12 @@ export default function App() {
         fetchBooks()
     }, []);
 
-
     return (
         <>
-            <Header/>
-            <GoToTopButton></GoToTopButton>
+            <Header />
             <Link to={"/books"}>All Books</Link>
             <main>
+                <Navigation/>
                 <Routes>
                     <Route path={"/books"} element={<BookGalleryPage data={data}/>}/>
                     <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks}/>}/>
