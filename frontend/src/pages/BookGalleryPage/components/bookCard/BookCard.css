@@ -3,23 +3,26 @@ li {
     padding: 15px;
     text-align: left;
     display: grid;
-    grid-template-areas: "cover info" "cover book-buttons";
+    grid: [row1-start] "cover info info"[row1-end]
+        [row2-start] "cover . book-buttons"[row2-end]
+        / 70px auto auto;
     gap: 15px;
-    justify-content: stretch;
+    justify-items: start;
     background-color: #183A37;
     border-radius: 15px;
+    flex-grow: 1;
 }
 
 .book-info {
     grid-area: info;
+    justify-self: flex-start;
     align-self: flex-start;
     min-width: 170px;
 }
 
 .book-buttons {
     grid-area: book-buttons;
-    align-self: flex-end;
-    justify-self: flex-end;
+    place-self: flex-end;
 }
 
 .book-button {
@@ -32,8 +35,6 @@ li {
     border: 1px solid transparent;
     transition: border-color 0.25s;
 }
-
-
 
 .book-button:hover {
     border-color: #EFD6AC;
