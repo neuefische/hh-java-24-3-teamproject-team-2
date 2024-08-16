@@ -6,7 +6,7 @@ type BookGalleryProps = {
     data: Book[]
 }
 
-export default function BookGallery({data}: BookGalleryProps) {
+export default function BookGallery({data}: Readonly<BookGalleryProps>) {
     return (
          <ul id={"bookGallery"}>
             {

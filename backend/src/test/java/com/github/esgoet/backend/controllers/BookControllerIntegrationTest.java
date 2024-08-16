@@ -1,6 +1,5 @@
 package com.github.esgoet.backend.controllers;
 
-import com.github.esgoet.backend.dto.BookDto;
 import com.github.esgoet.backend.models.Book;
 import com.github.esgoet.backend.models.Genre;
 import com.github.esgoet.backend.repositories.BookRepository;
@@ -33,7 +32,7 @@ class BookControllerIntegrationTest {
     private final LocalDate localDate = LocalDate.parse("2024-08-14");
 
     @Test
-    public void getAllBooks_Test_When_DbEmpty_Then_returnEmptyArray() throws Exception {
+    void getAllBooks_Test_When_DbEmpty_Then_returnEmptyArray() throws Exception {
 
         mockMvc.perform(get("/api/books"))
                 .andExpect(status().isOk())
@@ -112,7 +111,7 @@ class BookControllerIntegrationTest {
     }
 
     @Test
-    public void deleteBook() throws Exception {
+    void deleteBook() throws Exception {
 
         bookRepository.save(new Book("1", "Simon", "HowToDeleteBooksFast", Genre.SCIENCE, "description", "12345678", "https://linkToCover", localDate));
 

@@ -7,7 +7,7 @@ type FetchProps = {
     fetchBooks: () => void;
 }
 
-export default function AddBookForm({fetchBooks}: FetchProps) {
+export default function AddBookForm({fetchBooks}: Readonly<FetchProps>) {
 
     const [book, setBook] = useState<NewBook>({
         title: "",
@@ -59,7 +59,7 @@ export default function AddBookForm({fetchBooks}: FetchProps) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>Title</label>
+            <label htmlFor={"title"}>Title</label>
             <input
                 type={"text"}
                 name={"title"}
@@ -67,7 +67,7 @@ export default function AddBookForm({fetchBooks}: FetchProps) {
                 onChange={handleChange}
                 required={true}
             />
-            <label>Author</label>
+            <label htmlFor={"author"}>Author</label>
             <input
                 type={"text"}
                 name={"author"}
@@ -75,23 +75,23 @@ export default function AddBookForm({fetchBooks}: FetchProps) {
                 onChange={handleChange}
                 required={true}
             />
-            <label>Description: </label>
+            <label htmlFor={"description"}>Description: </label>
             <textarea rows={5} cols={30}
                       name="description"
                       value={book.description}
                       onChange={handleChange}
                       required={true}
             />
-            <label>Genre</label>
+            <label htmlFor={"genre"}>Genre</label>
             <select required={true} value={book.genre} onChange={handleChange} name={"genre"}>
                 {Object.values(genres).map((genre) => (
-                    <option value={genre}>
+                    <option key={genre} value={genre}>
                         {genre}
                     </option>
                 ))}
             </select>
-            <label>ISBN:
-                <input
+            <label>
+                ISBN:<input
                     type="text"
                     name="isbn"
                     value={book.isbn}
@@ -99,8 +99,7 @@ export default function AddBookForm({fetchBooks}: FetchProps) {
                     required={true}
                 />
             </label>
-            <label>Cover:
-                <input
+            <label>Cover:<input
                     type="text"
                     name="cover"
                     value={book.cover}
@@ -108,7 +107,7 @@ export default function AddBookForm({fetchBooks}: FetchProps) {
                     required={true}
                 />
             </label>
-            <label>Publication Date</label>
+            <label htmlFor={"publicationDate"}>Publication Date</label>
             <input
                 type={"date"}
                 name={"publicationDate"}

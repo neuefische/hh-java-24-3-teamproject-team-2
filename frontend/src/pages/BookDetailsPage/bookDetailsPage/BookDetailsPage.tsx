@@ -10,7 +10,7 @@ type DeleteProps = {
     deleteBook: (id: string) => void;
 }
 
-export default function BookDetailsPage({deleteBook}: DeleteProps) {
+export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
     const [book, setBook] = useState<Book>({
         title: "",
         author: "",

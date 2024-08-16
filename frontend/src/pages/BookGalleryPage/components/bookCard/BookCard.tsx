@@ -7,8 +7,9 @@ type BookCardProps = {
     book: Book
 }
 
-export default function BookCard({book}: BookCardProps) {
-        return (
+export default function BookCard({book}: Readonly<BookCardProps>) {
+
+    return (
 
         <li>
             <img className={"cover"} alt={`${book.title} Book Cover`}/>
