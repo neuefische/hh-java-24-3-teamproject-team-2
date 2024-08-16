@@ -16,7 +16,12 @@ const genres: Genre = {
     SCIENCE: "Science",
     NON_FICTION: "Non-fiction",
     HISTORY: "History",
-    NOVEL: "Novel"
+    NOVEL: "Novel",
+    HISTORICAL_FICTION: "Historical fiction",
+    SCIENCE_FICTION: "Science fiction",
+    ROMANCE: "Romance",
+    YOUNG_ADULT: "Young adult",
+    ADVENTURE: "Adventure"
 }
 
 export default function EditForm({book}: Readonly<FormData>) {
