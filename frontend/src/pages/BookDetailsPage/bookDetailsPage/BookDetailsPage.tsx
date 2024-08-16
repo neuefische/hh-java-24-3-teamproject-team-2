@@ -4,6 +4,7 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import EditForm from "../../../components/editForm/EditForm.tsx";
+import ConfirmationModal from "../../../components/confirmationModal/ConfirmationModal.tsx";
 
 
 type DeleteProps = {
@@ -21,6 +22,9 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
         cover: "",
         publicationDate: ""
     })
+
+    const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+
     const params = useParams();
     const navigate = useNavigate();
     const id: string | undefined = params.id;
@@ -31,9 +35,18 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
             .catch((error) => console.log(error.response.data))
     }
 
-    const handleDelete = (id: string) => {
-        deleteBook(id)
-        navigate("/books")
+    const handleDelete = () => {
+       setShowDeleteModal(true);
+    }
+
+    const handleClose = () => {
+        setShowDeleteModal(false)
+    }
+
+    const handleDeleteConfirm = (id: string) => {
+        deleteBook(id);
+        navigate("/books");
+        setShowDeleteModal(false);
     }
 
     useEffect(() => {
@@ -54,12 +67,10 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
                     <p><span className={"book-label"}>ISBN:</span> {book.isbn}</p>
                     <p><span className={"book-label"}>Publication Date:</span> {book.publicationDate}</p>
                 </div>
-
-                <button onClick={() => {
-                    handleDelete(book.id)
-                }}>Delete
+                <button onClick={handleDelete}>Delete
                 </button>
             </article>
+            {showDeleteModal && <ConfirmationModal handleClose={handleClose} handleDeleteConfirm={handleDeleteConfirm} bookToBeDeleted={book}/>}
             <EditForm book={book}/>
         </>
 
