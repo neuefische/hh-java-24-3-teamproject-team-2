@@ -6,12 +6,16 @@ export type Book = {
     genre: string,
     isbn: string,
     cover: string
+    publicationDate: string
 }
 
 export type NewBook = {
     title: string,
     author: string,
+    description: string,
     genre: string,
+    isbn: string,
+    cover: string
     publicationDate: string
 }
 

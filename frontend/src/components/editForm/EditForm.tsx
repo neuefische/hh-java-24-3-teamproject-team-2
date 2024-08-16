@@ -38,19 +38,66 @@ export default function EditForm({book}: FormData) {
 
     return (
         <form onSubmit={onSubmit}>
-            <label>Title: <input placeholder={book.title} type="text" name="title" value={formData.title}
-                                 onChange={handleChange}/></label>
-            <label>Author: <input placeholder={book.author} type="text" name="author" value={formData.author}
-                                  onChange={handleChange}/></label>
+            <label>Title:
+                <input
+                    placeholder={book.title}
+                    type="text"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleChange}
+                />
+            </label>
+            <label>Author:
+                <input
+                    placeholder={book.author}
+                    type="text"
+                    name="author"
+                    value={formData.author}
+                    onChange={handleChange}
+                />
+            </label>
             <label>Description: </label>
-            <textarea rows={5} cols={30} placeholder={book.description} name="description" value={formData.description}
-                      onChange={handleChange}/>
-            <label>Genre: <input placeholder={book.genre} type="text" name="genre" value={formData.genre}
-                                 onChange={handleChange}/></label>
-            <label>ISBN: <input placeholder={book.isbn} type="text" name="isbn" value={formData.isbn}
-                                onChange={handleChange}/></label>
-            <label>Cover: <input placeholder={book.cover} type="text" name="cover" value={formData.cover}
-                                 onChange={handleChange}/></label>
+            <textarea rows={5} cols={30}
+                      placeholder={book.description}
+                      name="description"
+                      value={formData.description}
+                      onChange={handleChange}
+            />
+            <label>Genre:
+                <input
+                    placeholder={book.genre}
+                    type="text"
+                    name="genre"
+                    value={formData.genre}
+                    onChange={handleChange}
+                />
+            </label>
+            <label>ISBN:
+                <input
+                    placeholder={book.isbn}
+                    type="text"
+                    name="isbn"
+                    value={formData.isbn}
+                    onChange={handleChange}
+                />
+            </label>
+            <label>Cover:
+                <input
+                    placeholder={book.cover}
+                    type="text"
+                    name="cover"
+                    value={formData.cover}
+                    onChange={handleChange}
+                />
+            </label>
+            <label>Publication Date: </label>
+            <input
+                placeholder={book.publicationDate}
+                type={"date"}
+                name="publicationDate"
+                value={formData.publicationDate}
+                onChange={handleChange}
+            />
             <div>
                 <button type={"submit"}>Submit</button>
                 <button onClick={onCancel} type={"button"}>Cancel</button>

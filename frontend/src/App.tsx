@@ -9,10 +9,9 @@ import AddBookForm from "./pages/BookGalleryPage/components/addBookButton/AddBoo
 import Header from "./components/header/Header.tsx";
 
 
+export default function App() {
 
-function App() {
-
-    const[data, setData] = useState<Book[]>([])
+    const [data, setData] = useState<Book[]>([])
 
     const fetchBooks = () => {
         axios.get("/api/books")
@@ -38,16 +37,16 @@ function App() {
 
 
     return (
-    <>
-        <Header />
-        <Link to={"/books"}>All Books</Link>
-        <Routes>
-            <Route path={"/books"} element={<BookGalleryPage data={data}/>}/>
-            <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks}/>}/>
-            <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook}/>}/>
-        </Routes>
-    </>
+        <>
+            <Header/>
+            <Link to={"/books"}>All Books</Link>
+            <Routes>
+                <Route path={"/books"} element={<BookGalleryPage data={data}/>}/>
+                <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks}/>}/>
+                <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook}/>}/>
+            </Routes>
+        </>
     )
 }
 
-export default App
+

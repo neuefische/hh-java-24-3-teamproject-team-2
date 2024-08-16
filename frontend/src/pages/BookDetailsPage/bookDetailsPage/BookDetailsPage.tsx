@@ -18,7 +18,8 @@ export default function BookDetailsPage({deleteBook}: DeleteProps) {
         description: "",
         genre: "",
         isbn: "",
-        cover: ""
+        cover: "",
+        publicationDate: ""
     })
     const params = useParams();
     const navigate = useNavigate();
@@ -48,6 +49,7 @@ export default function BookDetailsPage({deleteBook}: DeleteProps) {
                 <p>Genre: {book.genre} </p>
                 <p>ISBN: {book.isbn}</p>
                 <img width={200} alt={`cover form book ${book.title}`} src={book.cover}/>
+                <p>Publication Date: {book.publicationDate}</p>
                 <Link to={"/"}>Back</Link>
                 <button onClick={() => {
                     handleDelete(book.id)
