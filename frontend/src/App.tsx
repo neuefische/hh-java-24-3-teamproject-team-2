@@ -7,7 +7,7 @@ import BookDetailsPage from "./pages/BookDetailsPage/bookDetailsPage/BookDetails
 import BookGalleryPage from "./pages/BookGalleryPage/bookGalleryPage/BookGalleryPage.tsx";
 import AddBookForm from "./pages/BookGalleryPage/components/addBookButton/AddBookForm.tsx";
 import Header from "./components/header/Header.tsx";
-import GoToTopButton from "./components/goToTopButton/GoToTopButton.tsx";
+import Navigation from "./components/navigation/Navigation.tsx";
 
 
 export default function App() {

@@ -1,21 +1,32 @@
 import {useState} from "react";
+import "./GoToTopButton.css"
 
 export default function GoToTopButton() {
 
     const[visible, setVisible] = useState(false);
 
-    if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        setVisible(true);
-    }
+    const toggleVisible = () => {
+        const scrolled = document.documentElement.scrollTop;
 
-    const goToTop = () => {
-        if(visible) {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
+        if (scrolled > 2) {
+            setVisible(true)
+        } else if (scrolled <= 2) {
+            setVisible(false)
         }
-    }
+    };
+
+    const scrollToTop =  () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+
+    window.addEventListener('scroll', toggleVisible);
 
     return (
-        <button onClick={() => goToTop()}>&uarr;</button>
+        <div className="goToTop-Button-container">
+            {visible && <button className="goToTop-Button" onClick={scrollToTop}>&uarr;</button>}
+        </div>
     );
 }
