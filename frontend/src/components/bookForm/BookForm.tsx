@@ -33,71 +33,86 @@ export default function BookForm({book, setBook, handleSubmit, action, editable}
 
     return (
         <form onSubmit={handleSubmit} className={"book-form"}>
-            <label className={"book-label align-right"} htmlFor={"title"}>Title</label>
-            <input
-                type={"text"}
-                name={"title"}
-                value={book.title}
-                onChange={handleChange}
-                required={true}
-                disabled={!editable}
-            />
-            <label className={"book-label align-right"} htmlFor={"author"}>Author</label>
-            <input
-                type={"text"}
-                name={"author"}
-                value={book.author}
-                onChange={handleChange}
-                required={true}
-                disabled={!editable}
-            />
-            <label className={"book-label align-right"} htmlFor={"description"}>Description</label>
-            <textarea rows={5} cols={30}
-                      name="description"
-                      value={book.description}
-                      onChange={handleChange}
-                      required={true}
-                      disabled={!editable}
-            />
-            <label className={"book-label align-right"} htmlFor={"genre"}>Genre</label>
-            <select required={true} value={book.genre} onChange={handleChange} name={"genre"}
-                    disabled={!editable}>
-                {genres.map((genre) => (
-                    <option key={genre} value={genre}>
-                        {formatGenre(genre)}
-                    </option>
-                ))}
-            </select>
-            <label htmlFor={"isbn"} className={"book-label align-right"}>ISBN</label>
-            <input
-                type="text"
-                name="isbn"
-                value={book.isbn}
-                onChange={handleChange}
-                required={true}
-                disabled={!editable}
-            />
-            <label htmlFor={"cover"} className={"book-label align-right"}>Cover</label>
-            <input
-                type="text"
-                name="cover"
-                value={book.cover}
-                onChange={handleChange}
-                required={true}
-                disabled={!editable}
-            />
-            <label htmlFor={"publicationDate"} className={"book-label align-right"}>Publication Date</label>
-            <input
-                type={"date"}
-                name={"publicationDate"}
-                value={book.publicationDate}
-                onChange={handleChange}
-                required={true}
-                disabled={!editable}
-            />
+            <div className={`book-info`}>
+                <label className={"book-label align-right"} htmlFor={"title"}>Title</label>
+                <input
+                    type={"text"}
+                    name={"title"}
+                    value={book.title}
+                    onChange={handleChange}
+                    required={true}
+                    disabled={!editable}
+                />
+            </div>
+            <div className={`book-info`}>
+                <label className={"book-label align-right"} htmlFor={"author"}>Author</label>
+                <input
+                    type={"text"}
+                    name={"author"}
+                    value={book.author}
+                    onChange={handleChange}
+                    required={true}
+                    disabled={!editable}
+                />
+            </div>
+            <div className={`book-info`}>
+
+                <label className={"book-label align-right"} htmlFor={"description"}>Description</label>
+                <textarea rows={5} cols={30}
+                          name="description"
+                          value={book.description}
+                          onChange={handleChange}
+                          required={true}
+                          disabled={!editable}
+                />
+            </div>
+            <div className={`book-info`}>
+                <label className={"book-label align-right"} htmlFor={"genre"}>Genre</label>
+                <select required={true} value={book.genre} onChange={handleChange} name={"genre"}
+                        disabled={!editable}>
+                    {genres.map((genre) => (
+                        <option key={genre} value={genre}>
+                            {formatGenre(genre)}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            <div className={`book-info`}>
+                <label htmlFor={"isbn"} className={"book-label align-right"}>ISBN</label>
+                <input
+                    type="text"
+                    name="isbn"
+                    value={book.isbn}
+                    onChange={handleChange}
+                    required={true}
+                    disabled={!editable}
+                />
+            </div>
+            <div className={`book-info`}>
+                <label htmlFor={"cover"} className={"book-label align-right"}>Cover</label>
+                <input
+                    type="text"
+                    name="cover"
+                    value={book.cover}
+                    onChange={handleChange}
+                    required={true}
+                    disabled={!editable}
+                />
+            </div>
+            <div className={`book-info`}>
+                <label htmlFor={"publicationDate"} className={"book-label align-right"}>Publication Date</label>
+                <input
+                    type={"date"}
+                    name={"publicationDate"}
+                    value={book.publicationDate}
+                    onChange={handleChange}
+                    required={true}
+                    disabled={!editable}
+                />
+            </div>
             {editable && <button type={"submit"}>{action}</button>}
         </form>
 
-    )
+)
 
 }
