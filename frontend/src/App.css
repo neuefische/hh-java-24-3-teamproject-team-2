@@ -1,42 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cedarville+Cursive&family=Playwrite+DE+LA:wght@100..400&display=swap');
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+
+main {
+  max-width: 900px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  place-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.align-right {
+  align-self: flex-end;
+}
+
+.align-left {
+  align-self: flex-start;
+}
+
+.block {
+  display: block;
+}
+
+h2 {
+  color: #C44900;
+  font-size: 30px;
+  padding: 0;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: bold;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+form input, select, textarea {
+  background-color: #183A37;
+  padding: 8px 5px;
+  border: 1px solid #5b84ea;
+  border-radius: 5px;
+}
+
+form label {
+  margin-bottom: -10px;
+}
+
+.book-label {
+  font-weight: bold;
+  color: #5B84EA;
+  font-variant-caps: all-small-caps;
+}
+
+
+.book-button {
+  background-color: #C44900;
+  color: #EFD6AC;
+  border-radius: 5px;
   text-align: center;
+  padding: 6px 12px;
+  font-size: 1em;
+  border: 1px solid transparent;
+  transition: border-color 0.25s;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.book-button:hover {
+  border-color: #EFD6AC;
+  color: #EFD6AC;
 }
