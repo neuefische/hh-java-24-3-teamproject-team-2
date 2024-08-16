@@ -7,6 +7,7 @@ import BookDetailsPage from "./pages/BookDetailsPage/bookDetailsPage/BookDetails
 import BookGalleryPage from "./pages/BookGalleryPage/bookGalleryPage/BookGalleryPage.tsx";
 import AddBookForm from "./pages/BookGalleryPage/components/addBookButton/AddBookForm.tsx";
 import Header from "./components/header/Header.tsx";
+import GoToTopButton from "./components/goToTopButton/GoToTopButton.tsx";
 
 
 export default function App() {
@@ -39,6 +40,7 @@ export default function App() {
     return (
         <>
             <Header/>
+            <GoToTopButton></GoToTopButton>
             <Link to={"/books"}>All Books</Link>
             <Routes>
                 <Route path={"/books"} element={<BookGalleryPage data={data}/>}/>
