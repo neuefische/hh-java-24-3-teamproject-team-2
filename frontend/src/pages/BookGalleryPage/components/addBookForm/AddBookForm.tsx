@@ -51,11 +51,9 @@ export default function AddBookForm({fetchBooks}: Readonly<FetchProps>) {
         console.log(event);
 
         axios.post("/api/books", {
-            title: book.title,
-            author: book.author,
+            ...book,
             genre: Object.keys(genres).find(
-                key => genres[key as keyof typeof genres] === book.genre),
-            publicationDate: book.publicationDate
+                key => genres[key as keyof typeof genres] === book.genre)
         })
             .then(() => fetchBooks())
             .then(response => console.log(response))
