@@ -1,23 +1,27 @@
 .book-details {
     display: flex;
     flex-direction: column;
-    text-align: left;
+    place-items: stretch;
 }
 
-.book-details h3 {
+.book-details h2 {
     text-align: center;
-    margin: 6px 0;
 }
 
 .big-cover {
     height: 200px;
     aspect-ratio: auto;
     border: 1px solid #5b84ea;
+    margin: 20px 0;
+    place-self: center;
 }
 
-.book-details-info {
-    padding: 10px 0;
+.stretch {
+    align-self: stretch;
+}
+
+#top-buttons {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    justify-content: space-between;
+    width: 100%;
 }
