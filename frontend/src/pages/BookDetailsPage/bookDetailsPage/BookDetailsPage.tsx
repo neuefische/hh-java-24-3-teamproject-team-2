@@ -42,15 +42,19 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
 
     return (
         <>
-            <article>
-                <h3>Title: {book.title}</h3>
-                <p>Author: {book.author}</p>
-                <p>Description: {book.description}</p>
-                <p>Genre: {book.genre} </p>
-                <p>ISBN: {book.isbn}</p>
-                <img width={200} alt={`cover form book ${book.title}`} src={book.cover}/>
-                <p>Publication Date: {book.publicationDate}</p>
-                <Link to={"/"}>Back</Link>
+            <article className={"book-details"}>
+                <Link className={"book-button align-left"} to={"/books"}>Back</Link>
+                <h3>{book.title}</h3>
+                <img className={"big-cover"} src={book.cover} alt={`${book.title} Book Cover`}/>
+                <div className={"book-details-info"}>
+                    <p><span className={"book-label"}>Title:</span> {book.title}</p>
+                    <p><span className={"book-label"}>Author:</span> {book.author}</p>
+                    <p><span className={"book-label"}>Description:</span> {book.description}</p>
+                    <p><span className={"book-label"}>Genre:</span> {book.genre} </p>
+                    <p><span className={"book-label"}>ISBN:</span> {book.isbn}</p>
+                    <p><span className={"book-label"}>Publication Date:</span> {book.publicationDate}</p>
+                </div>
+
                 <button onClick={() => {
                     handleDelete(book.id)
                 }}>Delete
@@ -58,5 +62,6 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
             </article>
             <EditForm book={book}/>
         </>
+
     )
 }

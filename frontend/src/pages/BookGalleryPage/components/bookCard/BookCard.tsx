@@ -12,10 +12,14 @@ export default function BookCard({book}: Readonly<BookCardProps>) {
     return (
 
         <li>
-            <p>Id: {book.id}</p>
-            <p>Title: {book.title}</p>
-            <p>Author: {book.author}</p>
-            <Link to={`/books/${book.id}`}>Details</Link>
+            <img className={"cover"} alt={`${book.title} Book Cover`}/>
+            <div className={"book-info"}>
+                <h4>{book.title}</h4>
+                <p className={"author"}>By {book.author}</p>
+            </div>
+            <div className={"book-buttons"}>
+                <Link className={"book-button align-right"} to={`/books/${book.id}`}>Details</Link>
+            </div>
         </li>
 
     );

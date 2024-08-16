@@ -8,8 +8,8 @@ type BookGalleryPageProps = {
 }
 export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) {
     return (
-        <>
-            <BookGallery data={data}/>
-        </>
+        <div id={"galleryPage"}>
+            <BookGallery data={data} />
+        </div>
     );
 }

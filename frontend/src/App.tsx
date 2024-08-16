@@ -28,24 +28,23 @@ export default function App() {
         axios.delete("/api/books/" + id)
             .then((response) => response.status === 200 && fetchBooks())
             .catch((error) => console.log(error.message))
-
-
     }
 
     useEffect(() => {
         fetchBooks()
     }, []);
 
-
     return (
         <>
             <Header/>
-            <Navigation/>
-            <Routes>
-                <Route path={"/books"} element={<BookGalleryPage data={data}/>}/>
-                <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks}/>}/>
-                <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook}/>}/>
-            </Routes>
+            <main>
+                <Navigation/>
+                <Routes>
+                    <Route path={"/books"} element={<BookGalleryPage data={data}/>}/>
+                    <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks}/>}/>
+                    <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook}/>}/>
+                </Routes>
+            </main>
         </>
     )
 }
