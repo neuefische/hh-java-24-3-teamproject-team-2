@@ -23,10 +23,9 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
         publicationDate: ""
     })
 
-    const [showPopup, setShowPopup] = useState<boolean>(false);
+    const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
     const params = useParams();
-    console.log(params);
     const navigate = useNavigate();
     const id: string | undefined = params.id;
 
@@ -37,17 +36,17 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
     }
 
     const handleDelete = () => {
-       setShowPopup(true);
+       setShowDeleteModal(true);
     }
 
     const handleClose = () => {
-        setShowPopup(false)
+        setShowDeleteModal(false)
     }
 
     const handleDeleteConfirm = (id: string) => {
         deleteBook(id);
         navigate("/books");
-        setShowPopup(false);
+        setShowDeleteModal(false);
     }
 
     useEffect(() => {
@@ -68,13 +67,10 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
                     <p><span className={"book-label"}>ISBN:</span> {book.isbn}</p>
                     <p><span className={"book-label"}>Publication Date:</span> {book.publicationDate}</p>
                 </div>
-
-                <button onClick={() => {
-                    handleDelete()
-                }}>Delete
+                <button onClick={handleDelete}>Delete
                 </button>
             </article>
-            {showPopup && <ConfirmationModal handleClose={handleClose} handleDeleteConfirm={handleDeleteConfirm} bookToBeDeleted={book}/>}
+            {showDeleteModal && <ConfirmationModal handleClose={handleClose} handleDeleteConfirm={handleDeleteConfirm} bookToBeDeleted={book}/>}
             <EditForm book={book}/>
         </>
 
