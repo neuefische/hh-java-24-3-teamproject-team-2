@@ -8,9 +8,9 @@ type BookGalleryPageProps = {
 }
 export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) {
     return (
-        <>
-            <Link to={"/books/add"}>Add a Book</Link>
+        <div id={"galleryPage"}>
+            <Link className={"book-button align-right"} to={"/books/add"}>Add a Book</Link>
             <BookGallery data={data} />
-        </>
+        </div>
     );
 }

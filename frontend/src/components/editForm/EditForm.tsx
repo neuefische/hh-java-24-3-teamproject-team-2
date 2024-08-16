@@ -16,7 +16,12 @@ const genres: Genre = {
     SCIENCE: "Science",
     NON_FICTION: "Non-fiction",
     HISTORY: "History",
-    NOVEL: "Novel"
+    NOVEL: "Novel",
+    HISTORICAL_FICTION: "Historical fiction",
+    SCIENCE_FICTION: "Science fiction",
+    ROMANCE: "Romance",
+    YOUNG_ADULT: "Young adult",
+    ADVENTURE: "Adventure"
 }
 
 export default function EditForm({book}: Readonly<FormData>) {
@@ -46,54 +51,54 @@ export default function EditForm({book}: Readonly<FormData>) {
 
     return (
         <form onSubmit={onSubmit}>
-            <label>Title:<input
+            <label htmlFor={"title"} className={"book-label align-right"}>Title</label>
+            <input
                     placeholder={book.title}
                     type="text"
                     name="title"
                     value={formData.title}
                     onChange={handleChange}
                 />
-            </label>
-            <label>Author:<input
+            <label htmlFor={"author"} className={"book-label align-right"}>Author</label>
+            <input
                     placeholder={book.author}
                     type="text"
                     name="author"
                     value={formData.author}
                     onChange={handleChange}
                 />
-            </label>
-            <label>Description:<textarea rows={5} cols={30}
+            <label htmlFor={"description"} className={"book-label align-right"}>Description</label>
+            <textarea rows={5} cols={30}
                           placeholder={book.description}
                           name="description"
                           value={formData.description}
                           onChange={handleChange}
                 />
-            </label>
-            <label>Genre:<select required={true} value={formData.genre} onChange={handleChange} name={"genre"}>
+            <label htmlFor={"genre"} className={"book-label align-right"}>Genre</label>
+            <select required={true} value={formData.genre} onChange={handleChange} name={"genre"}>
                     {Object.values(genres).map((genre) => (
                         <option key={genre} value={genre}>
                             {genre}
                         </option>
                     ))}
                 </select>
-            </label>
-            <label>ISBN:<input
+            <label htmlFor={"isbn"} className={"book-label align-right"}>ISBN</label>
+            <input
                     placeholder={book.isbn}
                     type="text"
                     name="isbn"
                     value={formData.isbn}
                     onChange={handleChange}
                 />
-            </label>
-            <label>Cover:<input
+            <label htmlFor={"cover"} className={"book-label align-right"}>Cover</label>
+            <input
                     placeholder={book.cover}
                     type="text"
                     name="cover"
                     value={formData.cover}
                     onChange={handleChange}
                 />
-            </label>
-            <label htmlFor={"date"}>Publication Date: </label>
+            <label htmlFor={"date"} className={"book-label align-right"}>Publication Date</label>
             <input
                 placeholder={book.publicationDate}
                 type={"date"}
