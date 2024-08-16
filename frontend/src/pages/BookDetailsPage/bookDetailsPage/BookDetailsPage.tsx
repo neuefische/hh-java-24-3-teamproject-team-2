@@ -70,7 +70,7 @@ export default function BookDetailsPage({deleteBook}: DeleteProps) {
                 }}>Delete
                 </button>
             </article>
-            {showPopup && <ConfirmationModal handleClose={handleClose} handleDeleteConfirm={handleDeleteConfirm} itemIdToBeDeleted={book.id}/>}
+            {showPopup && <ConfirmationModal handleClose={handleClose} handleDeleteConfirm={handleDeleteConfirm} bookToBeDeleted={book}/>}
             <EditForm book={book}/>
         </>
     )
