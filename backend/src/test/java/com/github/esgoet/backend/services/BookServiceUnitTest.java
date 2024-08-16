@@ -104,25 +104,20 @@ class BookServiceUnitTest {
         // Given
         String id = "1";
         Book existingBook = new Book(id, "author1", "title1", Genre.THRILLER, "description1", "12345678", "cover1", localDate);
-        BookDto updatedBook = new BookDto("author2", "title2", Genre.FICTION, "description2", "23456789", "cover2", localDate);
+        BookDto updatedBookDto = new BookDto("author2", "title2", Genre.FICTION, "description2", "23456789", "cover2", localDate);
+        Book updatedBook = new Book("1", "author2", "title2", Genre.FICTION, "description2", "23456789", "cover2", localDate);
 
         // When
         when(bookRepo.findById(id)).thenReturn(Optional.of(existingBook));
-        when(bookRepo.save(any(Book.class))).thenAnswer(invocation -> invocation.getArguments()[0]);
+        when(bookRepo.save(updatedBook)).thenReturn(updatedBook);
 
-        Book result = bookService.updateBook(updatedBook, id);
+        Book result = bookService.updateBook(updatedBookDto, id);
 
         // Then
         assertNotNull(result);
-        assertEquals(updatedBook.title(), result.title());
-        assertEquals(updatedBook.author(), result.author());
-        assertEquals(updatedBook.genre(), result.genre());
-        assertEquals(updatedBook.description(), result.description());
-        assertEquals(updatedBook.cover(), result.cover());
-        assertEquals(updatedBook.isbn(), result.isbn());
-        assertEquals(updatedBook.publicationDate(), result.publicationDate());
+        assertEquals(updatedBook, result);
         verify(bookRepo).findById(id);
-        verify(bookRepo).save(any(Book.class));
+        verify(bookRepo).save(updatedBook);
     }
 
     @Test
@@ -130,7 +125,8 @@ class BookServiceUnitTest {
 
         // Given
         String id = "1";
-        BookDto updatedBook = new BookDto("author", "title", Genre.FICTION, "description", "isbn", "cover", localDate);
+        BookDto updatedBookDto = new BookDto("author", "title", Genre.FICTION, "description", "isbn", "cover", localDate);
+        Book updatedBook = new Book("1", "author", "title", Genre.FICTION, "description", "isbn", "cover", localDate);
 
         //When
         when(bookRepo.findById(id)).thenReturn(Optional.empty());
@@ -138,11 +134,11 @@ class BookServiceUnitTest {
         //Then
         BookNotFoundException thrown = assertThrows(
                 BookNotFoundException.class,
-                () -> bookService.updateBook(updatedBook, id)
+                () -> bookService.updateBook(updatedBookDto, id)
         );
         assertEquals("No book found with id: " + id, thrown.getMessage());
         verify(bookRepo).findById(id);
-        verify(bookRepo, never()).save(any(Book.class));
+        verify(bookRepo, never()).save(updatedBook);
     }
 
 }

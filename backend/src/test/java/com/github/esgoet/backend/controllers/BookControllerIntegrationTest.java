@@ -1,5 +1,6 @@
 package com.github.esgoet.backend.controllers;
 
+import com.github.esgoet.backend.dto.BookDto;
 import com.github.esgoet.backend.models.Book;
 import com.github.esgoet.backend.models.Genre;
 import com.github.esgoet.backend.repositories.BookRepository;
@@ -129,15 +130,12 @@ class BookControllerIntegrationTest {
         // GIVEN
         bookRepository.save(new Book("1", "author1", "title1", Genre.FANTASY, "description1", "12345678", "cover1", localDate));
 
-        Book updatedBook = new Book("1", "author2", "title2", Genre.HISTORY, "description2", "23456789", "cover2", localDate);
-
         // WHEN
         mockMvc.perform(MockMvcRequestBuilders.put("/api/books/1/update")
                         .contentType("application/json")
                         .content("""
                                 {
-                                    "id": "1",
-                                    "author": "author2",
+                                   "author": "author2",
                                     "title": "title2",
                                     "genre": "HISTORY",
                                     "description": "description2",
@@ -149,16 +147,14 @@ class BookControllerIntegrationTest {
                 // THEN
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
-                        {
-                            "id": "1",
-                            "author": "author2",
+                        { "id": "1",
+                           "author": "author2",
                             "title": "title2",
                             "genre": "HISTORY",
                             "description": "description2",
                             "isbn": "23456789",
                             "cover": "cover2",
                             "publicationDate": "2024-08-14"
-                             
                         }
                         """));
     }
