@@ -1,10 +1,22 @@
 import './EditForm.css'
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import axios from "axios";
-import {Book} from "../../types/types.ts";
+import {Book, Genre} from "../../types/types.ts";
 
 type FormData = {
     book: Book
+}
+
+const genres: Genre = {
+    NONE: "None",
+    FICTION: "Fiction",
+    MYSTERY: "Mystery",
+    THRILLER: "Thriller",
+    FANTASY: "Fantasy",
+    SCIENCE: "Science",
+    NON_FICTION: "Non-fiction",
+    HISTORY: "History",
+    NOVEL: "Novel"
 }
 
 export default function EditForm({book}: FormData) {
@@ -15,7 +27,7 @@ export default function EditForm({book}: FormData) {
         setFormData(book);
     }, [book]);
 
-    function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | ChangeEvent<HTMLSelectElement>) {
         const {name, value} = event.target;
         setFormData({
             ...formData, [name]: value
@@ -30,10 +42,6 @@ export default function EditForm({book}: FormData) {
         } catch (error) {
             console.error('Update failed:', error);
         }
-    }
-
-    function onCancel() {
-        console.log("cancel")
     }
 
     return (
@@ -56,21 +64,22 @@ export default function EditForm({book}: FormData) {
                     onChange={handleChange}
                 />
             </label>
-            <label>Description: </label>
-            <textarea rows={5} cols={30}
-                      placeholder={book.description}
-                      name="description"
-                      value={formData.description}
-                      onChange={handleChange}
-            />
-            <label>Genre:
-                <input
-                    placeholder={book.genre}
-                    type="text"
-                    name="genre"
-                    value={formData.genre}
-                    onChange={handleChange}
+            <label>Description:
+                <textarea rows={5} cols={30}
+                          placeholder={book.description}
+                          name="description"
+                          value={formData.description}
+                          onChange={handleChange}
                 />
+            </label>
+            <label>Genre:
+                <select required={true} value={formData.genre} onChange={handleChange} name={"genre"}>
+                    {Object.values(genres).map((genre) => (
+                        <option value={genre}>
+                            {genre}
+                        </option>
+                    ))}
+                </select>
             </label>
             <label>ISBN:
                 <input
@@ -100,7 +109,6 @@ export default function EditForm({book}: FormData) {
             />
             <div>
                 <button type={"submit"}>Submit</button>
-                <button onClick={onCancel} type={"button"}>Cancel</button>
             </div>
         </form>
 
