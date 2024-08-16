@@ -1,6 +1,6 @@
 package com.github.esgoet.backend.controllers;
 
-import com.github.esgoet.backend.dto.NewBookDto;
+import com.github.esgoet.backend.dto.BookDto;
 import com.github.esgoet.backend.models.Book;
 import com.github.esgoet.backend.services.BookService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/books")
@@ -36,7 +38,12 @@ public class BookController {
     }
 
     @PostMapping
-    public Book addABook(@RequestBody NewBookDto newBookDto) {
-        return bookService.saveBook(newBookDto);
+    public Book addABook(@RequestBody BookDto bookDto) {
+        return bookService.saveBook(bookDto);
+    }
+
+    @PutMapping(path = {"{id}/update", "{id}"})
+    public Book update(@PathVariable String id, @RequestBody BookDto book) {
+        return bookService.updateBook(book, id);
     }
 }

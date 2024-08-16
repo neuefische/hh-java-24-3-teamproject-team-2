@@ -7,9 +7,18 @@ type FetchProps = {
     fetchBooks: () => void;
 }
 
-export default function AddBookForm({ fetchBooks }: FetchProps) {
+export default function AddBookForm({fetchBooks}: FetchProps) {
 
-    const [book, setBook] = useState<NewBook>({title: "", author: "", genre: "", publicationDate: ""});
+    const [book, setBook] = useState<NewBook>({
+        title: "",
+        author: "",
+        description: "",
+        genre: "",
+        isbn: "",
+        cover: "",
+        publicationDate: ""
+    });
+
     const navigate = useNavigate();
 
     const genres: Genre = {
@@ -24,7 +33,7 @@ export default function AddBookForm({ fetchBooks }: FetchProps) {
         NOVEL: "Novel"
     }
 
-    function handleChange(event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>): void {
+    function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | ChangeEvent<HTMLSelectElement>): void {
         setBook({...book, [event.target.name]: event.target.value})
     }
 
@@ -66,6 +75,13 @@ export default function AddBookForm({ fetchBooks }: FetchProps) {
                 onChange={handleChange}
                 required={true}
             />
+            <label>Description: </label>
+            <textarea rows={5} cols={30}
+                      name="description"
+                      value={book.description}
+                      onChange={handleChange}
+                      required={true}
+            />
             <label>Genre</label>
             <select required={true} value={book.genre} onChange={handleChange} name={"genre"}>
                 {Object.values(genres).map((genre) => (
@@ -74,12 +90,31 @@ export default function AddBookForm({ fetchBooks }: FetchProps) {
                     </option>
                 ))}
             </select>
+            <label>ISBN:
+                <input
+                    type="text"
+                    name="isbn"
+                    value={book.isbn}
+                    onChange={handleChange}
+                    required={true}
+                />
+            </label>
+            <label>Cover:
+                <input
+                    type="text"
+                    name="cover"
+                    value={book.cover}
+                    onChange={handleChange}
+                    required={true}
+                />
+            </label>
             <label>Publication Date</label>
             <input
                 type={"date"}
                 name={"publicationDate"}
                 value={book.publicationDate}
                 onChange={handleChange}
+                required={true}
             />
             <button>Create</button>
         </form>
