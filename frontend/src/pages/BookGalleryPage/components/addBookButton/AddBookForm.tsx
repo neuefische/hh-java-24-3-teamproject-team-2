@@ -30,7 +30,12 @@ export default function AddBookForm({fetchBooks}: Readonly<FetchProps>) {
         SCIENCE: "Science",
         NON_FICTION: "Non-fiction",
         HISTORY: "History",
-        NOVEL: "Novel"
+        NOVEL: "Novel",
+        HISTORICAL_FICTION: "Historical fiction",
+        SCIENCE_FICTION: "Science fiction",
+        ROMANCE: "Romance",
+        YOUNG_ADULT: "Young adult",
+        ADVENTURE: "Adventure"
     }
 
     function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | ChangeEvent<HTMLSelectElement>): void {
