@@ -1,6 +1,6 @@
 import "./BookDetailsPage.css";
 import {Book} from "../../../types/types.ts";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import EditForm from "../../../components/editForm/EditForm.tsx";
@@ -26,7 +26,8 @@ export default function BookDetailsPage({deleteBook}: DeleteProps) {
     const [showPopup, setShowPopup] = useState<boolean>(false);
 
     const params = useParams();
-    //const navigate = useNavigate();
+    console.log(params);
+    const navigate = useNavigate();
     const id: string | undefined = params.id;
 
     const fetchBook = () => {
@@ -35,14 +36,19 @@ export default function BookDetailsPage({deleteBook}: DeleteProps) {
             .catch((error) => console.log(error.response.data))
     }
 
-    const handleDelete = (id: string) => {
-        //deleteBook(id)
-        //navigate("/books")
-
-        setShowPopup(true);
+    const handleDelete = () => {
+       setShowPopup(true);
     }
 
-    const handleClose = () => {setShowPopup(false)}
+    const handleClose = () => {
+        setShowPopup(false)
+    }
+
+    const handleDeleteConfirm = (id: string) => {
+        deleteBook(id);
+        navigate("/books");
+        setShowPopup(false);
+    }
 
     useEffect(() => {
         fetchBook();
@@ -60,11 +66,11 @@ export default function BookDetailsPage({deleteBook}: DeleteProps) {
                 <p>Publication Date: {book.publicationDate}</p>
                 <Link to={"/"}>Back</Link>
                 <button onClick={() => {
-                    handleDelete(book.id)
+                    handleDelete()
                 }}>Delete
                 </button>
             </article>
-            {showPopup && <ConfirmationModal handleClose={handleClose}/>}
+            {showPopup && <ConfirmationModal handleClose={handleClose} handleDeleteConfirm={handleDeleteConfirm} itemIdToBeDeleted={book.id}/>}
             <EditForm book={book}/>
         </>
     )
