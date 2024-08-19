@@ -38,6 +38,7 @@ public class BookService {
                 bookDto.description(),
                 bookDto.isbn(),
                 bookDto.cover(),
+                bookDto.rating(),
                 bookDto.publicationDate()
         );
         return bookRepository.save(bookToSave);
@@ -50,7 +51,8 @@ public class BookService {
                 .withDescription(updateBook.description())
                 .withGenre(updateBook.genre())
                 .withTitle(updateBook.title())
-                .withIsbn(updateBook.isbn());
+                .withIsbn(updateBook.isbn())
+                .withRating(updateBook.rating());
         return bookRepository.save(book);
     }
 }

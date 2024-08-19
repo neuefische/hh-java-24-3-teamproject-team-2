@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -44,7 +43,7 @@ class BookControllerIntegrationTest {
     @Test
     void getBook_Test_whenIdExists() throws Exception {
         //GIVEN
-        bookRepository.save(new Book("1", "George Orwell", "1984", Genre.THRILLER, "this is a description", "123456isbn", "https://linkToCover", localDate));
+        bookRepository.save(new Book("1", "George Orwell", "1984", Genre.THRILLER, "this is a description", "123456isbn", "https://linkToCover", 3.5,localDate));
         //WHEN
         mockMvc.perform(get("/api/books/1"))
                 //THEN
@@ -58,6 +57,7 @@ class BookControllerIntegrationTest {
                              "description": "this is a description",
                              "isbn": "123456isbn",
                              "cover": "https://linkToCover",
+                             "rating": 3.5,
                              "publicationDate": "2024-08-14"
                         }
                         """));
@@ -79,6 +79,7 @@ class BookControllerIntegrationTest {
                                          "description": "this is a description",
                                          "isbn": "123456isbn",
                                          "cover": "https://linkToCover",
+                                         "rating": 3.5,
                                          "publicationDate": "1869-01-01"
                                      }
                                 """))
@@ -91,6 +92,7 @@ class BookControllerIntegrationTest {
                 .andExpect(jsonPath("$.description").value("this is a description"))
                 .andExpect(jsonPath("$.isbn").value("123456isbn"))
                 .andExpect(jsonPath("$.cover").value("https://linkToCover"))
+                .andExpect(jsonPath("$.rating").value(3.5))
                 .andExpect(jsonPath("$.publicationDate").value("1869-01-01"));
     }
 
@@ -113,7 +115,7 @@ class BookControllerIntegrationTest {
     @Test
     void deleteBook() throws Exception {
 
-        bookRepository.save(new Book("1", "Simon", "HowToDeleteBooksFast", Genre.SCIENCE, "description", "12345678", "https://linkToCover", localDate));
+        bookRepository.save(new Book("1", "Simon", "HowToDeleteBooksFast", Genre.SCIENCE, "description", "12345678", "https://linkToCover", 3.5,localDate));
 
         mockMvc.perform(delete("/api/books/1"))
                 .andExpect(status().isOk());
@@ -127,10 +129,10 @@ class BookControllerIntegrationTest {
     @Test
     void updateBook_Test_When_IdMatches() throws Exception {
         // GIVEN
-        bookRepository.save(new Book("1", "author1", "title1", Genre.FANTASY, "description1", "12345678", "cover1", localDate));
+        bookRepository.save(new Book("1", "author1", "title1", Genre.FANTASY, "description1", "12345678", "cover1", 3.5,localDate));
 
         // WHEN
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/books/1/update")
+        mockMvc.perform(put("/api/books/1/update")
                         .contentType("application/json")
                         .content("""
                                 {
@@ -140,6 +142,7 @@ class BookControllerIntegrationTest {
                                     "description": "description2",
                                     "isbn": "23456789",
                                     "cover": "cover2",
+                                    "rating": 3.5,
                                     "publicationDate": "2024-08-14"
                                 }
                                 """))
@@ -153,6 +156,7 @@ class BookControllerIntegrationTest {
                             "description": "description2",
                             "isbn": "23456789",
                             "cover": "cover2",
+                            "rating": 3.5,
                             "publicationDate": "2024-08-14"
                         }
                         """));

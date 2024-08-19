@@ -26,13 +26,13 @@ class BookServiceUnitTest {
     @Test
     void getAllBooks_Test() {
         List<Book> allBooks = List.of(
-                new Book("1", "Simon", "Java for Dummies", Genre.HISTORY, "this is a description", "123456isbn", "https://linkToCover", localDate),
-                new Book("2", "Florian", "Java not for Dummies", Genre.THRILLER, "this is a description2", "789012isbn", "https://linkToAnotherCover", localDate)
+                new Book("1", "Simon", "Java for Dummies", Genre.HISTORY, "this is a description", "123456isbn", "https://linkToCover", 3.5, localDate),
+                new Book("2", "Florian", "Java not for Dummies", Genre.THRILLER, "this is a description2", "789012isbn", "https://linkToAnotherCover", 2.5, localDate)
         );
 
         List<Book> expectedBooks = List.of(
-                new Book("1", "Simon", "Java for Dummies", Genre.HISTORY, "this is a description", "123456isbn", "https://linkToCover", localDate),
-                new Book("2", "Florian", "Java not for Dummies", Genre.THRILLER, "this is a description2", "789012isbn", "https://linkToAnotherCover", localDate)
+                new Book("1", "Simon", "Java for Dummies", Genre.HISTORY, "this is a description", "123456isbn", "https://linkToCover",3.5, localDate),
+                new Book("2", "Florian", "Java not for Dummies", Genre.THRILLER, "this is a description2", "789012isbn", "https://linkToAnotherCover", 2.5, localDate)
         );
 
         when(bookRepo.findAll()).thenReturn(allBooks);
@@ -53,12 +53,12 @@ class BookServiceUnitTest {
     @Test
     void getBook_Test_whenBookExists_thenReturnBook() {
         //GIVEN
-        Book book = new Book("1", "George Orwell", "1984", Genre.THRILLER, "this is a description", "123456isbn", "https://linkToCover", localDate);
+        Book book = new Book("1", "George Orwell", "1984", Genre.THRILLER, "this is a description", "123456isbn", "https://linkToCover", 3.5,localDate);
         when(bookRepo.findById("1")).thenReturn(Optional.of(book));
         //WHEN
         Book actual = bookService.getBook("1");
         //THEN
-        Book expected = new Book("1", "George Orwell", "1984", Genre.THRILLER, "this is a description", "123456isbn", "https://linkToCover", localDate);
+        Book expected = new Book("1", "George Orwell", "1984", Genre.THRILLER, "this is a description", "123456isbn", "https://linkToCover", 3.5,localDate);
         verify(bookRepo).findById("1");
         assertEquals(expected, actual);
     }
@@ -76,8 +76,8 @@ class BookServiceUnitTest {
     @Test
     void addABookTest_whenNewBookAsInput_thenReturnNewBook() {
         // GIVEN
-        BookDto bookDto = new BookDto("J. K. Rowling", "Harry Potter", Genre.FANTASY, "this is a description", "123456isbn", "https://linkToCover", localDate);
-        Book bookToSave = new Book("1", bookDto.author(), bookDto.title(), bookDto.genre(), bookDto.description(), bookDto.isbn(), bookDto.cover(), bookDto.publicationDate());
+        BookDto bookDto = new BookDto("J. K. Rowling", "Harry Potter", Genre.FANTASY, "this is a description", "123456isbn", "https://linkToCover", 3.5,localDate);
+        Book bookToSave = new Book("1", bookDto.author(), bookDto.title(), bookDto.genre(), bookDto.description(), bookDto.isbn(), bookDto.cover(), bookDto.rating(), bookDto.publicationDate());
         when(bookRepo.save(bookToSave)).thenReturn(bookToSave);
         when(idService.randomId()).thenReturn(bookToSave.id());
 
@@ -85,7 +85,7 @@ class BookServiceUnitTest {
         Book actual = bookService.saveBook(bookDto);
 
         // THEN
-        Book expected = new Book("1", bookDto.author(), bookDto.title(), bookDto.genre(), bookDto.description(), bookDto.isbn(), bookDto.cover(), bookDto.publicationDate());
+        Book expected = new Book("1", bookDto.author(), bookDto.title(), bookDto.genre(), bookDto.description(), bookDto.isbn(), bookDto.cover(), bookDto.rating(), bookDto.publicationDate());
         verify(bookRepo).save(bookToSave);
         verify(idService).randomId();
         assertEquals(expected, actual);
@@ -103,9 +103,9 @@ class BookServiceUnitTest {
 
         // Given
         String id = "1";
-        Book existingBook = new Book(id, "author1", "title1", Genre.THRILLER, "description1", "12345678", "cover1", localDate);
-        BookDto updatedBookDto = new BookDto("author2", "title2", Genre.FICTION, "description2", "23456789", "cover2", localDate);
-        Book updatedBook = new Book("1", "author2", "title2", Genre.FICTION, "description2", "23456789", "cover2", localDate);
+        Book existingBook = new Book(id, "author1", "title1", Genre.THRILLER, "description1", "12345678", "cover1", 3.5,localDate);
+        BookDto updatedBookDto = new BookDto("author2", "title2", Genre.FICTION, "description2", "23456789", "cover2", 3.5,localDate);
+        Book updatedBook = new Book("1", "author2", "title2", Genre.FICTION, "description2", "23456789", "cover2", 3.5,localDate);
 
         // When
         when(bookRepo.findById(id)).thenReturn(Optional.of(existingBook));
@@ -125,8 +125,8 @@ class BookServiceUnitTest {
 
         // Given
         String id = "1";
-        BookDto updatedBookDto = new BookDto("author", "title", Genre.FICTION, "description", "isbn", "cover", localDate);
-        Book updatedBook = new Book("1", "author", "title", Genre.FICTION, "description", "isbn", "cover", localDate);
+        BookDto updatedBookDto = new BookDto("author", "title", Genre.FICTION, "description", "isbn", "cover", 3.5,localDate);
+        Book updatedBook = new Book("1", "author", "title", Genre.FICTION, "description", "isbn", "cover", 3.5,localDate);
 
         //When
         when(bookRepo.findById(id)).thenReturn(Optional.empty());
