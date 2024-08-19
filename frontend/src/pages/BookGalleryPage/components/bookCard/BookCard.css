@@ -1,4 +1,4 @@
-li {
+.book-card {
     list-style: none;
     padding: 15px;
     text-align: left;
@@ -36,4 +36,10 @@ li {
     object-fit: cover;
     border: 1px solid white;
     grid-area: cover;
+}
+
+@media only screen and (min-width: 600px) {
+    .book-card {
+        width: 350px;
+    }
 }
