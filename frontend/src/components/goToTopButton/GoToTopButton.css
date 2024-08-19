@@ -1,5 +1,11 @@
 .goToTop-Button-container {
     position:fixed;
-    bottom: 20px;
+    bottom: 90px;
     left: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+    .goToTop-Button-container {
+        bottom: 20px;
+    }
 }
