@@ -2,12 +2,13 @@ import './App.css'
 import axios from "axios"
 import {Book} from "./types/types.ts";
 import {useEffect, useState} from "react";
-import {Link, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import BookDetailsPage from "./pages/BookDetailsPage/bookDetailsPage/BookDetailsPage.tsx";
 import BookGalleryPage from "./pages/BookGalleryPage/bookGalleryPage/BookGalleryPage.tsx";
 import AddBookForm from "./pages/BookGalleryPage/components/addBookForm/AddBookForm.tsx";
 import Header from "./components/header/Header.tsx";
 import Navigation from "./components/navigation/Navigation.tsx";
+import Dashboard from "./pages/DashboardPage/dashboard/Dashboard.tsx";
 
 
 export default function App() {
@@ -39,10 +40,10 @@ export default function App() {
     return (
         <>
             <Header />
-            <Link to={"/books"}>All Books</Link>
+            <Navigation/>
             <main>
-                <Navigation/>
                 <Routes>
+                    <Route path={"/"} element={<Dashboard />}/>
                     <Route path={"/books"} element={<BookGalleryPage data={data}/>}/>
                     <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks}/>}/>
                     <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook}/>}/>
