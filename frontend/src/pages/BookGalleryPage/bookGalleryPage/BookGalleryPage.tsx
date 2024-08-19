@@ -1,16 +1,18 @@
-import {Book} from "../../../types/types.ts";
 import BookGallery from "../components/bookGallery/BookGallery.tsx";
 import "./BookGalleryPage.css";
 import GoToTopButton from "../../../components/goToTopButton/GoToTopButton.tsx";
+import Searchbar from "../components/searchbar/Searchbar.tsx";
 
 
-type BookGalleryPageProps = {
-    data: Book[]
-}
-export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) {
+export default function BookGalleryPage({filteredBooks, setSearchInput}: any) {
     return (
         <div id={"galleryPage"}>
-            <BookGallery data={data} />
+            <Searchbar setSearchInput={setSearchInput}/>
+            {
+                filteredBooks.length > 0
+                    ? <BookGallery data={filteredBooks}/>
+                    : <p>No results found</p>
+            }
             <GoToTopButton/>
         </div>
     );

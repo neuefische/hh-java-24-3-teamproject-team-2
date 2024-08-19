@@ -36,14 +36,24 @@ export default function App() {
         fetchBooks()
     }, []);
 
+
+    const [searchInput, setSearchInput] = useState("")
+
+    const filteredBooks: Book[] = data
+        .filter((book) => book.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+            book.author.toLowerCase().includes(searchInput.toLowerCase()));
+
+
     return (
         <>
-            <Header />
+            <Header/>
             <Link to={"/books"}>All Books</Link>
             <main>
                 <Navigation/>
                 <Routes>
-                    <Route path={"/books"} element={<BookGalleryPage data={data}/>}/>
+                    <Route path={"/books"} element={<BookGalleryPage data={data}
+                                                                     filteredBooks={filteredBooks}
+                                                                     setSearchInput={setSearchInput}/>}/>
                     <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks}/>}/>
                     <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook}/>}/>
                 </Routes>
