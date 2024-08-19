@@ -1,0 +1,13 @@
+.filter-body {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0 30px 0;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 50px;
+    gap: 10px;
+}

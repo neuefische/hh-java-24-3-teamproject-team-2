@@ -4,3 +4,20 @@
     gap: 10px;
     justify-content: center;
 }
+
+.filter-sector {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.show-filter-button {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.show-filter-button:focus {
+    outline: none;
+}
