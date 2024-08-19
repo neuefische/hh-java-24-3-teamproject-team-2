@@ -1,5 +1,4 @@
 header {
-
     background-color: #183A37;
     width: 100%;
     padding: 15px;
@@ -38,5 +37,4 @@ h1 {
     font-variant-caps: all-small-caps;
     font-size: 14px;
     grid-area: tag-line;
-
 }

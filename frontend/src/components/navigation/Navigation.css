@@ -3,5 +3,49 @@ nav ul {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-content: center;
     gap: 20px;
+    padding: 0;
+}
+
+nav {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    background-color: #C44900;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+nav li {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+}
+
+nav a {
+    color: #EFD6AC;
+    font-size: smaller;
+    display: flex;
+    place-items: center;
+    flex-direction: column;
+    gap: 2px;
+}
+
+nav a:hover {
+    color: #183A37;
+}
+
+@media only screen and (min-width: 768px) {
+    nav {
+        position: sticky;
+        top: 0;
+    }
+
+    nav a {
+        flex-direction: row;
+        gap: 5px;
+    }
 }

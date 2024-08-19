@@ -15,6 +15,15 @@ main {
   place-items: center;
   flex-direction: column;
   padding: 20px;
+  margin-bottom: 90px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
 }
 
 .align-right {
@@ -58,4 +67,10 @@ h2 {
 .book-button:hover {
   border-color: #EFD6AC;
   color: #EFD6AC;
+}
+
+@media only screen and (min-width: 768px) {
+  main {
+    margin-bottom: 10px;
+  }
 }
