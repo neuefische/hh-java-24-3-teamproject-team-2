@@ -11,7 +11,7 @@ export default function BookCard({book}: Readonly<BookCardProps>) {
 
     return (
 
-        <li>
+        <li className={"book-card"}>
             <img className={"cover"} alt={`${book.title} Book Cover`}/>
             <div className={"book-info"}>
                 <h4>{book.title}</h4>
