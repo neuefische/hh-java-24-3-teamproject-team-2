@@ -10,7 +10,6 @@ import Header from "./components/header/Header.tsx";
 import Navigation from "./components/navigation/Navigation.tsx";
 import Dashboard from "./pages/DashboardPage/dashboard/Dashboard.tsx";
 
-
 export default function App() {
 
     const [data, setData] = useState<Book[]>([])
@@ -29,14 +28,11 @@ export default function App() {
         axios.delete("/api/books/" + id)
             .then((response) => response.status === 200 && fetchBooks())
             .catch((error) => console.log(error.message))
-
-
     }
 
     useEffect(() => {
         fetchBooks()
     }, []);
-
 
     const [searchInput, setSearchInput] = useState("")
 
@@ -44,16 +40,14 @@ export default function App() {
         .filter((book) => book.title.toLowerCase().includes(searchInput.toLowerCase()) ||
             book.author.toLowerCase().includes(searchInput.toLowerCase()));
 
-
     return (
         <>
-            <Header />
+            <Header/>
             <Navigation/>
             <main>
                 <Routes>
-                    <Route path={"/"} element={<Dashboard />}/>
+                    <Route path={"/"} element={<Dashboard/>}/>
                     <Route path={"/books"} element={<BookGalleryPage
-                        data={data}
                         filteredBooks={filteredBooks}
                         setSearchInput={setSearchInput}/>}/>
                     <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks}/>}/>
