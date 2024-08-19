@@ -4,7 +4,7 @@ type StarRatingProps = {
     rating: number
 }
 
-export default function StarRating(props: StarRatingProps) {
+export default function StarRating(props: Readonly<StarRatingProps>) {
 
     return(
         <>
