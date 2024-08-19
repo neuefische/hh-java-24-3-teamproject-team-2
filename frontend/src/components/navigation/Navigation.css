@@ -23,6 +23,7 @@ nav li {
     background-color: transparent;
     display: flex;
     justify-content: center;
+    padding: 15px;
 }
 
 nav a {
