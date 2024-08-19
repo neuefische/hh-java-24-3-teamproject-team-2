@@ -11,7 +11,7 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: any) {
             {
                 filteredBooks.length > 0
                     ? <BookGallery data={filteredBooks}/>
-                    : <p>No results found</p>
+                    : <p>No Books found</p>
             }
             <GoToTopButton/>
         </div>
