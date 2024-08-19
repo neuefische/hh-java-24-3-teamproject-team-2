@@ -1,10 +1,10 @@
-import {Book, NewBook} from "../../types/types.ts";
-import {ChangeEvent, FormEvent} from "react";
+import {BookWithoutId} from "../../types/types.ts";
+import {ChangeEvent, Dispatch, FormEvent, SetStateAction} from "react";
 import "./BookForm.css";
 
 type BookFormProps = {
-    book: Book | NewBook,
-    setBook: (book: Book | NewBook) => void,
+    book: BookWithoutId,
+    setBook: Dispatch<SetStateAction<BookWithoutId>>,
     handleSubmit: (event: FormEvent<HTMLFormElement>) => void,
     action: string,
     editable: boolean

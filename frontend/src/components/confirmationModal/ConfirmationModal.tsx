@@ -1,11 +1,11 @@
 import "./ConfirmationModal.css";
 import DeleteIcon from "../../assets/delete-svgrepo-com.svg";
-import {Book} from "../../types/types.ts";
+import {BookWithoutId} from "../../types/types.ts";
 
 type ModalProps = {
     handleClose: () => void,
-    handleDeleteConfirm: (id: string) => void,
-    bookToBeDeleted: Book
+    handleDeleteConfirm: () => void,
+    bookToBeDeleted: BookWithoutId
 }
 
 export default function ConfirmationModal ({handleClose, handleDeleteConfirm, bookToBeDeleted}: ModalProps) {
@@ -21,7 +21,7 @@ export default function ConfirmationModal ({handleClose, handleDeleteConfirm, bo
                 </div>
                 <div className={"modal-buttons"}>
                     <button className={"close-btn"} onClick={handleClose}>No, cancel</button>
-                    <button className={"delete-btn"} onClick={() => handleDeleteConfirm(bookToBeDeleted.id)}>Yes, delete!</button>
+                    <button className={"delete-btn"} onClick={handleDeleteConfirm}>Yes, delete!</button>
                 </div>
             </div>
         </div>
