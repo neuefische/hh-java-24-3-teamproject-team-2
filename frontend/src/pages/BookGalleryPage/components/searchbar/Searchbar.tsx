@@ -3,7 +3,9 @@ import './Searchbar.css'
 export default function Searchbar({setSearchInput}: any) {
     return (
         <>
-            <label htmlFor={"searchbar"}>Search:
+            <label htmlFor={"searchbar"}>Search: <span className="material-symbols-outlined">
+search
+</span>
                 <input
                     type={"text"}
                     name={"searchbar"}
