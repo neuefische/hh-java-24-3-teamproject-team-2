@@ -1,6 +1,10 @@
 import "./FilterPage.css";
+import {ChangeEvent, useState} from "react";
 
 export default function FilterPage() {
+
+    const [selectedGenre, setSelectedGenre] = useState<string>("Select");
+
     const genres : string[] = ["NONE", "FICTION", "MYSTERY", "THRILLER",
         "FANTASY", "SCIENCE", "NON_FICTION", "HISTORY", "NOVEL", "HISTORICAL_FICTION", "SCIENCE_FICTION",
         "ROMANCE", "YOUNG_ADULT", "ADVENTURE", "HORROR"];
@@ -11,14 +15,24 @@ export default function FilterPage() {
         }).join(genre != "NON_FICTION" ? " " : "-");
     }
 
+    const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        setSelectedGenre(event.target.value);
+    }
+
+    const handleReset = () => {
+        setSelectedGenre("Select");
+    }
+
     return (
         <div className={"filter-content"}>
             <div className={"filter-body"}>
                 <label>Genre</label>
                 <select
-                    name={"filter"}
-                    id={"filter"}
+                    name={"genre"}
+                    onChange={handleChange}
+                    value={selectedGenre}
                 >
+                    <option  >{formatGenre(selectedGenre)}</option>
                     {genres.map((genre) => (
                         <option key={genre} value={genre}>
                             {formatGenre(genre)}
@@ -27,8 +41,7 @@ export default function FilterPage() {
                 </select>
             </div>
             <div className={"filter-buttons"}>
-                {/*<button className={"close-btn"} onClick={handleClick}>x</button>*/}
-                <button className={"close-btn"}>Reset</button>
+                <button className={"reset-btn"} onClick={handleReset}>Reset</button>
                 <button className={"delete-btn"}>Apply</button>
             </div>
 

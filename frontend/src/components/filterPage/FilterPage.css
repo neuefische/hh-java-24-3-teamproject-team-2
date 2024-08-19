@@ -11,3 +11,22 @@
     margin-bottom: 50px;
     gap: 10px;
 }
+
+.reset-btn {
+    background-color: #f9f9f9;
+    color: #888888;
+    border-color: #888888;
+    width: 110px;
+    font-size: 13px;
+}
+
+.reset-btn:hover {
+    background-color: #888888;
+    color: #f9f9f9;
+    border-color: #f9f9f9;
+}
+
+.apply-btn {
+    width: 110px;
+    font-size: 13px;
+}
