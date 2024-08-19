@@ -1,9 +1,15 @@
 import "./FilterPage.css";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent} from "react";
 
-export default function FilterPage() {
+type FilterPageProps = {
+    selectedGenre: string,
+    setSelectedGenre: (genre: string) => void,
+    handleApplyFilter: () => void
+}
 
-    const [selectedGenre, setSelectedGenre] = useState<string>("Select");
+export default function FilterPage({ selectedGenre, setSelectedGenre, handleApplyFilter }: FilterPageProps) {
+
+    //const [selectedGenre, setSelectedGenre] = useState<string>("Select");
 
     const genres : string[] = ["NONE", "FICTION", "MYSTERY", "THRILLER",
         "FANTASY", "SCIENCE", "NON_FICTION", "HISTORY", "NOVEL", "HISTORICAL_FICTION", "SCIENCE_FICTION",
@@ -42,7 +48,7 @@ export default function FilterPage() {
             </div>
             <div className={"filter-buttons"}>
                 <button className={"reset-btn"} onClick={handleReset}>Reset</button>
-                <button className={"delete-btn"}>Apply</button>
+                <button className={"delete-btn"} onClick={handleApplyFilter}>Apply</button>
             </div>
 
         </div>

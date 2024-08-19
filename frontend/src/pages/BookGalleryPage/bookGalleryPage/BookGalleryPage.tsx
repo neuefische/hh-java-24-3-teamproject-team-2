@@ -12,14 +12,21 @@ type BookGalleryPageProps = {
 export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) {
 
     const [showFilter, setShowFilter] = useState<boolean>(false);
+    const [selectedGenre, setSelectedGenre] = useState<string>("Select");
+    const [filteredDataByGenre, setFilteredDataByGenre] = useState<Book[]>(data);
 
     const handleClick = () => {
         setShowFilter(!showFilter);
     }
 
-    /*const handleClickOnClose = () => {
-        //setShowFilter(false);
-    }*/
+    const handleApplyFilter = () => {
+        const filteredData = selectedGenre === "Select" || selectedGenre === "NONE"
+            ? data
+            : data.filter(book => book.genre === selectedGenre);
+
+        setFilteredDataByGenre(filteredData);
+    }
+
 
     return (
         <div id={"galleryPage"}>
@@ -30,9 +37,15 @@ export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) 
                 >
                     Filter
                 </button>
-                {showFilter && <FilterPage />}
+                {showFilter &&
+                    <FilterPage
+                        selectedGenre={selectedGenre}
+                        setSelectedGenre={setSelectedGenre}
+                        handleApplyFilter={handleApplyFilter}
+                    />
+                }
             </div>
-            <BookGallery data={data} />
+            <BookGallery data={filteredDataByGenre} />
             <GoToTopButton/>
         </div>
     );
