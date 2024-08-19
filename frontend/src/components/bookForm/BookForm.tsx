@@ -113,6 +113,6 @@ export default function BookForm({book, setBook, handleSubmit, action, editable}
             {editable && <button type={"submit"}>{action}</button>}
         </form>
 
-)
+    )
 
 }

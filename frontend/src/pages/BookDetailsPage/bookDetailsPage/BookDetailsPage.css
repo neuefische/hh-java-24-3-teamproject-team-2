@@ -4,6 +4,10 @@
     place-items: stretch;
 }
 
+.StarRating {
+    text-align: center;
+}
+
 .book-details h2 {
     text-align: center;
 }
