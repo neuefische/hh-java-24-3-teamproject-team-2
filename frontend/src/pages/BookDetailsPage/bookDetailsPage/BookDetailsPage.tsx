@@ -1,10 +1,10 @@
 import "./BookDetailsPage.css";
-import {Book} from "../../../types/types.ts";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {FormEvent, useEffect, useState} from "react";
 import BookForm from "../../../components/bookForm/BookForm.tsx";
 import ConfirmationModal from "../../../components/confirmationModal/ConfirmationModal.tsx";
+import {BookWithoutId} from "../../../types/types.ts";
 
 
 type DeleteProps = {
@@ -12,10 +12,9 @@ type DeleteProps = {
 }
 
 export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
-    const [book, setBook] = useState<Book>({
+    const [book, setBook] = useState<BookWithoutId>({
         title: "",
         author: "",
-        id: "",
         description: "",
         genre: "",
         isbn: "",
@@ -47,10 +46,12 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
         setShowDeleteModal(false)
     }
 
-    const handleDeleteConfirm = (id: string) => {
-        deleteBook(id);
-        navigate("/books");
-        setShowDeleteModal(false);
+    const handleDeleteConfirm = () => {
+        if (id) {
+            deleteBook(id);
+            navigate("/books");
+            setShowDeleteModal(false);
+        }
     }
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {

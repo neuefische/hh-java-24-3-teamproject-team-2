@@ -9,7 +9,7 @@ export type Book = {
     publicationDate: string
 }
 
-export type NewBook = {
+export type BookWithoutId = {
     title: string,
     author: string,
     description: string,

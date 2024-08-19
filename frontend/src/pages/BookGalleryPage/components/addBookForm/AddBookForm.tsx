@@ -1,5 +1,5 @@
 import { FormEvent, useState} from "react";
-import {NewBook} from "../../../../types/types.ts";
+import {BookWithoutId} from "../../../../types/types.ts";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import "./AddBookForm.css";
@@ -10,7 +10,7 @@ type FetchProps = {
 }
 
 export default function AddBookForm({fetchBooks}: Readonly<FetchProps>) {
-    const [book, setBook] = useState<NewBook>({
+    const [book, setBook] = useState<BookWithoutId>({
         title: "",
         author: "",
         description: "",
