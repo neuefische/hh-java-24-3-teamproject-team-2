@@ -8,14 +8,20 @@
 .filter-sector {
     margin-top: 30px;
     margin-bottom: 20px;
+    padding: 15px 15px;
+    background-color: #183a37;
+    border-radius: 15px;
+    display: inline-block;
+    min-width: 700px;
+    flex-shrink: 0;
+    flex-grow: 0;
 }
 
 .show-filter-button {
-    width: 100%;
-    background-color: transparent;
+    float: right;
+    padding: 0;
     border: none;
-    font-size: 20px;
-    font-weight: 700;
+    background: none;
 }
 
 .show-filter-button:focus {

@@ -35,7 +35,7 @@ export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) 
                     onClick={handleClick}
                     className={"show-filter-button"}
                 >
-                    Filter
+                    {!showFilter ? "Advanced Search" : "x"}
                 </button>
                 {showFilter &&
                     <FilterPage

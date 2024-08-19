@@ -31,21 +31,21 @@ export default function FilterPage({ selectedGenre, setSelectedGenre, handleAppl
 
     return (
         <div className={"filter-content"}>
-            <div className={"filter-body"}>
-                <label>Genre</label>
-                <select
-                    name={"genre"}
-                    onChange={handleChange}
-                    value={selectedGenre}
-                >
-                    <option  >{formatGenre(selectedGenre)}</option>
-                    {genres.map((genre) => (
-                        <option key={genre} value={genre}>
-                            {formatGenre(genre)}
-                        </option>
-                    ))}
-                </select>
-            </div>
+            <form className={"filter-body"}>
+                    <label className={"filter-label"}>Genre</label>
+                    <select
+                        name={"genre"}
+                        onChange={handleChange}
+                        value={selectedGenre}
+                    >
+                        <option>{formatGenre(selectedGenre)}</option>
+                        {genres.map((genre) => (
+                            <option key={genre} value={genre}>
+                                {formatGenre(genre)}
+                            </option>
+                        ))}
+                    </select>
+            </form>
             <div className={"filter-buttons"}>
                 <button className={"reset-btn"} onClick={handleReset}>Reset</button>
                 <button className={"delete-btn"} onClick={handleApplyFilter}>Apply</button>
