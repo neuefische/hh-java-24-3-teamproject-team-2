@@ -32,6 +32,11 @@ export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) 
         setShowFilterTag(selectedGenre !== "Select");
     }
 
+    const handleRemoveFilter = () => {
+        setFilteredDataByGenre(data);
+        setShowFilterTag(false);
+        setSelectedGenre('Select');
+    }
 
     return (
         <div id={"galleryPage"}>
@@ -55,9 +60,7 @@ export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) 
                         <p style={{fontStyle: "italic", fontWeight: "bold"}}>Filtered Genre: </p>
                         <div className={"filter-tag"}>
                             <p className={"filter-tag-genre"}>{formatGenre(selectedGenre)}</p>
-                            <button className={"filter-tag-close"}>
-                                x
-                            </button>
+                            <button className={"filter-tag-close"} onClick={handleRemoveFilter}>x</button>
                         </div>
                     </div>
                 }
