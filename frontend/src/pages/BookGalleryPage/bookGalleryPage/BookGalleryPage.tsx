@@ -55,7 +55,7 @@ export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) 
                         setShowKeywordTag={setShowFilterTag}
                     />
                 }
-                {showFilterTag &&
+                {(showFilterTag && !showFilter) &&
                     <div className={"filter-tag-area"}>
                         <p style={{fontStyle: "italic", fontWeight: "bold"}}>Filtered Genre: </p>
                         <div className={"filter-tag"}>

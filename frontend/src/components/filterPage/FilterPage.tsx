@@ -1,5 +1,5 @@
 import "./FilterPage.css";
-import {ChangeEvent, Dispatch, SetStateAction} from "react";
+import {ChangeEvent, Dispatch, SetStateAction, useState} from "react";
 import {formatGenre} from "../functions/FormatGenre.ts";
 
 type FilterPageProps = {
@@ -10,6 +10,7 @@ type FilterPageProps = {
 }
 
 export default function FilterPage({ selectedGenre, setSelectedGenre, handleApplyFilter, setShowKeywordTag }: FilterPageProps) {
+    const [isDisable, setIsDisable] = useState<boolean>(true);
 
     const genres : string[] = ["NONE", "FICTION", "MYSTERY", "THRILLER",
         "FANTASY", "SCIENCE", "NON_FICTION", "HISTORY", "NOVEL", "HISTORICAL_FICTION", "SCIENCE_FICTION",
@@ -17,11 +18,13 @@ export default function FilterPage({ selectedGenre, setSelectedGenre, handleAppl
 
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setSelectedGenre(event.target.value);
+        setIsDisable(false);
     }
 
     const handleReset = () => {
         setSelectedGenre("Select");
         setShowKeywordTag(false);
+        setIsDisable(true);
     }
 
     return (
@@ -43,7 +46,11 @@ export default function FilterPage({ selectedGenre, setSelectedGenre, handleAppl
             </form>
             <div className={"filter-buttons"}>
                 <button className={"reset-btn"} onClick={handleReset}>Reset</button>
-                <button className={"delete-btn"} onClick={handleApplyFilter}>Apply</button>
+                <button
+                    className={"apply-btn"}
+                    onClick={handleApplyFilter}
+                    disabled={isDisable}
+                >Apply</button>
             </div>
 
         </div>
