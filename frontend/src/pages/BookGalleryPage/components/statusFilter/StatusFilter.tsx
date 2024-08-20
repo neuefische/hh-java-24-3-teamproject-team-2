@@ -1,5 +1,6 @@
 import {Dispatch, SetStateAction} from "react";
 import "./StatusFilter.css";
+import {formatEnum} from "../../../../utils/utilFunctions.ts";
 
 type StatusFilterProps = {
     statusFilter: string,
@@ -8,12 +9,6 @@ type StatusFilterProps = {
 
 export default function StatusFilter ({statusFilter, setStatusFilter}:StatusFilterProps) {
     const bookStatuses : string[] = ["ALL", "TO_BE_READ", "READING", "READ"];
-
-    function formatEnum(enumString :string): string {
-        return enumString.split('_').map((letter) => {
-            return letter.charAt(0).toUpperCase() + letter.slice(1).toLowerCase();
-        }).join(enumString != "NON_FICTION" ? " " : "-");
-    }
 
     return (
         <div className={"status-buttons"}>

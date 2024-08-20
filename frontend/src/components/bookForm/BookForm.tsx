@@ -1,6 +1,7 @@
 import {BookWithoutId, ReadingStatus} from "../../types/types.ts";
 import {ChangeEvent, Dispatch, FormEvent, SetStateAction} from "react";
 import "./BookForm.css";
+import {formatEnum} from "../../utils/utilFunctions.ts";
 
 type BookFormProps = {
     book: BookWithoutId,
@@ -19,12 +20,6 @@ export default function BookForm({book, setBook, handleSubmit, action, editable}
 
     function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | ChangeEvent<HTMLSelectElement>): void {
         setBook({...book, [event.target.name]: event.target.value})
-    }
-
-    function formatEnum(enumString :string): string {
-        return enumString.split('_').map((letter) => {
-            return letter.charAt(0).toUpperCase() + letter.slice(1).toLowerCase();
-        }).join(enumString != "NON_FICTION" ? " " : "-");
     }
 
     return (
