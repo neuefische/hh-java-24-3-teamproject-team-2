@@ -1,7 +1,6 @@
 import './SearchBar.css'
 
 export default function SearchBar({setSearchInput}: any) {
-    console.log(setSearchInput)
     return (
         <>
             <div className={"searchBar-container"}>
