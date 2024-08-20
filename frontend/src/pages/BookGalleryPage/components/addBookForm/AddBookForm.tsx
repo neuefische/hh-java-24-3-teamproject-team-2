@@ -25,10 +25,6 @@ export default function AddBookForm({fetchBooks}: Readonly<FetchProps>) {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-        console.log(book);
-        console.log(event);
-
         axios.post("/api/books", book)
             .then(response => console.log(response))
             .then(() => fetchBooks())
