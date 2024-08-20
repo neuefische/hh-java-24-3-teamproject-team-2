@@ -15,6 +15,7 @@ public record Book(
         String description,
         String isbn,
         String cover,
+        int rating,
         LocalDate publicationDate
 ) {
 }

@@ -5,6 +5,7 @@ import {FormEvent, useEffect, useState} from "react";
 import BookForm from "../../../components/bookForm/BookForm.tsx";
 import ConfirmationModal from "../../../components/confirmationModal/ConfirmationModal.tsx";
 import {BookWithoutId} from "../../../types/types.ts";
+import StarRating from "../../../components/starRating/StarRating.tsx";
 
 
 type DeleteProps = {
@@ -19,10 +20,11 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
         genre: "",
         isbn: "",
         cover: "",
+        rating: 0,
         publicationDate: ""
     })
     const [editable, setEditable ] = useState<boolean>(false);
-
+    const [ratingValue, setRatingValue] = useState<number | null>(0);
     const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
     const params = useParams();
@@ -31,8 +33,12 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
 
     const fetchBook = () => {
         axios.get(`/api/books/${id}`)
-            .then((response) => setBook(response.data))
+            .then((response) => {
+                setBook(response.data)
+                setRatingValue(response.data.rating)}
+            )
             .catch((error) => console.log(error.response.data))
+
     }
     useEffect(() => {
         fetchBook();
@@ -56,6 +62,9 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if(ratingValue) {
+            book.rating = ratingValue
+        }
         axios.put(`/api/books/${id}/update`, book)
             .then(()=>setEditable(false))
             .catch((error) => console.log(error.response.data))
@@ -77,6 +86,7 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
             </div>
             <h2>{book.title}</h2>
             <img className={"big-cover"} src={book.cover} alt={`${book.title} Book Cover`}/>
+            <StarRating  size={"large"} ratingValue={ratingValue} setRatingValue={setRatingValue} editable={editable}/>
             <BookForm book={book} setBook={setBook} handleSubmit={handleSubmit} action={"Update"} editable={editable}/>
             <button className={"stretch"} onClick={handleDelete}>Delete
             </button>
