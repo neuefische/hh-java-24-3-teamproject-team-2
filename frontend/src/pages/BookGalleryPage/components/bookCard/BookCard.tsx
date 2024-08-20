@@ -13,7 +13,7 @@ export default function BookCard({book}: Readonly<BookCardProps>) {
     return (
 
         <li className={"book-card"}>
-            <img className={"cover"} alt={`${book.title} Book Cover`}/>
+            <img className={"cover"} alt={`${book.title} Book Cover`} src={`${book.cover}`}/>
             <div className={"book-info"}>
                 <h4>{book.title}</h4>
                 <p className={"author"}>By {book.author}</p>
