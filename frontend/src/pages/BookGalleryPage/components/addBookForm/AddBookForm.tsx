@@ -1,4 +1,4 @@
-import { FormEvent, useState} from "react";
+import {FormEvent, useState} from "react";
 import {BookWithoutId} from "../../../../types/types.ts";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
@@ -24,9 +24,6 @@ export default function AddBookForm({fetchBooks}: Readonly<FetchProps>) {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-        console.log(book);
-        console.log(event);
 
         axios.post("/api/books", {book})
             .then(() => fetchBooks())
