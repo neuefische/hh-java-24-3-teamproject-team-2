@@ -37,9 +37,9 @@ export default function App() {
     const [searchInput, setSearchInput] = useState("")
 
     const filteredBooks: Book[] = data
-        .filter((book) => book.title.toLowerCase().includes(searchInput.toLowerCase()) ||
-            book.author.toLowerCase().includes(searchInput.toLowerCase()));
-
+        .filter((book) => book.title?.toLowerCase().includes(searchInput.toLowerCase()) ||
+            book.author?.toLowerCase().includes(searchInput.toLowerCase()));
+    
     return (
         <>
             <Header/>

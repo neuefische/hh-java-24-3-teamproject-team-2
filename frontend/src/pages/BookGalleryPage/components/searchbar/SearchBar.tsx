@@ -1,9 +1,11 @@
-import './Searchbar.css'
+import './SearchBar.css'
 
-export default function Searchbar({setSearchInput}: any) {
+export default function SearchBar({setSearchInput}: any) {
+    console.log(setSearchInput)
     return (
         <>
-            <label className={"search-label"} htmlFor={"searchbar"}>
+            <div className={"searchBar-container"}>
+                <label htmlFor={"searchbar"} className="sr-only">Search for Title or Author</label>
                 <span className="material-symbols-outlined search-lense">search </span>
                 <input className={"search-input"}
                        type={"text"}
@@ -11,7 +13,7 @@ export default function Searchbar({setSearchInput}: any) {
                        placeholder={"Search for Title or Author"}
                        onChange={(event) => setSearchInput(event.target.value)}
                 />
-            </label>
+            </div>
         </>
     )
 }
