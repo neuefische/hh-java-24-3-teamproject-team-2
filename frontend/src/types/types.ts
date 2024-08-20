@@ -5,7 +5,8 @@ export type Book = {
     description: string,
     genre: string,
     isbn: string,
-    cover: string
+    cover: string,
+    rating: number,
     publicationDate: string
 }
 
@@ -16,6 +17,7 @@ export type BookWithoutId = {
     genre: string,
     isbn: string,
     cover: string
+    rating: number,
     publicationDate: string
 }
 

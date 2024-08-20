@@ -13,6 +13,7 @@ public record BookDto(
         String description,
         String isbn,
         String cover,
+        int rating,
         LocalDate publicationDate
 ) {
 }

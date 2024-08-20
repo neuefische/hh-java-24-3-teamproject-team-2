@@ -1,20 +1,23 @@
-import {Book} from "../../../types/types.ts";
 import BookGallery from "../components/bookGallery/BookGallery.tsx";
 import "./BookGalleryPage.css";
 import GoToTopButton from "../../../components/goToTopButton/GoToTopButton.tsx";
 import {useState} from "react";
 import FilterPage from "../../../components/filterPage/FilterPage.tsx";
 import {formatGenre} from "../../../components/functions/FormatGenre.ts";
-
+import {Dispatch, SetStateAction} from "react";
+import {Book} from "../../../types/types.ts";
+import SearchBar from "../components/searchbar/SearchBar.tsx";
 
 type BookGalleryPageProps = {
-    data: Book[]
+    filteredBooks: Book[],
+    setSearchInput: Dispatch<SetStateAction<string>>
 }
-export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) {
+
+export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGalleryPageProps) {
 
     const [showFilter, setShowFilter] = useState<boolean>(false);
     const [selectedGenre, setSelectedGenre] = useState<string>("Select");
-    const [filteredDataByGenre, setFilteredDataByGenre] = useState<Book[]>(data);
+    const [filteredDataByGenre, setFilteredDataByGenre] = useState<Book[]>(filteredBooks);
     const [showFilterTag, setShowFilterTag] = useState<boolean>(false);
 
     const handleClick = () => {
@@ -22,24 +25,30 @@ export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) 
     }
 
     const handleApplyFilter = () => {
-        const filteredData = selectedGenre === "Select" || selectedGenre === "NONE"
-            ? data
-            : data.filter(book => book.genre === selectedGenre);
+        const filteredByGenre = selectedGenre === "Select" || selectedGenre === "NONE"
+            ? filteredBooks
+            : filteredBooks.filter(book => book.genre === selectedGenre);
 
-        setFilteredDataByGenre(filteredData);
+        setFilteredDataByGenre(filteredByGenre);
 
         setShowFilter(false);
         setShowFilterTag(selectedGenre !== "Select");
     }
 
     const handleRemoveFilter = () => {
-        setFilteredDataByGenre(data);
+        setFilteredDataByGenre(filteredBooks);
         setShowFilterTag(false);
         setSelectedGenre('Select');
     }
 
     return (
         <div id={"galleryPage"}>
+            <SearchBar setSearchInput={setSearchInput}/>
+            {
+                filteredBooks.length > 0
+                    ? <BookGallery data={filteredBooks}/>
+                    : <p>No Books found</p>
+            }
             <div className={"filter-sector"}>
                 <button
                     onClick={handleClick}
