@@ -1,13 +1,14 @@
 import "./FilterPage.css";
-import {ChangeEvent} from "react";
+import {ChangeEvent, Dispatch, SetStateAction} from "react";
 
 type FilterPageProps = {
     selectedGenre: string,
     setSelectedGenre: (genre: string) => void,
-    handleApplyFilter: () => void
+    handleApplyFilter: () => void,
+    setShowKeywordTag: Dispatch<SetStateAction<boolean>>
 }
 
-export default function FilterPage({ selectedGenre, setSelectedGenre, handleApplyFilter }: FilterPageProps) {
+export default function FilterPage({ selectedGenre, setSelectedGenre, handleApplyFilter, setShowKeywordTag }: FilterPageProps) {
 
     //const [selectedGenre, setSelectedGenre] = useState<string>("Select");
 
@@ -27,6 +28,7 @@ export default function FilterPage({ selectedGenre, setSelectedGenre, handleAppl
 
     const handleReset = () => {
         setSelectedGenre("Select");
+        setShowKeywordTag(false);
     }
 
     return (
