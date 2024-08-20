@@ -2,12 +2,16 @@ import {Book, ReadingStatus} from "../../../types/types.ts";
 import BookGallery from "../components/bookGallery/BookGallery.tsx";
 import "./BookGalleryPage.css";
 import GoToTopButton from "../../../components/goToTopButton/GoToTopButton.tsx";
+import {Dispatch, SetStateAction} from "react";
+import SearchBar from "../components/searchbar/SearchBar.tsx";
 
-
-type BookGalleryPageProps = {
-    data: Book[]
+type BookGalleryPageProps =
+{
+    filteredBooks: Book[],
+    setSearchInput: Dispatch<SetStateAction<string>>
 }
-export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) {
+
+export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGalleryPageProps) {
     const readingStatuses : ReadingStatus[] = ["TO_BE_READ", "READING", "READ"];
 
     function formatEnum(enumString :string): string {
@@ -18,10 +22,15 @@ export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) 
 
     return (
         <div id={"galleryPage"}>
+            <SearchBar setSearchInput={setSearchInput}/>
             {readingStatuses.map((status) => (
                 <button>{formatEnum(status)}</button>
             ))}
-            <BookGallery data={data} />
+            {
+                filteredBooks.length > 0
+                    ? <BookGallery data={filteredBooks}/>
+                    : <p>No Books found</p>
+            }
             <GoToTopButton/>
         </div>
     );
