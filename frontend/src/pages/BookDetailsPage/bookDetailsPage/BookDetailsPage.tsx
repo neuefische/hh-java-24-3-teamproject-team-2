@@ -10,14 +10,15 @@ import StarRating from "../../../components/starRating/StarRating.tsx";
 
 type DeleteProps = {
     deleteBook: (id: string) => void;
+    updateBook: (id: string, book: BookWithoutId) => void;
 }
 
-export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
+export default function BookDetailsPage({deleteBook, updateBook}: Readonly<DeleteProps>) {
     const [book, setBook] = useState<BookWithoutId>({
         title: "",
         author: "",
         description: "",
-        genre: "",
+        genre: "NONE",
         isbn: "",
         cover: "",
         rating: 0,
@@ -66,6 +67,7 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
         if(ratingValue) {
             book.rating = ratingValue
         }
+        updateBook(id, book)
         axios.put(`/api/books/${id}/update`, book)
             .then(()=>setEditable(false))
             .catch((error) => console.log(error.response.data))
