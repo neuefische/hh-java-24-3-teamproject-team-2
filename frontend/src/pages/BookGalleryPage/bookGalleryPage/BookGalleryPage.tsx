@@ -25,6 +25,7 @@ export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) 
             : data.filter(book => book.genre === selectedGenre);
 
         setFilteredDataByGenre(filteredData);
+        setShowFilter(!showFilter);
     }
 
 
