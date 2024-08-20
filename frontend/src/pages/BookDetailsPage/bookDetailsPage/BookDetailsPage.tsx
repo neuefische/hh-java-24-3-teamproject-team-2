@@ -21,7 +21,8 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
         isbn: "",
         cover: "",
         rating: 0,
-        publicationDate: ""
+        publicationDate: "",
+        readingStatus: "TO_BE_READ"
     })
     const [editable, setEditable ] = useState<boolean>(false);
     const [ratingValue, setRatingValue] = useState<number | null>(0);

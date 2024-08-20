@@ -7,7 +7,8 @@ export type Book = {
     isbn: string,
     cover: string,
     rating: number,
-    publicationDate: string
+    publicationDate: string,
+    readingStatus: ReadingStatus
 }
 
 export type BookWithoutId = {
@@ -18,8 +19,11 @@ export type BookWithoutId = {
     isbn: string,
     cover: string
     rating: number,
-    publicationDate: string
+    publicationDate: string,
+    readingStatus: ReadingStatus
 }
+
+export type ReadingStatus = "TO_BE_READ" | "READING" | "READ";
 
 export type Genre = {
     NONE: string,

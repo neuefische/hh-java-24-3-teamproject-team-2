@@ -18,7 +18,8 @@ export default function AddBookForm({fetchBooks}: Readonly<FetchProps>) {
         isbn: "",
         cover: "",
         rating: 0,
-        publicationDate: ""
+        publicationDate: "",
+        readingStatus: "TO_BE_READ"
     });
     const navigate = useNavigate();
 
@@ -29,8 +30,8 @@ export default function AddBookForm({fetchBooks}: Readonly<FetchProps>) {
         console.log(event);
 
         axios.post("/api/books", {book})
-            .then(() => fetchBooks())
             .then(response => console.log(response))
+            .then(() => fetchBooks())
             .catch(error => console.log(error))
 
         navigate("/books")

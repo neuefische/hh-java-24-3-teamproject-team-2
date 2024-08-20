@@ -30,6 +30,7 @@ public class BookService {
     }
 
     public Book saveBook(BookDto bookDto) {
+        System.out.println(bookDto);
         Book bookToSave = new Book(
                 idService.randomId(),
                 bookDto.author(),
@@ -42,6 +43,7 @@ public class BookService {
                 bookDto.publicationDate(),
                 bookDto.readingStatus()
         );
+        System.out.println(bookToSave);
         return bookRepository.save(bookToSave);
     }
 
