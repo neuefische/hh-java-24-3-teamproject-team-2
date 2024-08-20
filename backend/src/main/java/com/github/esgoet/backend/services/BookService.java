@@ -39,7 +39,8 @@ public class BookService {
                 bookDto.isbn(),
                 bookDto.cover(),
                 bookDto.rating(),
-                bookDto.publicationDate()
+                bookDto.publicationDate(),
+                bookDto.readingStatus()
         );
         return bookRepository.save(bookToSave);
     }
@@ -52,7 +53,8 @@ public class BookService {
                 .withGenre(updateBook.genre())
                 .withTitle(updateBook.title())
                 .withIsbn(updateBook.isbn())
-                .withRating(updateBook.rating());
+                .withRating(updateBook.rating())
+                .withReadingStatus(updateBook.readingStatus());
         return bookRepository.save(book);
     }
 }

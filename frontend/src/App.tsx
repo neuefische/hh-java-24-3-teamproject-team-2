@@ -1,6 +1,6 @@
 import './App.css'
 import axios from "axios"
-import {Book} from "./types/types.ts";
+import {Book, BookWithoutId} from "./types/types.ts";
 import {useEffect, useState} from "react";
 import {Route, Routes} from "react-router-dom";
 import BookDetailsPage from "./pages/BookDetailsPage/bookDetailsPage/BookDetailsPage.tsx";
@@ -30,6 +30,12 @@ export default function App() {
             .catch((error) => console.log(error.message))
     }
 
+    const updateBook = (id: string, book: BookWithoutId) => {
+        axios.put(`/api/books/${id}/update`, book)
+            .then((response) => response.status === 200 && fetchBooks())
+            .catch((error) => console.log(error.response.data))
+    }
+
     useEffect(() => {
         fetchBooks()
     }, []);
@@ -51,7 +57,7 @@ export default function App() {
                         filteredBooks={filteredBooks}
                         setSearchInput={setSearchInput}/>}/>
                     <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks}/>}/>
-                    <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook}/>}/>
+                    <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook} updateBook={updateBook}/>}/>
                 </Routes>
             </main>
         </>
