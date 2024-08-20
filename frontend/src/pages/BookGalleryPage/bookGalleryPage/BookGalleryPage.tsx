@@ -4,6 +4,7 @@ import "./BookGalleryPage.css";
 import GoToTopButton from "../../../components/goToTopButton/GoToTopButton.tsx";
 import {useState} from "react";
 import FilterPage from "../../../components/filterPage/FilterPage.tsx";
+import {formatGenre} from "../../../components/functions/FormatGenre.ts";
 
 
 type BookGalleryPageProps = {
@@ -49,7 +50,7 @@ export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) 
                         setShowKeywordTag={setShowFilterTag}
                     />
                 }
-                {showFilterTag && <button>{selectedGenre}</button>}
+                {showFilterTag && <button>{formatGenre(selectedGenre)}</button>}
             </div>
             <BookGallery data={filteredDataByGenre} />
             <GoToTopButton/>

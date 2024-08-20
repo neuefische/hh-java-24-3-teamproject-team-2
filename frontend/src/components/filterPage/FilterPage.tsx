@@ -1,5 +1,6 @@
 import "./FilterPage.css";
 import {ChangeEvent, Dispatch, SetStateAction} from "react";
+import {formatGenre} from "../functions/FormatGenre.ts";
 
 type FilterPageProps = {
     selectedGenre: string,
@@ -10,17 +11,9 @@ type FilterPageProps = {
 
 export default function FilterPage({ selectedGenre, setSelectedGenre, handleApplyFilter, setShowKeywordTag }: FilterPageProps) {
 
-    //const [selectedGenre, setSelectedGenre] = useState<string>("Select");
-
     const genres : string[] = ["NONE", "FICTION", "MYSTERY", "THRILLER",
         "FANTASY", "SCIENCE", "NON_FICTION", "HISTORY", "NOVEL", "HISTORICAL_FICTION", "SCIENCE_FICTION",
         "ROMANCE", "YOUNG_ADULT", "ADVENTURE", "HORROR"];
-
-    function formatGenre(genre :string): string {
-        return genre.split('_').map((letter) => {
-            return letter.charAt(0).toUpperCase() + letter.slice(1).toLowerCase();
-        }).join(genre != "NON_FICTION" ? " " : "-");
-    }
 
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setSelectedGenre(event.target.value);

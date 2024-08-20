@@ -1,6 +1,7 @@
 import {BookWithoutId} from "../../types/types.ts";
 import {ChangeEvent, Dispatch, FormEvent, SetStateAction} from "react";
 import "./BookForm.css";
+import {formatGenre} from "../functions/FormatGenre.ts";
 
 type BookFormProps = {
     book: BookWithoutId,
@@ -23,12 +24,6 @@ export default function BookForm({book, setBook, handleSubmit, action, editable}
 
     function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | ChangeEvent<HTMLSelectElement>): void {
         setBook({...book, [event.target.name]: event.target.value})
-    }
-
-    function formatGenre(genre :string): string {
-        return genre.split('_').map((letter) => {
-            return letter.charAt(0).toUpperCase() + letter.slice(1).toLowerCase();
-        }).join(genre != "NON_FICTION" ? " " : "-");
     }
 
     return (
