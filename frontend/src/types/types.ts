@@ -3,7 +3,7 @@ export type Book = {
     author: string,
     title: string
     description: string,
-    genre: string,
+    genre: Genre,
     isbn: string,
     cover: string,
     rating: number,
@@ -15,7 +15,7 @@ export type BookWithoutId = {
     title: string,
     author: string,
     description: string,
-    genre: string,
+    genre: Genre,
     isbn: string,
     cover: string
     rating: number,
@@ -25,20 +25,7 @@ export type BookWithoutId = {
 
 export type ReadingStatus = "TO_BE_READ" | "READING" | "READ";
 
-export type Genre = {
-    NONE: string,
-    FICTION: string,
-    MYSTERY: string,
-    THRILLER: string,
-    FANTASY: string,
-    SCIENCE: string,
-    NON_FICTION: string,
-    HISTORY: string,
-    NOVEL: string,
-    HISTORICAL_FICTION: string,
-    SCIENCE_FICTION: string,
-    ROMANCE: string,
-    YOUNG_ADULT: string,
-    ADVENTURE: string,
-    HORROR: string
-}
+export type Genre = "NONE" | "FICTION" | "MYSTERY" | "THRILLER" |
+    "FANTASY" | "SCIENCE" | "NON_FICTION" | "HISTORY" |
+    "NOVEL" | "HISTORICAL_FICTION" | "SCIENCE_FICTION" |
+    "ROMANCE" | "YOUNG_ADULT" | "ADVENTURE" | "HORROR";

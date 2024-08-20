@@ -14,7 +14,7 @@ export default function AddBookForm({fetchBooks}: Readonly<FetchProps>) {
         title: "",
         author: "",
         description: "",
-        genre: "",
+        genre: "NONE",
         isbn: "",
         cover: "",
         rating: 0,
@@ -29,7 +29,7 @@ export default function AddBookForm({fetchBooks}: Readonly<FetchProps>) {
         console.log(book);
         console.log(event);
 
-        axios.post("/api/books", {book})
+        axios.post("/api/books", book)
             .then(response => console.log(response))
             .then(() => fetchBooks())
             .catch(error => console.log(error))

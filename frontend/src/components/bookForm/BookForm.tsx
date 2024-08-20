@@ -10,12 +10,6 @@ type BookFormProps = {
     editable: boolean
 }
 
-/* not sure whether to use this, then genres would be of type Genre
-type Genre = "NONE" | "FICTION" | "MYSTERY" | "THRILLER" |
-    "FANTASY" | "SCIENCE" | "NON_FICTION" | "HISTORY" |
-    "NOVEL" | "HISTORICAL_FICTION" | "SCIENCE_FICTION" |
-    "ROMANCE" | "YOUNG_ADULT" | "ADVENTURE" | "HORROR";*/
-
 export default function BookForm({book, setBook, handleSubmit, action, editable}: Readonly<BookFormProps>) {
     const genres : string[] = ["NONE", "FICTION", "MYSTERY", "THRILLER",
     "FANTASY", "SCIENCE", "NON_FICTION", "HISTORY", "NOVEL", "HISTORICAL_FICTION", "SCIENCE_FICTION",
@@ -37,7 +31,7 @@ export default function BookForm({book, setBook, handleSubmit, action, editable}
         <form onSubmit={handleSubmit} className={"book-form"}>
             <div className={`book-info`}>
                 <label className={"book-label align-right"} htmlFor={"readingStatus"}>Reading Status</label>
-                <select required={true} value={book.readingStatus} onChange={handleChange} name={"readingStatus"} disabled={!editable}>
+                <select required={true} value={book.readingStatus} onChange={handleChange} name={"readingStatus"} disabled={!editable} defaultValue={"TO_BE_READ"}>
                     {readingStatuses.map((status) => (
                         <option key={status} value={status}>{formatEnum(status)}</option>
                     ))}
@@ -79,7 +73,7 @@ export default function BookForm({book, setBook, handleSubmit, action, editable}
             <div className={`book-info`}>
                 <label className={"book-label align-right"} htmlFor={"genre"}>Genre</label>
                 <select required={true} value={book.genre} onChange={handleChange} name={"genre"}
-                        disabled={!editable}>
+                        disabled={!editable} defaultValue={genres[0]}>
                     {genres.map((genre) => (
                         <option key={genre} value={genre}>
                             {formatEnum(genre)}
