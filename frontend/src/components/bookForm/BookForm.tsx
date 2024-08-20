@@ -31,7 +31,7 @@ export default function BookForm({book, setBook, handleSubmit, action, editable}
         <form onSubmit={handleSubmit} className={"book-form"}>
             <div className={`book-info`}>
                 <label className={"book-label align-right"} htmlFor={"readingStatus"}>Reading Status</label>
-                <select required={true} value={book.readingStatus} onChange={handleChange} name={"readingStatus"} disabled={!editable} defaultValue={"TO_BE_READ"}>
+                <select required={true} value={book.readingStatus} onChange={handleChange} name={"readingStatus"} disabled={!editable}>
                     {readingStatuses.map((status) => (
                         <option key={status} value={status}>{formatEnum(status)}</option>
                     ))}
@@ -73,7 +73,7 @@ export default function BookForm({book, setBook, handleSubmit, action, editable}
             <div className={`book-info`}>
                 <label className={"book-label align-right"} htmlFor={"genre"}>Genre</label>
                 <select required={true} value={book.genre} onChange={handleChange} name={"genre"}
-                        disabled={!editable} defaultValue={genres[0]}>
+                        disabled={!editable}>
                     {genres.map((genre) => (
                         <option key={genre} value={genre}>
                             {formatEnum(genre)}
