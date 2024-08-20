@@ -33,18 +33,31 @@
     margin-top: 40px;
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .filter-tag {
-    padding: 2px;
-    background: #c44900;
-    color: BEIGE;
-    width: fit-content;
-    height: 25px;
+    display: flex;
+    background-color: #c44900;
+    padding: 8px;
+    border-radius: 10px;
 }
 
-.filter-tag:hover,
-.filter-tag:focus {
+.filter-tag-genre {
+    color: BEIGE;
+    width: fit-content;
+    height: 18px;
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.filter-tag-close {
+    padding: 0;
+    color: BEIGE;
+}
+
+.filter-tag-close:hover,
+.filter-tag-close:focus {
     border-color: #c44900;
     outline: none;
 }

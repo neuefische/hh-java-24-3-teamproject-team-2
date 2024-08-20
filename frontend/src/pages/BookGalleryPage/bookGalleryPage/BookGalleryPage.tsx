@@ -53,9 +53,12 @@ export default function BookGalleryPage({data}: Readonly<BookGalleryPageProps>) 
                 {showFilterTag &&
                     <div className={"filter-tag-area"}>
                         <p style={{fontStyle: "italic", fontWeight: "bold"}}>Filtered Genre: </p>
-                        <button className={"filter-tag"}>
-                            {formatGenre(selectedGenre)}
-                        </button>
+                        <div className={"filter-tag"}>
+                            <p className={"filter-tag-genre"}>{formatGenre(selectedGenre)}</p>
+                            <button className={"filter-tag-close"}>
+                                x
+                            </button>
+                        </div>
                     </div>
                 }
             </div>
