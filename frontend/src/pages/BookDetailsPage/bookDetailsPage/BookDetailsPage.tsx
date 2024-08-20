@@ -86,7 +86,7 @@ export default function BookDetailsPage({deleteBook}: Readonly<DeleteProps>) {
             </div>
             <h2>{book.title}</h2>
             <img className={"big-cover"} src={book.cover} alt={`${book.title} Book Cover`}/>
-            <StarRating ratingValue={ratingValue} setRatingValue={setRatingValue} editable={editable}/>
+            <StarRating  size={"large"} ratingValue={ratingValue} setRatingValue={setRatingValue} editable={editable}/>
             <BookForm book={book} setBook={setBook} handleSubmit={handleSubmit} action={"Update"} editable={editable}/>
             <button className={"stretch"} onClick={handleDelete}>Delete
             </button>

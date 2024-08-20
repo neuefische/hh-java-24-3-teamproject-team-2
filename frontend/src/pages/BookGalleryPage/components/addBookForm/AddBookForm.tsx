@@ -17,6 +17,7 @@ export default function AddBookForm({fetchBooks}: Readonly<FetchProps>) {
         genre: "",
         isbn: "",
         cover: "",
+        rating: 0,
         publicationDate: ""
     });
     const navigate = useNavigate();

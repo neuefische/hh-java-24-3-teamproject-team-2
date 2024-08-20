@@ -8,7 +8,7 @@ type ModalProps = {
     bookToBeDeleted: BookWithoutId
 }
 
-export default function ConfirmationModal ({handleClose, handleDeleteConfirm, bookToBeDeleted}: ModalProps) {
+export default function ConfirmationModal ({handleClose, handleDeleteConfirm, bookToBeDeleted}: Readonly<ModalProps>) {
 
     return (
         <div className={"modal-backdrop"}>
