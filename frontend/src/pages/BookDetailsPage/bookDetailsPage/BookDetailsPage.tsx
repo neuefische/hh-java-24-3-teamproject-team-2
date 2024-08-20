@@ -67,10 +67,8 @@ export default function BookDetailsPage({deleteBook, updateBook}: Readonly<Delet
         if(ratingValue) {
             book.rating = ratingValue
         }
-        updateBook(id, book)
-        axios.put(`/api/books/${id}/update`, book)
-            .then(()=>setEditable(false))
-            .catch((error) => console.log(error.response.data))
+        if (id) updateBook(id, book)
+        setEditable(false)
     }
 
     const onEdit = () => {
