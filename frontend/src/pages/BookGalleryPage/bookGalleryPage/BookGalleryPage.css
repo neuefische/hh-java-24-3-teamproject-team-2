@@ -15,6 +15,7 @@
     min-width: 700px;
     flex-shrink: 0;
     flex-grow: 0;
+
 }
 
 .show-filter-button {
@@ -25,5 +26,25 @@
 }
 
 .show-filter-button:focus {
+    outline: none;
+}
+
+.filter-tag-area {
+    margin-top: 40px;
+    display: flex;
+    gap: 10px;
+}
+
+.filter-tag {
+    padding: 2px;
+    background: #c44900;
+    color: BEIGE;
+    width: fit-content;
+    height: 25px;
+}
+
+.filter-tag:hover,
+.filter-tag:focus {
+    border-color: #c44900;
     outline: none;
 }
