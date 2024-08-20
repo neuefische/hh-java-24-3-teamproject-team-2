@@ -2,6 +2,7 @@ package com.github.esgoet.backend.controllers;
 
 import com.github.esgoet.backend.models.Book;
 import com.github.esgoet.backend.models.Genre;
+import com.github.esgoet.backend.models.ReadingStatus;
 import com.github.esgoet.backend.repositories.BookRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ class BookControllerIntegrationTest {
     @Test
     void getBook_Test_whenIdExists() throws Exception {
         //GIVEN
-        bookRepository.save(new Book("1", "George Orwell", "1984", Genre.THRILLER, "this is a description", "123456isbn", "https://linkToCover", 3,localDate));
+        bookRepository.save(new Book("1", "George Orwell", "1984", Genre.THRILLER, "this is a description", "123456isbn", "https://linkToCover", 3,localDate, ReadingStatus.TO_BE_READ));
         //WHEN
         mockMvc.perform(get("/api/books/1"))
                 //THEN
@@ -58,7 +59,8 @@ class BookControllerIntegrationTest {
                              "isbn": "123456isbn",
                              "cover": "https://linkToCover",
                              "rating": 3,
-                             "publicationDate": "2024-08-14"
+                             "publicationDate": "2024-08-14",
+                             "readingStatus": "TO_BE_READ"
                         }
                         """));
     }
@@ -80,7 +82,8 @@ class BookControllerIntegrationTest {
                                          "isbn": "123456isbn",
                                          "cover": "https://linkToCover",
                                          "rating": 3,
-                                         "publicationDate": "1869-01-01"
+                                         "publicationDate": "1869-01-01",
+                                         "readingStatus": "TO_BE_READ"
                                      }
                                 """))
                 // THEN
@@ -93,7 +96,8 @@ class BookControllerIntegrationTest {
                 .andExpect(jsonPath("$.isbn").value("123456isbn"))
                 .andExpect(jsonPath("$.cover").value("https://linkToCover"))
                 .andExpect(jsonPath("$.rating").value(3))
-                .andExpect(jsonPath("$.publicationDate").value("1869-01-01"));
+                .andExpect(jsonPath("$.publicationDate").value("1869-01-01"))
+                .andExpect(jsonPath("$.readingStatus").value("TO_BE_READ"));
     }
 
     @DirtiesContext
@@ -115,7 +119,7 @@ class BookControllerIntegrationTest {
     @Test
     void deleteBook() throws Exception {
 
-        bookRepository.save(new Book("1", "Simon", "HowToDeleteBooksFast", Genre.SCIENCE, "description", "12345678", "https://linkToCover", 3,localDate));
+        bookRepository.save(new Book("1", "Simon", "HowToDeleteBooksFast", Genre.SCIENCE, "description", "12345678", "https://linkToCover", 3,localDate, ReadingStatus.TO_BE_READ));
 
         mockMvc.perform(delete("/api/books/1"))
                 .andExpect(status().isOk());
@@ -129,7 +133,7 @@ class BookControllerIntegrationTest {
     @Test
     void updateBook_Test_When_IdMatches() throws Exception {
         // GIVEN
-        bookRepository.save(new Book("1", "author1", "title1", Genre.FANTASY, "description1", "12345678", "cover1", 3,localDate));
+        bookRepository.save(new Book("1", "author1", "title1", Genre.FANTASY, "description1", "12345678", "cover1", 3,localDate, ReadingStatus.TO_BE_READ));
 
         // WHEN
         mockMvc.perform(put("/api/books/1/update")
@@ -143,7 +147,8 @@ class BookControllerIntegrationTest {
                                     "isbn": "23456789",
                                     "cover": "cover2",
                                     "rating": 3,
-                                    "publicationDate": "2024-08-14"
+                                    "publicationDate": "2024-08-14",
+                                    "readingStatus": "READING"
                                 }
                                 """))
                 // THEN
@@ -157,7 +162,8 @@ class BookControllerIntegrationTest {
                             "isbn": "23456789",
                             "cover": "cover2",
                             "rating": 3,
-                            "publicationDate": "2024-08-14"
+                            "publicationDate": "2024-08-14",
+                            "readingStatus": "READING"
                         }
                         """));
     }
