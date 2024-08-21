@@ -30,6 +30,10 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
         setSelectedGenre('Select');
     }
 
+    const filteredBooksByGenreAndStatus = filteredBooks
+        .filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : true)
+        .filter(book => statusFilter !== "ALL" ? book.readingStatus === statusFilter : true);
+
     return (
         <div id={"galleryPage"}>
             <SearchBar setSearchInput={setSearchInput}/>
@@ -60,11 +64,11 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
                     </div>
                 }
             </div>
-            <StatusFilter statusFilter={statusFilter} setStatusFilter={setStatusFilter}/>
+                <StatusFilter statusFilter={statusFilter} setStatusFilter={setStatusFilter}/>
+                <p className={"number-of-books"}>{filteredBooksByGenreAndStatus.length} books</p>
             {
-                filteredBooks.length > 0
-                    ? <BookGallery data={filteredBooks.filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : book)
-                        .filter((book) => statusFilter != "ALL" ? book.readingStatus === statusFilter : book)}/>
+                filteredBooksByGenreAndStatus.length > 0
+                    ? <BookGallery data={filteredBooksByGenreAndStatus} />
                     : <p>No Books found</p>
             }
             <GoToTopButton/>
