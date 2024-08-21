@@ -17,26 +17,19 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
 
     const [showFilter, setShowFilter] = useState<boolean>(false);
     const [selectedGenre, setSelectedGenre] = useState<string>("Select");
-    const [filteredDataByGenre, setFilteredDataByGenre] = useState<Book[]>(filteredBooks);
     const [showFilterTag, setShowFilterTag] = useState<boolean>(false);
 
     const handleClick = () => {
         setShowFilter(!showFilter);
     }
 
-    const handleApplyFilter = () => {
-        const filteredByGenre = selectedGenre === "Select" || selectedGenre === "NONE"
-            ? filteredBooks
-            : filteredBooks.filter(book => book.genre === selectedGenre);
-
-        setFilteredDataByGenre(filteredByGenre);
-
+    const handleApplyFilter = (genre: string) => {
         setShowFilter(false);
-        setShowFilterTag(selectedGenre !== "Select");
+        console.log(genre);
+        setShowFilterTag(genre !== "Select");
     }
 
     const handleRemoveFilter = () => {
-        setFilteredDataByGenre(filteredBooks);
         setShowFilterTag(false);
         setSelectedGenre('Select');
     }
@@ -44,7 +37,6 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
     return (
         <div id={"galleryPage"}>
             <SearchBar setSearchInput={setSearchInput}/>
-
             <div className={"filter-sector"}>
                 <button
                     onClick={handleClick}

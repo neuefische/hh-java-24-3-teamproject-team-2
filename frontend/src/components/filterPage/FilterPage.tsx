@@ -1,15 +1,15 @@
 import "./FilterPage.css";
-import {ChangeEvent, Dispatch, SetStateAction, useState} from "react";
+import {ChangeEvent, Dispatch, FormEvent, SetStateAction, useState} from "react";
 import {formatGenre} from "../functions/FormatGenre.ts";
 
 type FilterPageProps = {
     selectedGenre: string,
     setSelectedGenre: (genre: string) => void,
-    handleApplyFilter: () => void,
+    handleApplyFilter: (genre: string) => void,
     setShowKeywordTag: Dispatch<SetStateAction<boolean>>
 }
 
-export default function FilterPage({ selectedGenre, setSelectedGenre, handleApplyFilter, setShowKeywordTag }: FilterPageProps) {
+export default function FilterPage({ setSelectedGenre, handleApplyFilter, setShowKeywordTag }: FilterPageProps) {
     const [isDisable, setIsDisable] = useState<boolean>(true);
     const [genre, setGenre] = useState<string>('Select');
 
@@ -23,33 +23,40 @@ export default function FilterPage({ selectedGenre, setSelectedGenre, handleAppl
     }
 
     const handleReset = () => {
+        setGenre("Select");
         setSelectedGenre("Select");
         setShowKeywordTag(false);
         setIsDisable(true);
     }
 
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        setSelectedGenre(genre);
+        handleApplyFilter(genre);
+    }
+
     return (
         <div className={"filter-content"}>
-            <form className={"filter-body"} onSubmit={() => {
-                setSelectedGenre(genre)
-                handleApplyFilter()
-            }}>
-                    <label className={"filter-label"}>Genre</label>
-                    <select
-                        name={"genre"}
-                        onChange={handleChange}
-                        value={selectedGenre}
-                    >
-                        <option>{formatGenre(selectedGenre)}</option>
-                        {genres.map((genre) => (
-                            <option key={genre} value={genre}>
-                                {formatGenre(genre)}
-                            </option>
-                        ))}
-                    </select>
-
+            <form className={"filter-body"} onSubmit={handleSubmit}>
+                <label className={"filter-label"}>Genre</label>
+                <select
+                    name={"genre"}
+                    onChange={handleChange}
+                    value={genre}
+                >
+                    <option>{formatGenre(genre)}</option>
+                    {genres.map((genre) => (
+                        <option key={genre} value={genre}>
+                            {formatGenre(genre)}
+                        </option>
+                    ))}
+                </select>
                 <div className={"filter-buttons"}>
-                    <button className={"reset-btn"} onClick={handleReset}>Reset</button>
+                    <button
+                        type={"reset"}
+                        className={"reset-btn"}
+                        onClick={handleReset}
+                    >Reset</button>
                     <button
                         type={"submit"}
                         className={"apply-btn"}
