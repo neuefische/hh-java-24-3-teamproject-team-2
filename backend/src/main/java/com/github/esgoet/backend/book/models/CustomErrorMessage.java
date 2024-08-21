@@ -1,4 +1,4 @@
-package com.github.esgoet.backend.models;
+package com.github.esgoet.backend.book.models;
 
 import java.time.LocalDateTime;
 

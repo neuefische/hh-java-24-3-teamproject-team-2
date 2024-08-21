@@ -1,8 +1,8 @@
-package com.github.esgoet.backend.controllers;
+package com.github.esgoet.backend.book.controllers;
 
-import com.github.esgoet.backend.dto.BookDto;
-import com.github.esgoet.backend.models.Book;
-import com.github.esgoet.backend.services.BookService;
+import com.github.esgoet.backend.book.dto.BookDto;
+import com.github.esgoet.backend.book.models.Book;
+import com.github.esgoet.backend.book.services.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

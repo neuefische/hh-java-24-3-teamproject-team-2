@@ -1,4 +1,4 @@
-package com.github.esgoet.backend.models;
+package com.github.esgoet.backend.book.models;
 
 public enum ReadingStatus {
     TO_BE_READ,

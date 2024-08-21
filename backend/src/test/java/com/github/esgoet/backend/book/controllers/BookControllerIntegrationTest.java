@@ -1,9 +1,9 @@
-package com.github.esgoet.backend.controllers;
+package com.github.esgoet.backend.book.controllers;
 
-import com.github.esgoet.backend.models.Book;
-import com.github.esgoet.backend.models.Genre;
-import com.github.esgoet.backend.models.ReadingStatus;
-import com.github.esgoet.backend.repositories.BookRepository;
+import com.github.esgoet.backend.book.models.Book;
+import com.github.esgoet.backend.book.models.Genre;
+import com.github.esgoet.backend.book.models.ReadingStatus;
+import com.github.esgoet.backend.book.repositories.BookRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
