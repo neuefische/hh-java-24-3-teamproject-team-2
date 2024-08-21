@@ -14,7 +14,7 @@ import LoginPage from "./pages/LoginPage/loginPage/LoginPage.tsx";
 export default function App() {
 
     const [data, setData] = useState<Book[]>([])
-    const [user, setUser] = useState<string>(null);
+    const [user, setUser] = useState<string>("");
 
     const fetchBooks = () => {
         axios.get("/api/books")
