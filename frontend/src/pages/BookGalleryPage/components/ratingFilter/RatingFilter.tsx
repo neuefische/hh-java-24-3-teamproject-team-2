@@ -1,10 +1,15 @@
 import {ChangeEvent} from "react";
+import './RatingFilter.css'
 
-export default function RatingFilter() {
+type RatingFilterProps = {
+    setRatingFilter: (rating: number | null) => void;
+}
+
+export default function RatingFilter({setRatingFilter}: RatingFilterProps) {
 
     function handleAscending() {
         //const sortedBooksAscending = books.sort((a, b) => a.rating - b.rating);
-        console.log("asc")
+        console.log()
     }
 
     function handleDescending() {
@@ -13,23 +18,30 @@ export default function RatingFilter() {
     }
 
     function handleRatingValue(event: ChangeEvent<HTMLSelectElement>) {
-        const selectedBookRating = event.target.value;
-        console.log(selectedBookRating)
+        const selectedBookRating = Number(event.target.value);
+        setRatingFilter(selectedBookRating)
+    }
+
+    function handleReset() {
+        setRatingFilter(null)
     }
 
     return (
         <>
-            <h3>Rating Filter</h3>
-            <button onClick={handleAscending}>ascending</button>
-            <button onClick={handleDescending}>descending</button>
-            <select name={"rating"} onChange={handleRatingValue}>
-                <option value={"0"}>0</option>
-                <option value={"1"}>1</option>
-                <option value={"2"}>2</option>
-                <option value={"3"}>3</option>
-                <option value={"4"}>4</option>
-                <option value={"5"}>5</option>
-            </select>
+            <form className={"rating-form"}>
+                <button type={"button"} onClick={handleAscending}>ascending</button>
+                <button type={"button"} onClick={handleDescending}>descending</button>
+                <button type={"reset"} onClick={handleReset}>Reset</button>
+                <select name={"rating"} onChange={handleRatingValue}>
+                    <option value={""}></option>
+                    <option value={"0"}>0</option>
+                    <option value={"1"}>1</option>
+                    <option value={"2"}>2</option>
+                    <option value={"3"}>3</option>
+                    <option value={"4"}>4</option>
+                    <option value={"5"}>5</option>
+                </select>
+            </form>
         </>
     )
 }

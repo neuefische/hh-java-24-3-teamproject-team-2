@@ -19,10 +19,10 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
     const [showFilter, setShowFilter] = useState<boolean>(false);
     const [selectedGenre, setSelectedGenre] = useState<string>("Select");
     const [showFilterTag, setShowFilterTag] = useState<boolean>(false);
+    const [ratingFilter, setRatingFilter] = useState<number | null>(null);
 
     const handleApplyFilter = (genre: string) => {
         setShowFilter(false);
-        console.log(genre);
         setShowFilterTag(genre !== "Select");
     }
 
@@ -34,7 +34,7 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
     return (
         <div id={"galleryPage"}>
             <SearchBar setSearchInput={setSearchInput}/>
-            <RatingFilter/>
+
             <div className={"filter-sector"}>
                 <button
                     onClick={() => setShowFilter(!showFilter)}
@@ -57,16 +57,23 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
                             <button
                                 className={"filter-tag-close"}
                                 onClick={handleRemoveFilter}
-                            >{formatEnum(selectedGenre)} x</button>
+                            >{formatEnum(selectedGenre)} x
+                            </button>
                         </div>
                     </div>
                 }
             </div>
+            <RatingFilter setRatingFilter={setRatingFilter}
+            />
             <StatusFilter statusFilter={statusFilter} setStatusFilter={setStatusFilter}/>
             {
                 filteredBooks.length > 0
-                    ? <BookGallery data={filteredBooks.filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : book)
-                        .filter((book) => statusFilter != "ALL" ? book.readingStatus === statusFilter : book)}/>
+                    ? <BookGallery
+                        data={
+                            filteredBooks.filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : book)
+                                .filter((book) => statusFilter != "ALL" ? book.readingStatus === statusFilter : book)
+                                .filter(book => ratingFilter !== null ? book.rating === ratingFilter : book)
+                        }/>
                     : <p>No Books found</p>
             }
             <GoToTopButton/>
