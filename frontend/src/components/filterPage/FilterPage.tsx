@@ -11,13 +11,14 @@ type FilterPageProps = {
 
 export default function FilterPage({ selectedGenre, setSelectedGenre, handleApplyFilter, setShowKeywordTag }: FilterPageProps) {
     const [isDisable, setIsDisable] = useState<boolean>(true);
+    const [genre, setGenre] = useState<string>('Select');
 
     const genres : string[] = ["NONE", "FICTION", "MYSTERY", "THRILLER",
         "FANTASY", "SCIENCE", "NON_FICTION", "HISTORY", "NOVEL", "HISTORICAL_FICTION", "SCIENCE_FICTION",
         "ROMANCE", "YOUNG_ADULT", "ADVENTURE", "HORROR"];
 
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        setSelectedGenre(event.target.value);
+        setGenre(event.target.value);
         setIsDisable(false);
     }
 
@@ -29,7 +30,10 @@ export default function FilterPage({ selectedGenre, setSelectedGenre, handleAppl
 
     return (
         <div className={"filter-content"}>
-            <form className={"filter-body"}>
+            <form className={"filter-body"} onSubmit={() => {
+                setSelectedGenre(genre)
+                handleApplyFilter()
+            }}>
                     <label className={"filter-label"}>Genre</label>
                     <select
                         name={"genre"}
@@ -43,16 +47,16 @@ export default function FilterPage({ selectedGenre, setSelectedGenre, handleAppl
                             </option>
                         ))}
                     </select>
-            </form>
-            <div className={"filter-buttons"}>
-                <button className={"reset-btn"} onClick={handleReset}>Reset</button>
-                <button
-                    className={"apply-btn"}
-                    onClick={handleApplyFilter}
-                    disabled={isDisable}
-                >Apply</button>
-            </div>
 
+                <div className={"filter-buttons"}>
+                    <button className={"reset-btn"} onClick={handleReset}>Reset</button>
+                    <button
+                        type={"submit"}
+                        className={"apply-btn"}
+                        disabled={isDisable}
+                    >Apply</button>
+                </div>
+            </form>
         </div>
     )
 }

@@ -44,11 +44,7 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
     return (
         <div id={"galleryPage"}>
             <SearchBar setSearchInput={setSearchInput}/>
-            {
-                filteredBooks.length > 0
-                    ? <BookGallery data={filteredBooks}/>
-                    : <p>No Books found</p>
-            }
+
             <div className={"filter-sector"}>
                 <button
                     onClick={handleClick}
@@ -74,7 +70,11 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
                     </div>
                 }
             </div>
-            <BookGallery data={filteredDataByGenre} />
+            {
+                filteredBooks.length > 0
+                    ? <BookGallery data={filteredBooks.filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : book)}/>
+                    : <p>No Books found</p>
+            }
             <GoToTopButton/>
         </div>
     );
