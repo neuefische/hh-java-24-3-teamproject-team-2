@@ -43,14 +43,3 @@
     border: 1px solid white;
     grid-area: cover;
 }
-
-@media only screen and (min-width: 600px) {
-    .book-card {
-        /*width: 350px;*/
-        /*flex-grow: 0;*/
-    }
-
-    /*.book-card:last-of-type {*/
-    /*    justify-self: flex-start;*/
-    /*}*/
-}
