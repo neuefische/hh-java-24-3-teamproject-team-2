@@ -5,3 +5,53 @@
     justify-content: center;
     width: 90%;
 }
+
+.filter-sector {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 15px 15px;
+    background-color: #183a37;
+    border-radius: 15px;
+    display: inline-block;
+    min-width: 700px;
+    flex-shrink: 0;
+    flex-grow: 0;
+
+}
+
+.show-filter-button {
+    float: right;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.show-filter-button:focus {
+    outline: none;
+}
+
+.filter-tag-area {
+    margin-top: 40px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.filter-tag {
+    display: flex;
+    background-color: #c44900;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.filter-tag-close {
+    padding: 0;
+    color: BEIGE;
+}
+
+.filter-tag-close:hover,
+.filter-tag-close:focus {
+    border-color: #c44900;
+    outline: none;
+}

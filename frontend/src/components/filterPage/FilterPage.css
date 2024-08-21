@@ -1,0 +1,50 @@
+.filter-content {
+    margin-top: 50px;
+}
+
+.filter-body {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.filter-label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    padding: 3px;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.reset-btn {
+    background-color: #f9f9f9;
+    color: #888888;
+    border-color: #888888;
+    width: 110px;
+    font-size: 13px;
+}
+
+.reset-btn:hover {
+    background-color: #888888;
+    color: #f9f9f9;
+    border-color: #f9f9f9;
+}
+
+.apply-btn {
+    width: 110px;
+    font-size: 13px;
+}
+
+.apply-btn:disabled,
+.apply-btn:disabled:hover{
+    background-color: #888888;
+    border: none;
+    cursor: default;
+}
