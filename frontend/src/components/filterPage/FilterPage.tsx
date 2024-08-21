@@ -1,6 +1,6 @@
 import "./FilterPage.css";
 import {ChangeEvent, Dispatch, FormEvent, SetStateAction, useState} from "react";
-import {formatGenre} from "../functions/FormatGenre.ts";
+import {formatEnum} from "../../utils/utilFunctions.ts";
 
 type FilterPageProps = {
     selectedGenre: string,
@@ -44,10 +44,10 @@ export default function FilterPage({ setSelectedGenre, handleApplyFilter, setSho
                     onChange={handleChange}
                     value={genre}
                 >
-                    <option>{formatGenre(genre)}</option>
+                    <option>{formatEnum(genre)}</option>
                     {genres.map((genre) => (
                         <option key={genre} value={genre}>
-                            {formatGenre(genre)}
+                            {formatEnum(genre)}
                         </option>
                     ))}
                 </select>

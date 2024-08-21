@@ -4,7 +4,7 @@ import "./BookGalleryPage.css";
 import GoToTopButton from "../../../components/goToTopButton/GoToTopButton.tsx";
 import {Dispatch, SetStateAction, useState} from "react";
 import FilterPage from "../../../components/filterPage/FilterPage.tsx";
-import {formatGenre} from "../../../components/functions/FormatGenre.ts";
+import {formatEnum} from "../../../utils/utilFunctions.ts";
 import SearchBar from "../components/searchbar/SearchBar.tsx";
 import StatusFilter from "../components/statusFilter/StatusFilter.tsx";
 
@@ -59,7 +59,7 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
                     <div className={"filter-tag-area"}>
                         <p style={{fontStyle: "italic", fontWeight: "bold"}}>Filtered Genre: </p>
                         <div className={"filter-tag"}>
-                            <p className={"filter-tag-genre"}>{formatGenre(selectedGenre)}</p>
+                            <p className={"filter-tag-genre"}>{formatEnum(selectedGenre)}</p>
                             <button className={"filter-tag-close"} onClick={handleRemoveFilter}>x</button>
                         </div>
                     </div>
