@@ -15,16 +15,9 @@ type BookGalleryPageProps = {
 
 export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGalleryPageProps) {
     const [statusFilter, setStatusFilter] = useState<string>("ALL")
-
-
-
     const [showFilter, setShowFilter] = useState<boolean>(false);
     const [selectedGenre, setSelectedGenre] = useState<string>("Select");
     const [showFilterTag, setShowFilterTag] = useState<boolean>(false);
-
-    const handleClick = () => {
-        setShowFilter(!showFilter);
-    }
 
     const handleApplyFilter = (genre: string) => {
         setShowFilter(false);
@@ -42,7 +35,7 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
             <SearchBar setSearchInput={setSearchInput}/>
             <div className={"filter-sector"}>
                 <button
-                    onClick={handleClick}
+                    onClick={() => setShowFilter(!showFilter)}
                     className={"show-filter-button"}
                 >
                     {!showFilter ? "Advanced Search" : "x"}
@@ -59,8 +52,10 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
                     <div className={"filter-tag-area"}>
                         <p style={{fontStyle: "italic", fontWeight: "bold"}}>Filtered Genre: </p>
                         <div className={"filter-tag"}>
-                            <p className={"filter-tag-genre"}>{formatEnum(selectedGenre)}</p>
-                            <button className={"filter-tag-close"} onClick={handleRemoveFilter}>x</button>
+                            <button
+                                className={"filter-tag-close"}
+                                onClick={handleRemoveFilter}
+                            >{formatEnum(selectedGenre)} x</button>
                         </div>
                     </div>
                 }
