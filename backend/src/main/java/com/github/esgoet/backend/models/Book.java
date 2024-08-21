@@ -16,6 +16,7 @@ public record Book(
         String isbn,
         String cover,
         int rating,
-        LocalDate publicationDate
+        LocalDate publicationDate,
+        ReadingStatus readingStatus
 ) {
 }

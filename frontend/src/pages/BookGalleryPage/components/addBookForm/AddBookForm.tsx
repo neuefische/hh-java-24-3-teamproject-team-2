@@ -14,20 +14,20 @@ export default function AddBookForm({fetchBooks}: Readonly<FetchProps>) {
         title: "",
         author: "",
         description: "",
-        genre: "",
+        genre: "NONE",
         isbn: "",
-        cover: "",
+        cover: "https://inspektorat.cianjurkab.go.id/images/publikasi/Default-book-cover.png",
         rating: 0,
-        publicationDate: ""
+        publicationDate: "",
+        readingStatus: "TO_BE_READ"
     });
     const navigate = useNavigate();
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-        axios.post("/api/books", {book})
-            .then(() => fetchBooks())
+        axios.post("/api/books", book)
             .then(response => console.log(response))
+            .then(() => fetchBooks())
             .catch(error => console.log(error))
 
         navigate("/books")

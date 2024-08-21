@@ -1,0 +1,30 @@
+.status-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    background-color: rgba(24, 58, 55, 0.41);
+    border-radius: 20px;
+    padding: 6px 12px;
+    align-self: center;
+}
+
+.status-buttons button {
+    padding: 4px 8px;
+}
+
+.not-selected-status:hover {
+    border-color: #5b84ea;
+}
+
+.not-selected-status {
+    background-color: #183A37;;
+    color: #5b84ea;
+}
+
+.selected-status {
+    background-color: #c44900;
+}
+
+.selected-status:hover {
+    border-color: #c44900;
+}

@@ -14,6 +14,8 @@
     flex-grow: 1;
 }
 
+
+
 .book-info {
     grid-area: info;
     justify-self: flex-start;
@@ -40,10 +42,4 @@
     object-fit: cover;
     border: 1px solid white;
     grid-area: cover;
-}
-
-@media only screen and (min-width: 600px) {
-    .book-card {
-        width: 350px;
-    }
 }

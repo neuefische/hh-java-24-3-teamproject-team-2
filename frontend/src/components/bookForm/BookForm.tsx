@@ -1,7 +1,7 @@
-import {BookWithoutId} from "../../types/types.ts";
+import {BookWithoutId, ReadingStatus} from "../../types/types.ts";
 import {ChangeEvent, Dispatch, FormEvent, SetStateAction} from "react";
 import "./BookForm.css";
-import {formatGenre} from "../functions/FormatGenre.ts";
+import {formatEnum} from "../../utils/utilFunctions.ts";
 
 type BookFormProps = {
     book: BookWithoutId,
@@ -11,16 +11,12 @@ type BookFormProps = {
     editable: boolean
 }
 
-/* not sure whether to use this, then genres would be of type Genre
-type Genre = "NONE" | "FICTION" | "MYSTERY" | "THRILLER" |
-    "FANTASY" | "SCIENCE" | "NON_FICTION" | "HISTORY" |
-    "NOVEL" | "HISTORICAL_FICTION" | "SCIENCE_FICTION" |
-    "ROMANCE" | "YOUNG_ADULT" | "ADVENTURE" | "HORROR";*/
-
 export default function BookForm({book, setBook, handleSubmit, action, editable}: Readonly<BookFormProps>) {
     const genres : string[] = ["NONE", "FICTION", "MYSTERY", "THRILLER",
     "FANTASY", "SCIENCE", "NON_FICTION", "HISTORY", "NOVEL", "HISTORICAL_FICTION", "SCIENCE_FICTION",
     "ROMANCE", "YOUNG_ADULT", "ADVENTURE", "HORROR"];
+
+    const readingStatuses : ReadingStatus[] = ["TO_BE_READ", "READING", "READ"]
 
     function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | ChangeEvent<HTMLSelectElement>): void {
         setBook({...book, [event.target.name]: event.target.value})
@@ -28,6 +24,14 @@ export default function BookForm({book, setBook, handleSubmit, action, editable}
 
     return (
         <form onSubmit={handleSubmit} className={"book-form"}>
+            <div className={`book-info`}>
+                <label className={"book-label align-right"} htmlFor={"readingStatus"}>Reading Status</label>
+                <select required={true} value={book.readingStatus} onChange={handleChange} name={"readingStatus"} disabled={!editable}>
+                    {readingStatuses.map((status) => (
+                        <option key={status} value={status}>{formatEnum(status)}</option>
+                    ))}
+                </select>
+            </div>
             <div className={`book-info`}>
                 <label className={"book-label align-right"} htmlFor={"title"}>Title</label>
                 <input
@@ -67,7 +71,7 @@ export default function BookForm({book, setBook, handleSubmit, action, editable}
                         disabled={!editable}>
                     {genres.map((genre) => (
                         <option key={genre} value={genre}>
-                            {formatGenre(genre)}
+                            {formatEnum(genre)}
                         </option>
                     ))}
                 </select>

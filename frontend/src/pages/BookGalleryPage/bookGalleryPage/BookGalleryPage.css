@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 10px;
     justify-content: center;
+    width: 90%;
 }
 
 .filter-sector {

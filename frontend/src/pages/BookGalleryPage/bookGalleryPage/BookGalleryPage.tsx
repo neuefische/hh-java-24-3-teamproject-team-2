@@ -1,12 +1,12 @@
+import {Book} from "../../../types/types.ts";
 import BookGallery from "../components/bookGallery/BookGallery.tsx";
 import "./BookGalleryPage.css";
 import GoToTopButton from "../../../components/goToTopButton/GoToTopButton.tsx";
-import {useState} from "react";
+import {Dispatch, SetStateAction, useState} from "react";
 import FilterPage from "../../../components/filterPage/FilterPage.tsx";
 import {formatGenre} from "../../../components/functions/FormatGenre.ts";
-import {Dispatch, SetStateAction} from "react";
-import {Book} from "../../../types/types.ts";
 import SearchBar from "../components/searchbar/SearchBar.tsx";
+import StatusFilter from "../components/statusFilter/StatusFilter.tsx";
 
 type BookGalleryPageProps = {
     filteredBooks: Book[],
@@ -14,6 +14,9 @@ type BookGalleryPageProps = {
 }
 
 export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGalleryPageProps) {
+    const [statusFilter, setStatusFilter] = useState<string>("ALL")
+
+
 
     const [showFilter, setShowFilter] = useState<boolean>(false);
     const [selectedGenre, setSelectedGenre] = useState<string>("Select");
@@ -62,9 +65,11 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
                     </div>
                 }
             </div>
+            <StatusFilter statusFilter={statusFilter} setStatusFilter={setStatusFilter}/>
             {
                 filteredBooks.length > 0
-                    ? <BookGallery data={filteredBooks.filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : book)}/>
+                    ? <BookGallery data={filteredBooks.filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : book)
+                        .filter((book) => statusFilter != "ALL" ? book.readingStatus === statusFilter : book)}/>
                     : <p>No Books found</p>
             }
             <GoToTopButton/>

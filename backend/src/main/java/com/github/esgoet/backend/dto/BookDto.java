@@ -1,6 +1,7 @@
 package com.github.esgoet.backend.dto;
 
 import com.github.esgoet.backend.models.Genre;
+import com.github.esgoet.backend.models.ReadingStatus;
 import lombok.With;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ public record BookDto(
         String isbn,
         String cover,
         int rating,
-        LocalDate publicationDate
+        LocalDate publicationDate,
+        ReadingStatus readingStatus
 ) {
 }
