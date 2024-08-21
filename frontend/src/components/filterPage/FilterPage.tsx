@@ -1,6 +1,7 @@
 import "./FilterPage.css";
 import {ChangeEvent, Dispatch, FormEvent, SetStateAction, useState} from "react";
 import {formatEnum} from "../../utils/utilFunctions.ts";
+import {Genre} from "../../types/types.ts";
 
 type FilterPageProps = {
     selectedGenre: string,
@@ -10,23 +11,23 @@ type FilterPageProps = {
 }
 
 export default function FilterPage({ setSelectedGenre, handleApplyFilter, setShowKeywordTag }: FilterPageProps) {
-    const [isDisable, setIsDisable] = useState<boolean>(true);
+    const [isDisabled, setIsDisabled] = useState<boolean>(true);
     const [genre, setGenre] = useState<string>('Select');
 
-    const genres : string[] = ["NONE", "FICTION", "MYSTERY", "THRILLER",
+    const genres: Genre[] = ["NONE", "FICTION", "MYSTERY", "THRILLER",
         "FANTASY", "SCIENCE", "NON_FICTION", "HISTORY", "NOVEL", "HISTORICAL_FICTION", "SCIENCE_FICTION",
         "ROMANCE", "YOUNG_ADULT", "ADVENTURE", "HORROR"];
 
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setGenre(event.target.value);
-        setIsDisable(false);
+        setIsDisabled(false);
     }
 
     const handleReset = () => {
         setGenre("Select");
         setSelectedGenre("Select");
         setShowKeywordTag(false);
-        setIsDisable(true);
+        setIsDisabled(true);
     }
 
     const handleSubmit = (e: FormEvent) => {
@@ -60,7 +61,7 @@ export default function FilterPage({ setSelectedGenre, handleApplyFilter, setSho
                     <button
                         type={"submit"}
                         className={"apply-btn"}
-                        disabled={isDisable}
+                        disabled={isDisabled}
                     >Apply</button>
                 </div>
             </form>
