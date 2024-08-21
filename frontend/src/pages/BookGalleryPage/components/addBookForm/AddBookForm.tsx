@@ -16,7 +16,7 @@ export default function AddBookForm({fetchBooks}: Readonly<FetchProps>) {
         description: "",
         genre: "NONE",
         isbn: "",
-        cover: "",
+        cover: "https://inspektorat.cianjurkab.go.id/images/publikasi/Default-book-cover.png",
         rating: 0,
         publicationDate: "",
         readingStatus: "TO_BE_READ"
