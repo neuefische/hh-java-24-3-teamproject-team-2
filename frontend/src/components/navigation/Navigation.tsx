@@ -14,6 +14,10 @@ auto_stories
                     <li><Link to={"/books/add"}><span className="material-symbols-outlined">
 add_circle
 </span>Add Book</Link></li>
+                    <li><Link to={"/login"}><span className="material-symbols-outlined">
+login
+</span>Login</Link></li>
+
                 </ul>
             </nav>
     )

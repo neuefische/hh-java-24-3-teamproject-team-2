@@ -9,10 +9,12 @@ import AddBookForm from "./pages/BookGalleryPage/components/addBookForm/AddBookF
 import Header from "./components/header/Header.tsx";
 import Navigation from "./components/navigation/Navigation.tsx";
 import Dashboard from "./pages/DashboardPage/dashboard/Dashboard.tsx";
+import LoginPage from "./pages/LoginPage/loginPage/LoginPage.tsx";
 
 export default function App() {
 
     const [data, setData] = useState<Book[]>([])
+    const [user, setUser] = useState<string>(null);
 
     const fetchBooks = () => {
         axios.get("/api/books")
@@ -45,14 +47,26 @@ export default function App() {
     const filteredBooks: Book[] = data
         .filter((book) => book.title?.toLowerCase().includes(searchInput.toLowerCase()) ||
             book.author?.toLowerCase().includes(searchInput.toLowerCase()));
+
+    const login = () => {
+        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080': window.location.origin
+        window.open(host + '/oauth2/authorization/github', '_self')
+    }
+
+    const loadUser = () => {
+        axios.get("/api/users/me")
+            .then((response) => setUser(response.data))
+    }
     
     return (
         <>
             <Header/>
             <Navigation/>
+
             <main>
                 <Routes>
-                    <Route path={"/"} element={<Dashboard/>}/>
+                    <Route path={"/login"} element={<LoginPage login={login}/>}/>
+                    <Route path={"/"} element={<Dashboard  user={user} loadUser={loadUser}/>}/>
                     <Route path={"/books"} element={<BookGalleryPage
                         filteredBooks={filteredBooks}
                         setSearchInput={setSearchInput}/>}/>

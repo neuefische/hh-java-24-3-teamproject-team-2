@@ -1,6 +1,17 @@
+import {useEffect} from "react";
 
-export default function Dashboard() {
+type DashboardProps = {
+    user: string,
+    loadUser: () => void;
+}
+export default function Dashboard({user, loadUser}:DashboardProps) {
+    useEffect(() => {
+        loadUser()
+    },[])
+
     return (
-        <div></div>
+        <div>
+            {user && <h2>Hello {user}</h2>}
+        </div>
     );
 }
