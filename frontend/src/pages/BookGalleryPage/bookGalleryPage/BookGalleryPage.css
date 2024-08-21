@@ -55,3 +55,12 @@
     border-color: #c44900;
     outline: none;
 }
+
+.number-of-books {
+    margin-left: auto;
+    font-size: 16px;
+    padding-right: 3px;
+    color: BEIGE;
+    font-style: italic;
+    font-weight: bold;
+}
