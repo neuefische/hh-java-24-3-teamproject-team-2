@@ -65,11 +65,17 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
                 }
             </div>
                 <StatusFilter statusFilter={statusFilter} setStatusFilter={setStatusFilter}/>
-                <p className={"number-of-books"}>{filteredBooksByGenreAndStatus.length} books</p>
+                <p className={"number-of-books"}>
+                    {
+                        filteredBooksByGenreAndStatus.length == 1
+                            ? filteredBooksByGenreAndStatus.length + " book"
+                            : filteredBooksByGenreAndStatus.length + " books"
+                    }
+                </p>
             {
                 filteredBooksByGenreAndStatus.length > 0
                     ? <BookGallery data={filteredBooksByGenreAndStatus} />
-                    : <p>No Books found</p>
+                    : <p style={{textAlign: "center", marginTop: "50px"}}>No Books found</p>
             }
             <GoToTopButton/>
         </div>
