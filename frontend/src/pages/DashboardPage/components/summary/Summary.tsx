@@ -23,15 +23,18 @@ export default function Summary() {
 
     return (
         <div className={"dashboard-statistics"}>
-            {summaryInfo.map(info => (
-                <div className={"summary-box"}>
-                    <div className={"summary-title"}>
-                        <p>{info.title}</p>
+            <p className={"greeting-message"}>Current Library Info</p>
+            <div className={"summary-box-container"}>
+                {summaryInfo.map(info => (
+                    <div className={"summary-box"}>
+                        <div className={"summary-number"}>
+                            <p>{info.numberOfBooks}</p>
+                        </div>
+                        <div className={"summary-title"}>{info.title}</div>
                     </div>
-                    <div className={"summary-number"}>{info.numberOfBooks}</div>
-                </div>
-                )
-            )}
+                    )
+                )}
+            </div>
         </div>
     )
 }
