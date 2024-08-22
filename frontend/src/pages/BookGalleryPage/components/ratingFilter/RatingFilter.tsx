@@ -19,6 +19,7 @@ export default function RatingFilter({setRatingFilter, setSortedBooks}: RatingFi
     function handleRatingValue(event: ChangeEvent<HTMLSelectElement>) {
         const selectedBookRating = Number(event.target.value);
         setRatingFilter(selectedBookRating)
+        event.target.value === "" && handleReset();
     }
 
     function handleReset() {
