@@ -29,3 +29,18 @@ export type Genre = "NONE" | "FICTION" | "MYSTERY" | "THRILLER" |
     "FANTASY" | "SCIENCE" | "NON_FICTION" | "HISTORY" |
     "NOVEL" | "HISTORICAL_FICTION" | "SCIENCE_FICTION" |
     "ROMANCE" | "YOUNG_ADULT" | "ADVENTURE" | "HORROR";
+
+export type User = {
+    id: string,
+    userName: string,
+    readingGoal: number,
+    goalDate: string,
+    readBooks: number
+}
+
+export type UserWithoutId = {
+    userName: string,
+    readingGoal: number,
+    goalDate: string,
+    readBooks: number
+}

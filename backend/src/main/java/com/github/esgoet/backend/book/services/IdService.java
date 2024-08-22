@@ -1,4 +1,4 @@
-package com.github.esgoet.backend.services;
+package com.github.esgoet.backend.book.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

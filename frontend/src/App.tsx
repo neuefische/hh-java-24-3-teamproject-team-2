@@ -1,6 +1,6 @@
 import './App.css'
 import axios from "axios"
-import {Book, BookWithoutId} from "./types/types.ts";
+import {Book, BookWithoutId, User} from "./types/types.ts";
 import {useEffect, useState} from "react";
 import {Route, Routes} from "react-router-dom";
 import BookDetailsPage from "./pages/BookDetailsPage/bookDetailsPage/BookDetailsPage.tsx";
@@ -13,6 +13,7 @@ import Dashboard from "./pages/DashboardPage/dashboard/Dashboard.tsx";
 export default function App() {
 
     const [data, setData] = useState<Book[]>([])
+    const [user, setUser] = useState<User>({id:"",userName:"",readingGoal:0, goalDate:"", readBooks: 0})
 
     const fetchBooks = () => {
         axios.get("/api/books")
@@ -22,6 +23,13 @@ export default function App() {
             .catch((error) => {
                 alert(error)
             })
+    }
+    const fetchUser = () => {
+        axios.get("/api/users/1")
+            .then((response)=> {
+                setUser(response.data)
+            })
+            .catch((error)=>(console.log(error)))
     }
 
     const deleteBook = (id: string) => {
@@ -36,8 +44,15 @@ export default function App() {
             .catch((error) => console.log(error.response.data))
     }
 
+    const updateUser = (updatedProperty : string, updatedValue: number | string) => {
+        axios.put(`/api/users/${user.id}`, {...user, [updatedProperty]: updatedValue})
+            .then((response) => response.status === 200 && fetchUser())
+    }
+
+
     useEffect(() => {
         fetchBooks()
+        fetchUser()
     }, []);
 
     const [searchInput, setSearchInput] = useState("")
@@ -52,12 +67,12 @@ export default function App() {
             <Navigation/>
             <main>
                 <Routes>
-                    <Route path={"/"} element={<Dashboard/>}/>
+                    <Route path={"/"} element={<Dashboard user={user}/>}/>
                     <Route path={"/books"} element={<BookGalleryPage
                         filteredBooks={filteredBooks}
                         setSearchInput={setSearchInput}/>}/>
-                    <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks}/>}/>
-                    <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook} updateBook={updateBook}/>}/>
+                    <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks} user={user}  updateUser={updateUser}/>}/>
+                    <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook} updateBook={updateBook} user={user} updateUser={updateUser}/>}/>
                 </Routes>
             </main>
         </>

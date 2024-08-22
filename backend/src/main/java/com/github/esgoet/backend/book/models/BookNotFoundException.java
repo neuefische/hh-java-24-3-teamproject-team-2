@@ -1,4 +1,4 @@
-package com.github.esgoet.backend.models;
+package com.github.esgoet.backend.book.models;
 
 public class BookNotFoundException extends RuntimeException {
     public BookNotFoundException(String message) {

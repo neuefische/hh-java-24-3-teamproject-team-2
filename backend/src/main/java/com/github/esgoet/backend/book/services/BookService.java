@@ -1,9 +1,9 @@
-package com.github.esgoet.backend.services;
+package com.github.esgoet.backend.book.services;
 
-import com.github.esgoet.backend.dto.BookDto;
-import com.github.esgoet.backend.models.Book;
-import com.github.esgoet.backend.models.BookNotFoundException;
-import com.github.esgoet.backend.repositories.BookRepository;
+import com.github.esgoet.backend.book.dto.BookDto;
+import com.github.esgoet.backend.book.models.Book;
+import com.github.esgoet.backend.book.models.BookNotFoundException;
+import com.github.esgoet.backend.book.repositories.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

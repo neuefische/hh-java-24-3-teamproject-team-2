@@ -1,0 +1,33 @@
+.reading-goal {
+    background-color: rgba(24, 58, 55, 0.41);
+    padding: 20px 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+    gap: 10px;
+    width: 320px;
+}
+
+.reading-goal h3 {
+    display: flex;
+    align-content: center;
+    gap: 10px;
+}
+
+.reading-goal p {
+    padding: 5px;
+}
+
+.circle {
+    width: 200px;
+    aspect-ratio: 1 /1;
+    background-color: #04151F;
+    border-radius: 100%;
+    position: absolute;
+
+}
+
+
+

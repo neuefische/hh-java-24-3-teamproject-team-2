@@ -1,6 +1,6 @@
-package com.github.esgoet.backend.repositories;
+package com.github.esgoet.backend.book.repositories;
 
-import com.github.esgoet.backend.models.Book;
+import com.github.esgoet.backend.book.models.Book;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

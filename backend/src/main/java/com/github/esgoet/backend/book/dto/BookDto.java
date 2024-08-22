@@ -1,7 +1,7 @@
-package com.github.esgoet.backend.dto;
+package com.github.esgoet.backend.book.dto;
 
-import com.github.esgoet.backend.models.Genre;
-import com.github.esgoet.backend.models.ReadingStatus;
+import com.github.esgoet.backend.book.models.Genre;
+import com.github.esgoet.backend.book.models.ReadingStatus;
 import lombok.With;
 
 import java.time.LocalDate;
