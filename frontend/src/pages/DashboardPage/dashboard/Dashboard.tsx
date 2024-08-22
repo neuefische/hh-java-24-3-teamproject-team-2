@@ -15,7 +15,7 @@ export default function Dashboard({user, data}: DashboardProps) {
         <div id={"DashboardPage"}>
             <GreetingAndGoal user={user}/>
             <Summary data={data}/>
-            <LastAddedBook />
+            <LastAddedBook data={data}/>
         </div>
     );
 }

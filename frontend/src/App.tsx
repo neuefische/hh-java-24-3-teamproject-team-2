@@ -60,7 +60,7 @@ export default function App() {
     const filteredBooks: Book[] = data
         .filter((book) => book.title?.toLowerCase().includes(searchInput.toLowerCase()) ||
             book.author?.toLowerCase().includes(searchInput.toLowerCase()));
-
+console.log(filteredBooks)
     return (
         <>
             <Header/>
