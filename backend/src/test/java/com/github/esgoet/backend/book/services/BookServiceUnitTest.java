@@ -1,11 +1,11 @@
-package com.github.esgoet.backend.services;
+package com.github.esgoet.backend.book.services;
 
-import com.github.esgoet.backend.dto.BookDto;
-import com.github.esgoet.backend.models.Book;
-import com.github.esgoet.backend.models.BookNotFoundException;
-import com.github.esgoet.backend.models.Genre;
-import com.github.esgoet.backend.models.ReadingStatus;
-import com.github.esgoet.backend.repositories.BookRepository;
+import com.github.esgoet.backend.book.dto.BookDto;
+import com.github.esgoet.backend.book.models.Book;
+import com.github.esgoet.backend.book.models.BookNotFoundException;
+import com.github.esgoet.backend.book.models.Genre;
+import com.github.esgoet.backend.book.models.ReadingStatus;
+import com.github.esgoet.backend.book.repositories.BookRepository;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -45,7 +45,7 @@ class BookServiceUnitTest {
 
     @Test
     void getAllBooks_WhenEmpty_ReturnsEmptyList() {
-        List<Book> expectedBooks = new ArrayList<Book>();
+        List<Book> expectedBooks = new ArrayList<>();
         List<Book> actualBooks = bookService.getAllBooks();
 
         assertEquals(expectedBooks, actualBooks);

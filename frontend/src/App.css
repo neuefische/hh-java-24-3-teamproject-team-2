@@ -47,10 +47,22 @@ h2 {
   font-weight: bold;
 }
 
+h3 {
+  color: #5b84ea;
+  padding: 0;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 24px;
+}
+
 .book-label {
   font-weight: bold;
   color: #5B84EA;
   font-variant-caps: all-small-caps;
+}
+
+.highlight {
+  color: #5b84ea;
+  font-weight: bold;
 }
 
 
