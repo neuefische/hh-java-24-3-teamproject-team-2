@@ -1,0 +1,36 @@
+.sort-option {
+    background-color: transparent;
+    display: flex;
+    place-items: center;
+    font-size: small;
+    padding: 0;
+    border: none;
+}
+
+.selected-sort {
+    color: #c44900;
+}
+
+.sort-option:hover {
+    color: #c44900;
+    border: none;
+}
+.sort-container {
+    display: flex;
+    align-content: center;
+    gap: 5px;
+    color: #5b84ea;
+    font-size: smaller;
+}
+
+.sort-reset {
+    color: #5b84ea;
+}
+
+.sort-option .material-symbols-outlined {
+ font-variation-settings:
+         'FILL' 0,
+         'wght' 300,
+         'GRAD' -25,
+         'opsz' 20
+}

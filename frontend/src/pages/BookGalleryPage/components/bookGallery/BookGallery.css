@@ -1,7 +1,28 @@
-#bookGallery {
+#book-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));;
     padding: 0;
     gap: 15px;
     justify-content: center;
+}
+
+#book-gallery ul {
+    padding: 0;
+}
+
+#book-gallery li {
+    list-style: none;
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.category-title {
+    font-variant-caps: all-small-caps;
+    margin-left: 10px;
+    display: block;
+    margin-bottom: 5px;
 }

@@ -10,16 +10,23 @@ type FilterPageProps = {
     setShowKeywordTag: Dispatch<SetStateAction<boolean>>
 }
 
+type Filter = {
+    genre: string,
+    rating: string
+}
+
 export default function FilterPage({ setSelectedGenre, handleApplyFilter, setShowKeywordTag }: FilterPageProps) {
     const [isDisabled, setIsDisabled] = useState<boolean>(true);
     const [genre, setGenre] = useState<string>('Select');
+    const [filter, setFilter] = useState<Filter>({genre:"Select", rating: ""})
 
     const genres: Genre[] = ["NONE", "FICTION", "MYSTERY", "THRILLER",
         "FANTASY", "SCIENCE", "NON_FICTION", "HISTORY", "NOVEL", "HISTORICAL_FICTION", "SCIENCE_FICTION",
         "ROMANCE", "YOUNG_ADULT", "ADVENTURE", "HORROR"];
 
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        setGenre(event.target.value);
+        // setGenre(event.target.value);
+        setFilter({...filter, [event.target.name]: event.target.value})
         setIsDisabled(false);
     }
 
@@ -39,7 +46,7 @@ export default function FilterPage({ setSelectedGenre, handleApplyFilter, setSho
     return (
         <div className={"filter-content"}>
             <form className={"filter-body"} onSubmit={handleSubmit}>
-                <label className={"filter-label"}>Genre</label>
+                <label className={"book-label"} htmlFor={"genre"}>Genre</label>
                 <select
                     name={"genre"}
                     onChange={handleChange}
@@ -52,17 +59,29 @@ export default function FilterPage({ setSelectedGenre, handleApplyFilter, setSho
                         </option>
                     ))}
                 </select>
+                <label htmlFor={"rating"} className={"book-label"}>Rating</label>
+                <select name={"rating"} onChange={handleChange}>
+                    <option value={"All"}>All</option>
+                    <option value={"0"}>☆☆☆☆☆</option>
+                    <option value={"1"}>★☆☆☆☆</option>
+                    <option value={"2"}>★★☆☆☆</option>
+                    <option value={"3"}>★★★☆☆</option>
+                    <option value={"4"}>★★★★☆</option>
+                    <option value={"5"}>★★★★★</option>
+                </select>
                 <div className={"filter-buttons"}>
                     <button
                         type={"reset"}
                         className={"reset-btn"}
                         onClick={handleReset}
-                    >Reset</button>
+                    >Reset
+                    </button>
                     <button
                         type={"submit"}
                         className={"apply-btn"}
                         disabled={isDisabled}
-                    >Apply</button>
+                    >Apply
+                    </button>
                 </div>
             </form>
         </div>
