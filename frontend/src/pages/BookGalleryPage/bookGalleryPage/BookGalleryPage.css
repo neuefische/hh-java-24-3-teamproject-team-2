@@ -12,7 +12,6 @@
     background-color: #183a37;
     border-radius: 15px;
     display: inline-block;
-    /*min-width: 700px;*/
     flex-shrink: 0;
     flex-grow: 0;
 }
