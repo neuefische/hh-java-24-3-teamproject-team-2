@@ -1,46 +1,51 @@
-import "./FilterPage.css";
-import {ChangeEvent, Dispatch, FormEvent, SetStateAction, useState} from "react";
-import {formatEnum} from "../../utils/utilFunctions.ts";
-import {Genre} from "../../types/types.ts";
+import "./FilterForm.css";
+import {ChangeEvent, Dispatch, FormEvent, SetStateAction, useEffect, useState} from "react";
+import {formatEnum} from "../../../../utils/utilFunctions.ts";
+import {GENRES, STAR_RATINGS} from "../../../../utils/utilConstants.ts";
 
 type FilterPageProps = {
     selectedGenre: string,
-    setSelectedGenre: (genre: string) => void,
+    setSelectedGenre: Dispatch<SetStateAction<string>>,
     handleApplyFilter: (genre: string) => void,
-    setShowKeywordTag: Dispatch<SetStateAction<boolean>>
+    setShowKeywordTag: Dispatch<SetStateAction<boolean>>,
+    ratingFilter: number | null,
+    setRatingFilter: Dispatch<SetStateAction<number | null>>
 }
 
 type Filter = {
     genre: string,
-    rating: string
+    rating: number | null
 }
 
-export default function FilterPage({ setSelectedGenre, handleApplyFilter, setShowKeywordTag }: FilterPageProps) {
+export default function FilterForm({selectedGenre, setSelectedGenre, handleApplyFilter, ratingFilter, setRatingFilter, setShowKeywordTag }: FilterPageProps) {
     const [isDisabled, setIsDisabled] = useState<boolean>(true);
     const [genre, setGenre] = useState<string>('Select');
-    const [filter, setFilter] = useState<Filter>({genre:"Select", rating: ""})
+    const [filter, setFilter] = useState<Filter>({genre:"Select", rating: null})
 
-    const genres: Genre[] = ["NONE", "FICTION", "MYSTERY", "THRILLER",
-        "FANTASY", "SCIENCE", "NON_FICTION", "HISTORY", "NOVEL", "HISTORICAL_FICTION", "SCIENCE_FICTION",
-        "ROMANCE", "YOUNG_ADULT", "ADVENTURE", "HORROR"];
+    useEffect(()=> {
+        setFilter({genre: selectedGenre, rating: ratingFilter})
+    } ,[])
 
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
         // setGenre(event.target.value);
-        setFilter({...filter, [event.target.name]: event.target.value})
+        setFilter({...filter, [event.target.name]: event.target.value});
         setIsDisabled(false);
     }
 
     const handleReset = () => {
         setGenre("Select");
         setSelectedGenre("Select");
+        setRatingFilter(null);
         setShowKeywordTag(false);
         setIsDisabled(true);
     }
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        setSelectedGenre(genre);
-        handleApplyFilter(genre);
+        setSelectedGenre(filter.genre);
+        setRatingFilter(filter.rating ? filter.rating : null)
+        handleApplyFilter(filter.genre);
+        handleApplyFilter(STAR_RATINGS[Number(filter.rating)]);
     }
 
     return (
@@ -50,24 +55,24 @@ export default function FilterPage({ setSelectedGenre, handleApplyFilter, setSho
                 <select
                     name={"genre"}
                     onChange={handleChange}
-                    value={genre}
+                    value={filter.genre}
                 >
                     <option>{formatEnum(genre)}</option>
-                    {genres.map((genre) => (
+                    {GENRES.map((genre) => (
                         <option key={genre} value={genre}>
                             {formatEnum(genre)}
                         </option>
                     ))}
                 </select>
                 <label htmlFor={"rating"} className={"book-label"}>Rating</label>
-                <select name={"rating"} onChange={handleChange}>
-                    <option value={"All"}>All</option>
-                    <option value={"0"}>☆☆☆☆☆</option>
-                    <option value={"1"}>★☆☆☆☆</option>
-                    <option value={"2"}>★★☆☆☆</option>
-                    <option value={"3"}>★★★☆☆</option>
-                    <option value={"4"}>★★★★☆</option>
-                    <option value={"5"}>★★★★★</option>
+                <select name={"rating"} onChange={handleChange} value={filter.rating ? filter.rating : undefined}>
+                    <option >All</option>
+                    <option value={0}>☆☆☆☆☆</option>
+                    <option value={1}>★☆☆☆☆</option>
+                    <option value={2}>★★☆☆☆</option>
+                    <option value={3}>★★★☆☆</option>
+                    <option value={4}>★★★★☆</option>
+                    <option value={5}>★★★★★</option>
                 </select>
                 <div className={"filter-buttons"}>
                     <button

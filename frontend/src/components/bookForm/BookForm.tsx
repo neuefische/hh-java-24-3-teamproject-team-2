@@ -1,7 +1,8 @@
-import {BookWithoutId, ReadingStatus} from "../../types/types.ts";
+import {BookWithoutId} from "../../types/types.ts";
 import {ChangeEvent, Dispatch, FormEvent, SetStateAction} from "react";
 import "./BookForm.css";
 import {formatEnum} from "../../utils/utilFunctions.ts";
+import {GENRES, READING_STATUSES} from "../../utils/utilConstants.ts";
 
 type BookFormProps = {
     book: BookWithoutId,
@@ -12,11 +13,6 @@ type BookFormProps = {
 }
 
 export default function BookForm({book, setBook, handleSubmit, action, editable}: Readonly<BookFormProps>) {
-    const genres : string[] = ["NONE", "FICTION", "MYSTERY", "THRILLER",
-    "FANTASY", "SCIENCE", "NON_FICTION", "HISTORY", "NOVEL", "HISTORICAL_FICTION", "SCIENCE_FICTION",
-    "ROMANCE", "YOUNG_ADULT", "ADVENTURE", "HORROR"];
-
-    const readingStatuses : ReadingStatus[] = ["TO_BE_READ", "READING", "READ"]
 
     function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | ChangeEvent<HTMLSelectElement>): void {
         setBook({...book, [event.target.name]: event.target.value})
@@ -27,7 +23,7 @@ export default function BookForm({book, setBook, handleSubmit, action, editable}
             <div className={`book-info`}>
                 <label className={"book-label align-right"} htmlFor={"readingStatus"}>Reading Status</label>
                 <select required={true} value={book.readingStatus} onChange={handleChange} name={"readingStatus"} disabled={!editable}>
-                    {readingStatuses.map((status) => (
+                    {READING_STATUSES.map((status) => (
                         <option key={status} value={status}>{formatEnum(status)}</option>
                     ))}
                 </select>
@@ -69,7 +65,7 @@ export default function BookForm({book, setBook, handleSubmit, action, editable}
                 <label className={"book-label align-right"} htmlFor={"genre"}>Genre</label>
                 <select required={true} value={book.genre} onChange={handleChange} name={"genre"}
                         disabled={!editable}>
-                    {genres.map((genre) => (
+                    {GENRES.map((genre) => (
                         <option key={genre} value={genre}>
                             {formatEnum(genre)}
                         </option>

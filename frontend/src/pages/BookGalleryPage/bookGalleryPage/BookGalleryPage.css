@@ -40,15 +40,12 @@
 
 .filter-tag {
     display: flex;
-    background-color: #c44900;
-    padding: 8px;
-    border-radius: 10px;
     font-size: 14px;
+    gap: 10px;
 }
 
 .filter-tag-close {
-    padding: 0;
-    color: BEIGE;
+    color: #EFD6AC;
 }
 
 .filter-tag-close:hover,

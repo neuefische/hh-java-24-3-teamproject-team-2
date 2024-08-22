@@ -5,10 +5,10 @@ import GoToTopButton from "../../../components/goToTopButton/GoToTopButton.tsx";
 import {Dispatch, SetStateAction, useState} from "react";
 import SearchBar from "../components/searchBar/SearchBar.tsx";
 import StatusFilter from "../components/statusFilter/StatusFilter.tsx";
-import RatingFilter from "../components/ratingFilter/RatingFilter.tsx";
-import FilterPage from "../../../components/filterPage/FilterPage.tsx";
+import FilterForm from "../components/filterForm/FilterForm.tsx";
 import {formatEnum} from "../../../utils/utilFunctions.ts";
 import SortOptions from "../components/sortOptions/SortOptions.tsx";
+import {STAR_RATINGS} from "../../../utils/utilConstants.ts";
 
 type BookGalleryPageProps = {
     filteredBooks: Book[],
@@ -27,12 +27,13 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
 
     const handleApplyFilter = (genre: string) => {
         setShowFilter(false);
-        setShowFilterTag(genre !== "Select");
+        setShowFilterTag(genre !== "Select" || ratingFilter !== null);
     }
 
     const handleRemoveFilter = () => {
         setShowFilterTag(false);
         setSelectedGenre('Select');
+        setRatingFilter(null);
     }
 
     const sortAlphabetically = (a: string, b:string, descending: boolean) => {
@@ -46,7 +47,7 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
         .filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : book)
         .filter((book) => statusFilter !== "ALL" ? book.readingStatus === statusFilter : book)
         .filter(book => ratingFilter !== null ? book.rating === ratingFilter : book)
-        .sort((a, b) => sortRatingDesc ? a.rating - b.rating : b.rating - a.rating)
+        .sort((a, b) => sortRatingDesc ? b.rating - a.rating : a.rating - b.rating)
         .sort((a,b) => sortABCDesc ? sortAlphabetically(a.title, b.title, true) : sortABCDesc !== null ? sortAlphabetically(a.title, b.title, false): 0 )
         .sort((a,b)=> sortGenreDesc ? sortAlphabetically(a.genre, b.genre, true) : sortGenreDesc !==null ? sortAlphabetically(a.genre, b.genre, false): 0)
 
@@ -64,22 +65,29 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
                     {!showFilter ? "Advanced Search ◀" : "Advanced Search ▼"}
                 </button>
                 {showFilter &&
-                    <FilterPage
+                    <FilterForm
                         selectedGenre={selectedGenre}
                         setSelectedGenre={setSelectedGenre}
+                        ratingFilter={ratingFilter}
+                        setRatingFilter={setRatingFilter}
                         handleApplyFilter={handleApplyFilter}
                         setShowKeywordTag={setShowFilterTag}
                     />
                 }
                 {(showFilterTag && !showFilter) &&
                     <div className={"filter-tag-area"}>
-                        <p style={{fontStyle: "italic", fontWeight: "bold"}}>Filtered Genre: </p>
+                        <p className={"book-label"}>Filters: </p>
                         <div className={"filter-tag"}>
-                            <button
+                            {selectedGenre !== "Select" && <button
                                 className={"filter-tag-close"}
                                 onClick={handleRemoveFilter}
                             >{formatEnum(selectedGenre)} x
-                            </button>
+                            </button>}
+                            {ratingFilter && <button
+                                className={"filter-tag-close"}
+                                onClick={handleRemoveFilter}
+                            >{STAR_RATINGS[ratingFilter]} x
+                            </button>}
                         </div>
                     </div>
                 }
@@ -89,11 +97,6 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
                 setStatusFilter={setStatusFilter}
             />
             <SortOptions setSortABCDesc={setSortABCDesc} setSortGenreDesc={setSortGenreDesc} setSortRatingDesc={setSortRatingDesc} sortABCDesc={sortABCDesc} sortGenreDesc={sortGenreDesc} sortRatingDesc={sortRatingDesc}/>
-
-            {/*<RatingFilter*/}
-            {/*    setRatingFilter={setRatingFilter}*/}
-            {/*/>*/}
-
             <div className={"number-of-books"}>
                 {
                     filteredAndSortedBooks.length == 1
