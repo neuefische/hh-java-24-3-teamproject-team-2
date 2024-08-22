@@ -84,15 +84,16 @@ class UserControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                     {
-                      "id": "1",
                       "userName": "esgoet",
                       "readingGoal": 6,
                       "goalDate": "2024-12-31",
                       "readBooks": 0
                     }
-                    """));
+                    """))
+                .andExpect(jsonPath("$.id").exists());
     }
 
+    @DirtiesContext
     @Test
     void updateUserTest() throws Exception {
         //GIVEN
@@ -122,6 +123,7 @@ class UserControllerIntegrationTest {
                     """));
     }
 
+    @DirtiesContext
     @Test
     void deleteUserTest() throws Exception {
         //GIVEN
