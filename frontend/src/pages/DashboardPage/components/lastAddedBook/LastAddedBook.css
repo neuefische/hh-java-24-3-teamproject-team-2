@@ -5,3 +5,20 @@
     margin-bottom: 20px;
     padding: 15px;
 }
+
+.recently-added-books {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex: 1 1 0;
+    align-items: flex-start;
+}
+
+.cover-in-dashboard {
+    #width: fit-content;
+    height: 200px;
+    aspect-ratio: auto;
+    border: 1px solid #5b84ea;
+    margin: 20px auto;
+}
