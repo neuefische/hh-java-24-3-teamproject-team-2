@@ -3,18 +3,17 @@ import './RatingFilter.css'
 
 type RatingFilterProps = {
     setRatingFilter: (rating: number | null) => void;
+    setSortedBooks: (sort: boolean | null) => void;
 }
 
-export default function RatingFilter({setRatingFilter}: RatingFilterProps) {
+export default function RatingFilter({setRatingFilter, setSortedBooks}: RatingFilterProps) {
 
     function handleAscending() {
-        //const sortedBooksAscending = books.sort((a, b) => a.rating - b.rating);
-        console.log()
+        setSortedBooks(true)
     }
 
     function handleDescending() {
-        //const sortedBooksDescending = books.sort((a, b) => b.rating - a.rating);
-        console.log("desc")
+        setSortedBooks(false)
     }
 
     function handleRatingValue(event: ChangeEvent<HTMLSelectElement>) {
@@ -24,6 +23,7 @@ export default function RatingFilter({setRatingFilter}: RatingFilterProps) {
 
     function handleReset() {
         setRatingFilter(null)
+        setSortedBooks(null)
     }
 
     return (

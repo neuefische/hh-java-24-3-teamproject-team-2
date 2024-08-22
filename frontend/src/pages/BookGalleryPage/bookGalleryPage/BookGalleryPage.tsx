@@ -20,6 +20,7 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
     const [selectedGenre, setSelectedGenre] = useState<string>("Select");
     const [showFilterTag, setShowFilterTag] = useState<boolean>(false);
     const [ratingFilter, setRatingFilter] = useState<number | null>(null);
+    const [sortedBooks, setSortedBooks] = useState<boolean | null>(null)
 
     const handleApplyFilter = (genre: string) => {
         setShowFilter(false);
@@ -30,6 +31,12 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
         setShowFilterTag(false);
         setSelectedGenre('Select');
     }
+
+    const filteredAndSortedBooks = filteredBooks
+        .filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : book)
+        .filter((book) => statusFilter != "ALL" ? book.readingStatus === statusFilter : book)
+        .filter(book => ratingFilter !== null ? book.rating === ratingFilter : book)
+        .sort((a, b) => sortedBooks ? a.rating - b.rating : b.rating - a.rating);
 
     return (
         <div id={"galleryPage"}>
@@ -63,17 +70,17 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
                     </div>
                 }
             </div>
-            <RatingFilter setRatingFilter={setRatingFilter}
+            <RatingFilter
+                setRatingFilter={setRatingFilter}
+                setSortedBooks={setSortedBooks}
             />
-            <StatusFilter statusFilter={statusFilter} setStatusFilter={setStatusFilter}/>
+            <StatusFilter
+                statusFilter={statusFilter}
+                setStatusFilter={setStatusFilter}
+            />
             {
                 filteredBooks.length > 0
-                    ? <BookGallery
-                        data={
-                            filteredBooks.filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : book)
-                                .filter((book) => statusFilter != "ALL" ? book.readingStatus === statusFilter : book)
-                                .filter(book => ratingFilter !== null ? book.rating === ratingFilter : book)
-                        }/>
+                    ? <BookGallery data={filteredAndSortedBooks}/>
                     : <p>No Books found</p>
             }
             <GoToTopButton/>
