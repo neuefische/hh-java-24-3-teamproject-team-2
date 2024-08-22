@@ -60,14 +60,14 @@ export default function App() {
     const filteredBooks: Book[] = data
         .filter((book) => book.title?.toLowerCase().includes(searchInput.toLowerCase()) ||
             book.author?.toLowerCase().includes(searchInput.toLowerCase()));
-    
+
     return (
         <>
             <Header/>
             <Navigation/>
             <main>
                 <Routes>
-                    <Route path={"/"} element={<Dashboard user={user}/>}/>
+                    <Route path={"/"} element={<Dashboard user={user} data={filteredBooks}/>}/>
                     <Route path={"/books"} element={<BookGalleryPage
                         filteredBooks={filteredBooks}
                         setSearchInput={setSearchInput}/>}/>

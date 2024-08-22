@@ -1,18 +1,19 @@
 import GreetingAndGoal from "../components/greeting/GreetingAndGoal.tsx";
 import Summary from "../components/summary/Summary.tsx";
 
-import {User} from "../../../types/types.ts";
+import {Book, User} from "../../../types/types.ts";
 
 type DashboardProps = {
-    user: User
+    user: User,
+    data: Book[]
 }
 
-export default function Dashboard({user}: DashboardProps) {
+export default function Dashboard({user, data}: DashboardProps) {
 
     return (
         <div id={"DashboardPage"}>
             <GreetingAndGoal user={user}/>
-            <Summary/>
+            <Summary data={data}/>
         </div>
     );
 }

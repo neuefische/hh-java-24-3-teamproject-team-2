@@ -44,3 +44,8 @@ export type UserWithoutId = {
     goalDate: string,
     readBooks: number
 }
+
+export type SummaryInfo = {
+    title: string,
+    numberOfBooks: number
+}

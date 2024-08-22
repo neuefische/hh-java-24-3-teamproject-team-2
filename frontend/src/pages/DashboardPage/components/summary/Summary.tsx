@@ -1,23 +1,29 @@
 import "./Summary.css";
+import {Book, SummaryInfo} from "../../../../types/types.ts";
+import {getSizeOfData} from "../../../../utils/utilFunctions.ts";
 
-export default function Summary() {
+type SummaryProps = {
+    data: Book[]
+}
 
-    const summaryInfo = [
+export default function Summary({data}: SummaryProps) {
+
+    const summaryInfo: SummaryInfo[] = [
         {
             title: "All",
-            numberOfBooks: 13
+            numberOfBooks: data.length
         },
         {
             title: "To Be Read",
-            numberOfBooks: 9
+            numberOfBooks: getSizeOfData(data, "TO_BE_READ")
         },
         {
             title: "Reading",
-            numberOfBooks: 3
+            numberOfBooks: getSizeOfData(data, "READING")
         },
         {
             title: "Read",
-            numberOfBooks: 1
+            numberOfBooks: getSizeOfData(data, "READ")
         }
     ]
 
