@@ -1,0 +1,23 @@
+.settingsPageForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 10px;
+    justify-content: stretch;
+    align-content: stretch;
+}
+
+.settingsPageForm input:disabled, select:disabled, textarea:disabled {
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+
+.settingsPageForm input, select, textarea {
+    background-color: #183A37;
+    padding: 8px 5px;
+    border: 1px solid rgba(93, 165, 45, 0.45);
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}

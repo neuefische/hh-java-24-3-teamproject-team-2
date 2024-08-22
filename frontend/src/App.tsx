@@ -9,11 +9,12 @@ import AddBookForm from "./pages/BookGalleryPage/components/addBookForm/AddBookF
 import Header from "./components/header/Header.tsx";
 import Navigation from "./components/navigation/Navigation.tsx";
 import Dashboard from "./pages/DashboardPage/dashboard/Dashboard.tsx";
+import SettingsPage from "./pages/SettingsPage/settingsPage/SettingsPage.tsx";
 
 export default function App() {
 
     const [data, setData] = useState<Book[]>([])
-    const [user, setUser] = useState<User>({id:"",userName:"",readingGoal:0, goalDate:"", readBooks: 0})
+    const [user, setUser] = useState<User>({id: "", userName: "", readingGoal: 0, goalDate: "", readBooks: 0})
 
     const fetchBooks = () => {
         axios.get("/api/books")
@@ -24,12 +25,13 @@ export default function App() {
                 alert(error)
             })
     }
+    
     const fetchUser = () => {
         axios.get("/api/users/1")
-            .then((response)=> {
+            .then((response) => {
                 setUser(response.data)
             })
-            .catch((error)=>(console.log(error)))
+            .catch((error) => (console.log(error)))
     }
 
     const deleteBook = (id: string) => {
@@ -44,7 +46,7 @@ export default function App() {
             .catch((error) => console.log(error.response.data))
     }
 
-    const updateUser = (updatedProperty : string, updatedValue: number | string) => {
+    const updateUser = (updatedProperty: string, updatedValue: number | string) => {
         axios.put(`/api/users/${user.id}`, {...user, [updatedProperty]: updatedValue})
             .then((response) => response.status === 200 && fetchUser())
     }
@@ -60,7 +62,7 @@ export default function App() {
     const filteredBooks: Book[] = data
         .filter((book) => book.title?.toLowerCase().includes(searchInput.toLowerCase()) ||
             book.author?.toLowerCase().includes(searchInput.toLowerCase()));
-    
+
     return (
         <>
             <Header/>
@@ -70,9 +72,23 @@ export default function App() {
                     <Route path={"/"} element={<Dashboard user={user}/>}/>
                     <Route path={"/books"} element={<BookGalleryPage
                         filteredBooks={filteredBooks}
-                        setSearchInput={setSearchInput}/>}/>
-                    <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks} user={user}  updateUser={updateUser}/>}/>
-                    <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook} updateBook={updateBook} user={user} updateUser={updateUser}/>}/>
+                        setSearchInput={setSearchInput}
+                    />}/>
+                    <Route path={"/books/add"}
+                           element={<AddBookForm fetchBooks={fetchBooks}
+                                                 user={user}
+                                                 updateUser={updateUser}
+                           />}/>
+                    <Route path={"/books/:id"}
+                           element={<BookDetailsPage deleteBook={deleteBook}
+                                                     updateBook={updateBook}
+                                                     user={user}
+                                                     updateUser={updateUser}
+                           />}/>
+                    <Route path={"/settings"} element={<SettingsPage
+                        user={user}
+                        updateUser={updateUser}
+                    />}/>
                 </Routes>
             </main>
         </>
