@@ -50,12 +50,12 @@ class UserServiceTest {
     }
 
     @Test
-    void getUserTest_whenUserExists_thenReturnUser() {
+    void getUserByIdTest_whenUserExists_thenReturnUser() {
         //GIVEN
         User user = new User("1","user1", 6, goalDate, 0);
         when(userRepo.findById("1")).thenReturn(Optional.of(user));
         //WHEN
-        User actual = userService.getUser("1");
+        User actual = userService.getUserById("1");
         //THEN
         User expected = new User("1","user1", 6, goalDate, 0);
         verify(userRepo).findById("1");
@@ -63,12 +63,12 @@ class UserServiceTest {
     }
 
     @Test
-    void getUserTest_whenUserDoesNotExists_thenThrow() {
+    void getUserByIdTest_whenUserDoesNotExists_thenThrow() {
         //GIVEN
         when(userRepo.findById("1")).thenReturn(Optional.empty());
         //WHEN
         //THEN
-        assertThrows(UserNotFoundException.class, () -> userService.getUser("1"));
+        assertThrows(UserNotFoundException.class, () -> userService.getUserById("1"));
         verify(userRepo).findById("1");
     }
 

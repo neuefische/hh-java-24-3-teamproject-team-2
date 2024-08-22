@@ -34,7 +34,7 @@ class UserControllerIntegrationTest {
 
     @DirtiesContext
     @Test
-    void getUserTest_whenIdExists() throws Exception{
+    void getUserByIdTest_whenIdExists() throws Exception{
         //GIVEN
         userRepository.save(new User("1","esgoet", 6, goalDate, 0));
         //WHEN
@@ -53,7 +53,7 @@ class UserControllerIntegrationTest {
     }
 
     @Test
-    void getUserTest_whenIdDoesNotExist() throws Exception {
+    void getUserByIdTest_whenIdDoesNotExist() throws Exception {
         //WHEN
         mockMvc.perform(get("/api/users/1"))
                 //THEN
