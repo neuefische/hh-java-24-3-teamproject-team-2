@@ -34,7 +34,7 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
 
     const filteredAndSortedBooks = filteredBooks
         .filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : book)
-        .filter((book) => statusFilter != "ALL" ? book.readingStatus === statusFilter : book)
+        .filter((book) => statusFilter !== "ALL" ? book.readingStatus === statusFilter : book)
         .filter(book => ratingFilter !== null ? book.rating === ratingFilter : book)
         .sort((a, b) => sortedBooks ? a.rating - b.rating : b.rating - a.rating);
 
