@@ -15,8 +15,7 @@ main {
   align-content: center;
   place-items: center;
   flex-direction: column;
-  padding: 20px;
-  margin-bottom: 90px;
+  margin: 20px 20px 90px;
 }
 
 .material-symbols-outlined {
