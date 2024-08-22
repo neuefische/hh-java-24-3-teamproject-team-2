@@ -3,10 +3,11 @@ import BookGallery from "../components/bookGallery/BookGallery.tsx";
 import "./BookGalleryPage.css";
 import GoToTopButton from "../../../components/goToTopButton/GoToTopButton.tsx";
 import {Dispatch, SetStateAction, useState} from "react";
+import SearchBar from "../components/searchBar/SearchBar.tsx";
+import StatusFilter from "../components/statusFilter/StatusFilter.tsx";
+import RatingFilter from "../components/ratingFilter/RatingFilter.tsx";
 import FilterPage from "../../../components/filterPage/FilterPage.tsx";
 import {formatEnum} from "../../../utils/utilFunctions.ts";
-import SearchBar from "../components/searchbar/SearchBar.tsx";
-import StatusFilter from "../components/statusFilter/StatusFilter.tsx";
 
 type BookGalleryPageProps = {
     filteredBooks: Book[],
@@ -18,10 +19,11 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
     const [showFilter, setShowFilter] = useState<boolean>(false);
     const [selectedGenre, setSelectedGenre] = useState<string>("Select");
     const [showFilterTag, setShowFilterTag] = useState<boolean>(false);
+    const [ratingFilter, setRatingFilter] = useState<number | null>(null);
+    const [sortedBooks, setSortedBooks] = useState<boolean | null>(null)
 
     const handleApplyFilter = (genre: string) => {
         setShowFilter(false);
-        console.log(genre);
         setShowFilterTag(genre !== "Select");
     }
 
@@ -30,9 +32,11 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
         setSelectedGenre('Select');
     }
 
-    const filteredBooksByGenreAndStatus = filteredBooks
-        .filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : true)
-        .filter(book => statusFilter !== "ALL" ? book.readingStatus === statusFilter : true);
+    const filteredAndSortedBooks = filteredBooks
+        .filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : book)
+        .filter((book) => statusFilter !== "ALL" ? book.readingStatus === statusFilter : book)
+        .filter(book => ratingFilter !== null ? book.rating === ratingFilter : book)
+        .sort((a, b) => sortedBooks ? a.rating - b.rating : b.rating - a.rating);
 
     return (
         <div id={"galleryPage"}>
@@ -59,22 +63,30 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
                             <button
                                 className={"filter-tag-close"}
                                 onClick={handleRemoveFilter}
-                            >{formatEnum(selectedGenre)} x</button>
+                            >{formatEnum(selectedGenre)} x
+                            </button>
                         </div>
                     </div>
                 }
             </div>
-                <StatusFilter statusFilter={statusFilter} setStatusFilter={setStatusFilter}/>
-                <p className={"number-of-books"}>
-                    {
-                        filteredBooksByGenreAndStatus.length == 1
-                            ? filteredBooksByGenreAndStatus.length + " book"
-                            : filteredBooksByGenreAndStatus.length + " books"
-                    }
-                </p>
+            <RatingFilter
+                setRatingFilter={setRatingFilter}
+                setSortedBooks={setSortedBooks}
+            />
+            <StatusFilter
+                statusFilter={statusFilter}
+                setStatusFilter={setStatusFilter}
+            />
+            <p className={"number-of-books"}>
+                {
+                    filteredAndSortedBooks.length == 1
+                        ? filteredAndSortedBooks.length + " book"
+                        : filteredAndSortedBooks.length + " books"
+                }
+            </p>
             {
-                filteredBooksByGenreAndStatus.length > 0
-                    ? <BookGallery data={filteredBooksByGenreAndStatus} />
+                filteredAndSortedBooks.length > 0
+                    ? <BookGallery data={filteredAndSortedBooks}/>
                     : <p style={{textAlign: "center", marginTop: "50px"}}>No Books found</p>
             }
             <GoToTopButton/>
