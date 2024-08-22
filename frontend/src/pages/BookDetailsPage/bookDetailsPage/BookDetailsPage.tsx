@@ -1,19 +1,21 @@
 import "./BookDetailsPage.css";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
-import {FormEvent, useEffect, useState} from "react";
+import { FormEvent, useEffect, useState} from "react";
 import BookForm from "../../../components/bookForm/BookForm.tsx";
 import ConfirmationModal from "../../../components/confirmationModal/ConfirmationModal.tsx";
-import {BookWithoutId} from "../../../types/types.ts";
+import {BookWithoutId, ReadingStatus, User} from "../../../types/types.ts";
 import StarRating from "../../../components/starRating/StarRating.tsx";
 
 
 type DeleteProps = {
-    deleteBook: (id: string) => void;
-    updateBook: (id: string, book: BookWithoutId) => void;
+    deleteBook: (id: string) => void,
+    updateBook: (id: string, book: BookWithoutId) => void,
+    user: User,
+    updateUser: (updatedProperty : string, updatedValue: string | number ) => void
 }
 
-export default function BookDetailsPage({deleteBook, updateBook}: Readonly<DeleteProps>) {
+export default function BookDetailsPage({deleteBook, updateBook, user, updateUser}: Readonly<DeleteProps>) {
     const [book, setBook] = useState<BookWithoutId>({
         title: "",
         author: "",
@@ -28,6 +30,7 @@ export default function BookDetailsPage({deleteBook, updateBook}: Readonly<Delet
     const [editable, setEditable ] = useState<boolean>(false);
     const [ratingValue, setRatingValue] = useState<number | null>(0);
     const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+    const [statusBeforeEdit, setStatusBeforeEdit] = useState<ReadingStatus>();
 
     const params = useParams();
     const navigate = useNavigate();
@@ -68,11 +71,18 @@ export default function BookDetailsPage({deleteBook, updateBook}: Readonly<Delet
             book.rating = ratingValue
         }
         if (id) updateBook(id, book)
+
+        if (statusBeforeEdit != "READ" && book.readingStatus === "READ") {
+            updateUser("readBooks", (user.readBooks + 1))
+        } else if (statusBeforeEdit === "READ" && book.readingStatus != "READ") {
+            updateUser("readBooks", (user.readBooks - 1))
+        }
         setEditable(false)
     }
 
     const onEdit = () => {
         setEditable(!editable)
+        setStatusBeforeEdit(book.readingStatus)
         if (editable) {
             fetchBook()
         }
