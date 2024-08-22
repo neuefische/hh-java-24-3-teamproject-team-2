@@ -20,7 +20,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUser(String id) {
+    public User getUserById(String id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("No user found with id: " + id));
 
@@ -32,7 +32,7 @@ public class UserService {
     }
 
     public User updateUser(String id, UserDto updatedUser) {
-        User user = getUser(id)
+        User user = getUserById(id)
                 .withUserName(updatedUser.userName())
                 .withGoalDate(updatedUser.goalDate())
                 .withReadBooks(updatedUser.readBooks())
