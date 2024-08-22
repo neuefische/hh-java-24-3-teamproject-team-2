@@ -1,9 +1,9 @@
 import { FormEvent, useState} from "react";
-import {BookWithoutId, User} from "../../../../types/types.ts";
+import {BookWithoutId, User} from "../../../types/types.ts";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import "./AddBookForm.css";
-import BookForm from "../../../../components/bookForm/BookForm.tsx";
+import "./AddBookPage.css";
+import BookForm from "../../../components/bookForm/BookForm.tsx";
 
 type FetchProps = {
     fetchBooks: () => void,
@@ -11,7 +11,7 @@ type FetchProps = {
     updateUser: (updatedProperty : string, updatedValue: string | number ) => void
 }
 
-export default function AddBookForm({fetchBooks, user, updateUser}: Readonly<FetchProps>) {
+export default function AddBookPage({fetchBooks, user, updateUser}: Readonly<FetchProps>) {
     const [book, setBook] = useState<BookWithoutId>({
         title: "",
         author: "",

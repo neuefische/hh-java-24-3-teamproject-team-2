@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {Route, Routes} from "react-router-dom";
 import BookDetailsPage from "./pages/BookDetailsPage/bookDetailsPage/BookDetailsPage.tsx";
 import BookGalleryPage from "./pages/BookGalleryPage/bookGalleryPage/BookGalleryPage.tsx";
-import AddBookForm from "./pages/BookGalleryPage/components/addBookForm/AddBookForm.tsx";
+import AddBookPage from "./pages/AddBookPage/addBookPage/AddBookPage.tsx";
 import Header from "./components/header/Header.tsx";
 import Navigation from "./components/navigation/Navigation.tsx";
 import Dashboard from "./pages/DashboardPage/dashboard/Dashboard.tsx";
@@ -71,7 +71,7 @@ export default function App() {
                     <Route path={"/books"} element={<BookGalleryPage
                         filteredBooks={filteredBooks}
                         setSearchInput={setSearchInput}/>}/>
-                    <Route path={"/books/add"} element={<AddBookForm fetchBooks={fetchBooks} user={user}  updateUser={updateUser}/>}/>
+                    <Route path={"/books/add"} element={<AddBookPage fetchBooks={fetchBooks} user={user} updateUser={updateUser}/>}/>
                     <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook} updateBook={updateBook} user={user} updateUser={updateUser}/>}/>
                 </Routes>
             </main>
