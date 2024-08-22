@@ -2,6 +2,7 @@ import GreetingAndGoal from "../components/greeting/GreetingAndGoal.tsx";
 import Summary from "../components/summary/Summary.tsx";
 
 import {Book, User} from "../../../types/types.ts";
+import LastAddedBook from "../components/lastAddedBook/LastAddedBook.tsx";
 
 type DashboardProps = {
     user: User,
@@ -14,6 +15,7 @@ export default function Dashboard({user, data}: DashboardProps) {
         <div id={"DashboardPage"}>
             <GreetingAndGoal user={user}/>
             <Summary data={data}/>
+            <LastAddedBook />
         </div>
     );
 }

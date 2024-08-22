@@ -8,8 +8,8 @@ type GreetingProps = {
 
 export default function GreetingAndGoal({user}: GreetingProps) {
     return (
-        <div className={"dashboard-greeting"}>
-            <p className={"greeting-message"}>Welcome to TaleTrail, <em>{user.userName}</em>!</p>
+        <div className={"dashboard-greeting-goal"}>
+            <h2 className={"section-title"}>Welcome to TaleTrail, <em>{user.userName}</em>!</h2>
             <ReadingGoal readBooks={user.readBooks} goalDate={user.goalDate} readingGoal={user.readingGoal}/>
         </div>
     )
