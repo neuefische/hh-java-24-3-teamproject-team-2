@@ -12,7 +12,9 @@ public record User (
         String userName,
         int readingGoal,
         LocalDate goalDate,
-        int readBooks
+        int readBooks,
+        String gitHubId,
+        String role
 ) {
 
 }

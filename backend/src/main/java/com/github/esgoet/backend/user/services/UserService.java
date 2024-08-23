@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public User saveUser(UserDto userDto) {
-        User userToSave = new User(idService.randomId(), userDto.userName(), userDto.readingGoal(), userDto.goalDate(), userDto.readBooks());
+        User userToSave = new User(idService.randomId(), userDto.userName(), userDto.readingGoal(), userDto.goalDate(), userDto.readBooks(), userDto.gitHubId(), userDto.role());
         return userRepository.save(userToSave);
     }
 
@@ -43,5 +43,9 @@ public class UserService {
 
     public void deleteUser(String id) {
         userRepository.deleteById(id);
+    }
+
+    public User getUserByGitHubId(String gitHubId) {
+        return userRepository.findByGitHubId(gitHubId);
     }
 }

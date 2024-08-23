@@ -27,6 +27,4 @@ class AuthControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("esgoet"));
     }
-
-
 }
