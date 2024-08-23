@@ -6,7 +6,6 @@ type LastAddedBookProps = {
 }
 
 export default function LastAddedBook({data}: LastAddedBookProps) {
-console.log(new Date(data[0]?.createdDate));
 
     const sortedBooks = [...data].sort((a, b) =>
         new Date(b?.createdDate).getTime() - new Date(a?.createdDate).getTime()
