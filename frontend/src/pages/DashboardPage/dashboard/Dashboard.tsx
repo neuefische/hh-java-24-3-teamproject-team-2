@@ -1,3 +1,4 @@
+import "./Dashboard.css";
 import GreetingAndGoal from "../components/greeting/GoalAndSummary.tsx";
 
 import {Book, User} from "../../../types/types.ts";
@@ -11,10 +12,12 @@ type DashboardProps = {
 export default function Dashboard({user, data}: DashboardProps) {
 
     return (
-        <div id={"DashboardPage"}>
+        <div id={"dashboard-page"}>
             <h2 style={{paddingLeft: "15px"}}>Welcome to TaleTrail, <em>{user.userName}</em>!</h2>
-            <GreetingAndGoal user={user} data={data}/>
-            <LastAddedBook data={data}/>
+            <div>
+                <GreetingAndGoal user={user} data={data}/>
+                <LastAddedBook data={data}/>
+            </div>
         </div>
     );
 }
