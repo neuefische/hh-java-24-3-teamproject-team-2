@@ -1,6 +1,6 @@
 
 import {User} from "../../../types/types.ts"
-import ReadingGoal from "../readingGoal/ReadingGoal.tsx";
+import ReadingGoal from "../components/readingGoal/ReadingGoal.tsx";
 
 type DashboardProps = {
     user: User
