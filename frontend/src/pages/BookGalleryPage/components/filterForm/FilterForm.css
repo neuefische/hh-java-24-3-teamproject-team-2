@@ -1,11 +1,12 @@
-.filter-content {
-    margin-top: 50px;
-}
-
 .filter-body {
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
+    gap: 5px;
+    margin-top: 30px;
+}
+
+.filter-body select {
+    background-color: #1b4c3f;
 }
 
 .filter-label {
@@ -28,7 +29,7 @@
     color: #888888;
     border-color: #888888;
     width: 110px;
-    font-size: 13px;
+    font-size: smaller;
 }
 
 .reset-btn:hover {
@@ -39,12 +40,12 @@
 
 .apply-btn {
     width: 110px;
-    font-size: 13px;
+    font-size: smaller;
 }
 
 .apply-btn:disabled,
 .apply-btn:disabled:hover{
     background-color: #888888;
     border: none;
-    cursor: default;
+    cursor: not-allowed;
 }

@@ -1,13 +1,14 @@
-import {Book} from "../../../types/types.ts";
+import {Book, Filter} from "../../../types/types.ts";
 import BookGallery from "../components/bookGallery/BookGallery.tsx";
 import "./BookGalleryPage.css";
 import GoToTopButton from "../../../components/goToTopButton/GoToTopButton.tsx";
 import {Dispatch, SetStateAction, useState} from "react";
 import SearchBar from "../components/searchBar/SearchBar.tsx";
 import StatusFilter from "../components/statusFilter/StatusFilter.tsx";
-import RatingFilter from "../components/ratingFilter/RatingFilter.tsx";
-import FilterPage from "../../../components/filterPage/FilterPage.tsx";
+import FilterForm from "../components/filterForm/FilterForm.tsx";
 import {formatEnum} from "../../../utils/utilFunctions.ts";
+import SortOptions from "../components/sortOptions/SortOptions.tsx";
+import {STAR_RATINGS} from "../../../utils/utilConstants.ts";
 
 type BookGalleryPageProps = {
     filteredBooks: Book[],
@@ -16,77 +17,94 @@ type BookGalleryPageProps = {
 
 export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGalleryPageProps) {
     const [statusFilter, setStatusFilter] = useState<string>("ALL")
+    const [selectedFilter, setSelectedFilter] = useState<Filter>({genre: undefined, rating: undefined});
     const [showFilter, setShowFilter] = useState<boolean>(false);
-    const [selectedGenre, setSelectedGenre] = useState<string>("Select");
     const [showFilterTag, setShowFilterTag] = useState<boolean>(false);
-    const [ratingFilter, setRatingFilter] = useState<number | null>(null);
-    const [sortedBooks, setSortedBooks] = useState<boolean | null>(null)
+    const [sortRatingDesc, setSortRatingDesc] = useState<boolean | null>(null);
+    const [sortGenreDesc, setSortGenreDesc] = useState<boolean | null>(null);
+    const [sortABCDesc, setSortABCDesc] = useState<boolean | null>(null);
 
-    const handleApplyFilter = (genre: string) => {
+    const handleApplyFilter = (filter: Filter) => {
         setShowFilter(false);
-        setShowFilterTag(genre !== "Select");
+        setShowFilterTag(filter.genre !== undefined || filter.rating !== undefined);
     }
 
-    const handleRemoveFilter = () => {
-        setShowFilterTag(false);
-        setSelectedGenre('Select');
+    const handleRemoveFilter = (removeGenreFilter: boolean, removeRatingFilter: boolean) => {
+        if (removeGenreFilter) setSelectedFilter({...selectedFilter, genre: undefined})
+        if (removeRatingFilter) setSelectedFilter({...selectedFilter, rating: undefined})
+        if (selectedFilter.genre === undefined && removeRatingFilter || selectedFilter.rating === undefined && removeGenreFilter) {
+            setShowFilterTag(false);
+        }
+    }
+
+    const sortAlphabetically = (a: string, b:string, descending: boolean) => {
+        const multiplier : number = descending ? 1 : -1;
+        if (a < b) return -1 * multiplier;
+        if (a > b) return multiplier;
+        return 0
     }
 
     const filteredAndSortedBooks = filteredBooks
-        .filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : book)
         .filter((book) => statusFilter !== "ALL" ? book.readingStatus === statusFilter : book)
-        .filter(book => ratingFilter !== null ? book.rating === ratingFilter : book)
-        .sort((a, b) => sortedBooks ? a.rating - b.rating : b.rating - a.rating);
+        .filter(book => selectedFilter.genre ? book.genre === selectedFilter.genre : book)
+        .filter((book) => selectedFilter.rating ? book.rating === Number(selectedFilter.rating) : book)
+        .sort((a, b) => sortRatingDesc ? b.rating - a.rating : a.rating - b.rating)
+        .sort((a,b) => sortABCDesc ? sortAlphabetically(a.title, b.title, true) : sortABCDesc !== null ? sortAlphabetically(a.title, b.title, false): 0 )
+        .sort((a,b)=> sortGenreDesc ? sortAlphabetically(a.genre, b.genre, true) : sortGenreDesc !==null ? sortAlphabetically(a.genre, b.genre, false): 0)
 
     return (
         <div id={"galleryPage"}>
-            <SearchBar setSearchInput={setSearchInput}/>
             <div className={"filter-sector"}>
+                <SearchBar setSearchInput={setSearchInput}/>
                 <button
                     onClick={() => setShowFilter(!showFilter)}
                     className={"show-filter-button"}
                 >
-                    {!showFilter ? "Advanced Search" : "x"}
+                    {!showFilter ? "Advanced Search ◀" : "Advanced Search ▼"}
                 </button>
                 {showFilter &&
-                    <FilterPage
-                        selectedGenre={selectedGenre}
-                        setSelectedGenre={setSelectedGenre}
+                    <FilterForm
+                        selectedFilter={selectedFilter}
+                        setSelectedFilter={setSelectedFilter}
                         handleApplyFilter={handleApplyFilter}
-                        setShowKeywordTag={setShowFilterTag}
+                        setShowFilterTag={setShowFilterTag}
                     />
                 }
                 {(showFilterTag && !showFilter) &&
                     <div className={"filter-tag-area"}>
-                        <p style={{fontStyle: "italic", fontWeight: "bold"}}>Filtered Genre: </p>
+                        <p className={"book-label"}>Filters: </p>
                         <div className={"filter-tag"}>
-                            <button
+                            {selectedFilter.genre && <button
                                 className={"filter-tag-close"}
-                                onClick={handleRemoveFilter}
-                            >{formatEnum(selectedGenre)} x
-                            </button>
+                                onClick={()=>handleRemoveFilter(true, false)}
+                            >{formatEnum(selectedFilter.genre)} x
+                            </button>}
+                            {selectedFilter.rating  && <button
+                                className={"filter-tag-close"}
+                                onClick={() => handleRemoveFilter(false, true)}
+                            >{STAR_RATINGS[selectedFilter.rating]} x
+                            </button>}
                         </div>
                     </div>
                 }
             </div>
-            <RatingFilter
-                setRatingFilter={setRatingFilter}
-                setSortedBooks={setSortedBooks}
-            />
             <StatusFilter
                 statusFilter={statusFilter}
                 setStatusFilter={setStatusFilter}
             />
-            <p className={"number-of-books"}>
-                {
-                    filteredAndSortedBooks.length == 1
-                        ? filteredAndSortedBooks.length + " book"
-                        : filteredAndSortedBooks.length + " books"
-                }
-            </p>
+            <div className={"gallery-sort"}>
+                <SortOptions setSortABCDesc={setSortABCDesc} setSortGenreDesc={setSortGenreDesc} setSortRatingDesc={setSortRatingDesc} sortABCDesc={sortABCDesc} sortGenreDesc={sortGenreDesc} sortRatingDesc={sortRatingDesc}/>
+                <div className={"number-of-books"}>
+                    {
+                        filteredAndSortedBooks.length == 1
+                            ? filteredAndSortedBooks.length + " book"
+                            : filteredAndSortedBooks.length + " books"
+                    }
+                </div>
+            </div>
             {
                 filteredAndSortedBooks.length > 0
-                    ? <BookGallery data={filteredAndSortedBooks}/>
+                    ? <BookGallery data={filteredAndSortedBooks} sortGenreDesc={sortGenreDesc} sortRatingDesc={sortRatingDesc}/>
                     : <p style={{textAlign: "center", marginTop: "50px"}}>No Books found</p>
             }
             <GoToTopButton/>
