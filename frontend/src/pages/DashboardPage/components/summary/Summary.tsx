@@ -31,8 +31,8 @@ export default function Summary({data}: SummaryProps) {
         <section className={"dashboard-statistics"}>
             <h3 className={"section-title"}>Current Library Info</h3>
             <div className={"summary-box-container"}>
-                {summaryInfo.map(info => (
-                    <div className={"summary-box"}>
+                {summaryInfo.map((info) => (
+                    <div className={"summary-box"} key={info.title}>
                         <div className={"summary-number"}>
                             <p>{info.numberOfBooks}</p>
                         </div>

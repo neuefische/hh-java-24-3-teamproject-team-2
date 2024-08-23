@@ -1,5 +1,5 @@
 import "./GoalAndSummary.css";
-import ReadingGoal from "../../readingGoal/ReadingGoal.tsx";
+import ReadingGoal from "../readingGoal/ReadingGoal.tsx";
 import {Book, User} from "../../../../types/types.ts";
 import Summary from "../summary/Summary.tsx";
 
