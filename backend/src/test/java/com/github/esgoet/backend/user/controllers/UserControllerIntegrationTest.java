@@ -39,7 +39,7 @@ class UserControllerIntegrationTest {
     @WithMockUser
     void getUserByIdTest_whenIdExists() throws Exception{
         //GIVEN
-        userRepository.save(new User("1","esgoet", 6, goalDate, 0));
+        userRepository.save(new User("1","esgoet", 6, goalDate, 0,  "123", "USER"));
         //WHEN
         mockMvc.perform(get("/api/users/1"))
                 //THEN
@@ -50,7 +50,9 @@ class UserControllerIntegrationTest {
                       "userName": "esgoet",
                       "readingGoal": 6,
                       "goalDate": "2024-12-31",
-                      "readBooks": 0
+                      "readBooks": 0,
+                      "gitHubId": "123",
+                      "role": "USER"
                     }
                     """));
     }
@@ -83,7 +85,9 @@ class UserControllerIntegrationTest {
                       "userName": "esgoet",
                       "readingGoal": 6,
                       "goalDate": "2024-12-31",
-                      "readBooks": 0
+                      "readBooks": 0,
+                      "gitHubId": "123",
+                      "role": "USER"
                     }
                     """))
                 .andExpect(status().isOk())
@@ -92,7 +96,9 @@ class UserControllerIntegrationTest {
                       "userName": "esgoet",
                       "readingGoal": 6,
                       "goalDate": "2024-12-31",
-                      "readBooks": 0
+                      "readBooks": 0,
+                      "gitHubId": "123",
+                      "role": "USER"
                     }
                     """))
                 .andExpect(jsonPath("$.id").exists());
@@ -103,7 +109,7 @@ class UserControllerIntegrationTest {
     @WithMockUser
     void updateUserTest() throws Exception {
         //GIVEN
-        userRepository.save(new User("1","esgoet", 6, goalDate, 0));
+        userRepository.save(new User("1","esgoet", 6, goalDate, 0, "123", "USER"));
 
         //WHEN
         mockMvc.perform(put("/api/users/1")
@@ -113,7 +119,9 @@ class UserControllerIntegrationTest {
                       "userName": "esgoet",
                       "readingGoal": 6,
                       "goalDate": "2024-12-31",
-                      "readBooks": 1
+                      "readBooks": 1,
+                      "gitHubId": "123",
+                      "role": "USER"
                     }
                     """))
                 //THEN
@@ -124,7 +132,9 @@ class UserControllerIntegrationTest {
                       "userName": "esgoet",
                       "readingGoal": 6,
                       "goalDate": "2024-12-31",
-                      "readBooks": 1
+                      "readBooks": 1,
+                      "gitHubId": "123",
+                      "role": "USER"
                     }
                     """));
     }
@@ -134,7 +144,7 @@ class UserControllerIntegrationTest {
     @WithMockUser
     void deleteUserTest() throws Exception {
         //GIVEN
-        userRepository.save(new User("1","esgoet", 6, goalDate, 0));
+        userRepository.save(new User("1","esgoet", 6, goalDate, 0, "123", "USER"));
 
         //WHEN
         mockMvc.perform(delete("/api/users/1"))
