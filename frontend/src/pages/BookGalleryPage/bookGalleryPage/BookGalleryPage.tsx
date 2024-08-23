@@ -1,4 +1,4 @@
-import {Book} from "../../../types/types.ts";
+import {Book, Filter} from "../../../types/types.ts";
 import BookGallery from "../components/bookGallery/BookGallery.tsx";
 import "./BookGalleryPage.css";
 import GoToTopButton from "../../../components/goToTopButton/GoToTopButton.tsx";
@@ -17,23 +17,24 @@ type BookGalleryPageProps = {
 
 export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGalleryPageProps) {
     const [statusFilter, setStatusFilter] = useState<string>("ALL")
+    const [selectedFilter, setSelectedFilter] = useState<Filter>({genre: undefined, rating: undefined});
     const [showFilter, setShowFilter] = useState<boolean>(false);
-    const [selectedGenre, setSelectedGenre] = useState<string>("Select");
     const [showFilterTag, setShowFilterTag] = useState<boolean>(false);
-    const [ratingFilter, setRatingFilter] = useState<number | null>(null);
     const [sortRatingDesc, setSortRatingDesc] = useState<boolean | null>(null);
     const [sortGenreDesc, setSortGenreDesc] = useState<boolean | null>(null);
     const [sortABCDesc, setSortABCDesc] = useState<boolean | null>(null);
 
-    const handleApplyFilter = (genre: string) => {
+    const handleApplyFilter = (filter: Filter) => {
         setShowFilter(false);
-        setShowFilterTag(genre !== "Select" || ratingFilter !== null);
+        setShowFilterTag(filter.genre !== undefined || filter.rating !== undefined);
     }
 
-    const handleRemoveFilter = () => {
-        setShowFilterTag(false);
-        setSelectedGenre('Select');
-        setRatingFilter(null);
+    const handleRemoveFilter = (removeGenreFilter: boolean, removeRatingFilter: boolean) => {
+        if (removeGenreFilter) setSelectedFilter({...selectedFilter, genre: undefined})
+        if (removeRatingFilter) setSelectedFilter({...selectedFilter, rating: undefined})
+        if (selectedFilter.genre === undefined && removeRatingFilter || selectedFilter.rating === undefined && removeGenreFilter) {
+            setShowFilterTag(false);
+        }
     }
 
     const sortAlphabetically = (a: string, b:string, descending: boolean) => {
@@ -44,18 +45,15 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
     }
 
     const filteredAndSortedBooks = filteredBooks
-        .filter(book => selectedGenre !== 'Select' ? book.genre === selectedGenre : book)
         .filter((book) => statusFilter !== "ALL" ? book.readingStatus === statusFilter : book)
-        .filter(book => ratingFilter !== null ? book.rating === ratingFilter : book)
+        .filter(book => selectedFilter.genre ? book.genre === selectedFilter.genre : book)
+        .filter((book) => selectedFilter.rating ? book.rating === Number(selectedFilter.rating) : book)
         .sort((a, b) => sortRatingDesc ? b.rating - a.rating : a.rating - b.rating)
         .sort((a,b) => sortABCDesc ? sortAlphabetically(a.title, b.title, true) : sortABCDesc !== null ? sortAlphabetically(a.title, b.title, false): 0 )
         .sort((a,b)=> sortGenreDesc ? sortAlphabetically(a.genre, b.genre, true) : sortGenreDesc !==null ? sortAlphabetically(a.genre, b.genre, false): 0)
 
-
-
     return (
         <div id={"galleryPage"}>
-
             <div className={"filter-sector"}>
                 <SearchBar setSearchInput={setSearchInput}/>
                 <button
@@ -66,27 +64,25 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
                 </button>
                 {showFilter &&
                     <FilterForm
-                        selectedGenre={selectedGenre}
-                        setSelectedGenre={setSelectedGenre}
-                        ratingFilter={ratingFilter}
-                        setRatingFilter={setRatingFilter}
+                        selectedFilter={selectedFilter}
+                        setSelectedFilter={setSelectedFilter}
                         handleApplyFilter={handleApplyFilter}
-                        setShowKeywordTag={setShowFilterTag}
+                        setShowFilterTag={setShowFilterTag}
                     />
                 }
                 {(showFilterTag && !showFilter) &&
                     <div className={"filter-tag-area"}>
                         <p className={"book-label"}>Filters: </p>
                         <div className={"filter-tag"}>
-                            {selectedGenre !== "Select" && <button
+                            {selectedFilter.genre && <button
                                 className={"filter-tag-close"}
-                                onClick={handleRemoveFilter}
-                            >{formatEnum(selectedGenre)} x
+                                onClick={()=>handleRemoveFilter(true, false)}
+                            >{formatEnum(selectedFilter.genre)} x
                             </button>}
-                            {ratingFilter && <button
+                            {selectedFilter.rating  && <button
                                 className={"filter-tag-close"}
-                                onClick={handleRemoveFilter}
-                            >{STAR_RATINGS[ratingFilter]} x
+                                onClick={() => handleRemoveFilter(false, true)}
+                            >{STAR_RATINGS[selectedFilter.rating]} x
                             </button>}
                         </div>
                     </div>
@@ -96,13 +92,15 @@ export default function BookGalleryPage({filteredBooks, setSearchInput}: BookGal
                 statusFilter={statusFilter}
                 setStatusFilter={setStatusFilter}
             />
-            <SortOptions setSortABCDesc={setSortABCDesc} setSortGenreDesc={setSortGenreDesc} setSortRatingDesc={setSortRatingDesc} sortABCDesc={sortABCDesc} sortGenreDesc={sortGenreDesc} sortRatingDesc={sortRatingDesc}/>
-            <div className={"number-of-books"}>
-                {
-                    filteredAndSortedBooks.length == 1
-                        ? filteredAndSortedBooks.length + " book"
-                        : filteredAndSortedBooks.length + " books"
-                }
+            <div className={"gallery-sort"}>
+                <SortOptions setSortABCDesc={setSortABCDesc} setSortGenreDesc={setSortGenreDesc} setSortRatingDesc={setSortRatingDesc} sortABCDesc={sortABCDesc} sortGenreDesc={sortGenreDesc} sortRatingDesc={sortRatingDesc}/>
+                <div className={"number-of-books"}>
+                    {
+                        filteredAndSortedBooks.length == 1
+                            ? filteredAndSortedBooks.length + " book"
+                            : filteredAndSortedBooks.length + " books"
+                    }
+                </div>
             </div>
             {
                 filteredAndSortedBooks.length > 0

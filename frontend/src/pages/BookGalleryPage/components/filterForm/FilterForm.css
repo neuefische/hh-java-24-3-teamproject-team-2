@@ -5,6 +5,10 @@
     margin-top: 30px;
 }
 
+.filter-body select {
+    background-color: #1b4c3f;
+}
+
 .filter-label {
     margin-bottom: 5px;
     font-weight: 600;
@@ -25,7 +29,7 @@
     color: #888888;
     border-color: #888888;
     width: 110px;
-    font-size: 13px;
+    font-size: smaller;
 }
 
 .reset-btn:hover {
@@ -36,7 +40,7 @@
 
 .apply-btn {
     width: 110px;
-    font-size: 13px;
+    font-size: smaller;
 }
 
 .apply-btn:disabled,

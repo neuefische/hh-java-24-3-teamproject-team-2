@@ -6,6 +6,13 @@
     width: 90%;
 }
 
+.gallery-sort {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column-reverse;
+    margin: 10px 0 0;
+}
+
 .filter-sector {
     margin: 10px 0;
     padding: 15px 15px;
@@ -21,6 +28,7 @@
     padding: 0;
     border: none;
     background: none;
+    font-size: smaller;
 }
 
 .show-filter-button:hover {
@@ -56,10 +64,29 @@
 
 .number-of-books {
     margin-left: auto;
+    margin-bottom: -20px;
     font-size: 16px;
-    padding-right: 3px;
-    color: BEIGE;
-    font-style: italic;
+    border-radius: 10px;
+    color: #5b84ea;
+    font-variant-caps: all-small-caps;
+
     font-weight: bold;
-    display: inline;
+    padding: 3px 9px;
+    background-color: rgba(24, 58, 55, 0.41);
+}
+
+@media only screen and (min-width: 601px) {
+    .gallery-sort {
+        flex-direction: row;
+        padding: 6px 12px;
+        background-color: rgba(24, 58, 55, 0.41);
+        border-radius: 8px;
+    }
+
+    .number-of-books {
+        margin-left: 0;
+        margin-bottom: 0;
+        background: none;
+        padding: 0;
+    }
 }

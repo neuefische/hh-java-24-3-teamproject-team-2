@@ -2,50 +2,38 @@ import "./FilterForm.css";
 import {ChangeEvent, Dispatch, FormEvent, SetStateAction, useEffect, useState} from "react";
 import {formatEnum} from "../../../../utils/utilFunctions.ts";
 import {GENRES, STAR_RATINGS} from "../../../../utils/utilConstants.ts";
+import {Filter} from "../../../../types/types.ts";
 
 type FilterPageProps = {
-    selectedGenre: string,
-    setSelectedGenre: Dispatch<SetStateAction<string>>,
-    handleApplyFilter: (genre: string) => void,
-    setShowKeywordTag: Dispatch<SetStateAction<boolean>>,
-    ratingFilter: number | null,
-    setRatingFilter: Dispatch<SetStateAction<number | null>>
+    selectedFilter: Filter,
+    setSelectedFilter: Dispatch<SetStateAction<Filter>>,
+    handleApplyFilter: (filter: Filter) => void,
+    setShowFilterTag: Dispatch<SetStateAction<boolean>>,
 }
 
-type Filter = {
-    genre: string,
-    rating: number | null
-}
-
-export default function FilterForm({selectedGenre, setSelectedGenre, handleApplyFilter, ratingFilter, setRatingFilter, setShowKeywordTag }: FilterPageProps) {
+export default function FilterForm({selectedFilter, setSelectedFilter, handleApplyFilter, setShowFilterTag }: FilterPageProps) {
     const [isDisabled, setIsDisabled] = useState<boolean>(true);
-    const [genre, setGenre] = useState<string>('Select');
-    const [filter, setFilter] = useState<Filter>({genre:"Select", rating: null})
+    const [filter, setFilter] = useState<Filter>({genre:undefined, rating: undefined})
 
     useEffect(()=> {
-        setFilter({genre: selectedGenre, rating: ratingFilter})
+        setFilter({genre: selectedFilter.genre, rating: selectedFilter.rating})
     } ,[])
 
     const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        // setGenre(event.target.value);
         setFilter({...filter, [event.target.name]: event.target.value});
         setIsDisabled(false);
     }
 
     const handleReset = () => {
-        setGenre("Select");
-        setSelectedGenre("Select");
-        setRatingFilter(null);
-        setShowKeywordTag(false);
+        setSelectedFilter({genre: undefined, rating: undefined})
+        setShowFilterTag(false);
         setIsDisabled(true);
     }
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        setSelectedGenre(filter.genre);
-        setRatingFilter(filter.rating ? filter.rating : null)
-        handleApplyFilter(filter.genre);
-        handleApplyFilter(STAR_RATINGS[Number(filter.rating)]);
+        setSelectedFilter({genre: filter.genre, rating: filter.rating})
+        handleApplyFilter(filter)
     }
 
     return (
@@ -57,7 +45,7 @@ export default function FilterForm({selectedGenre, setSelectedGenre, handleApply
                     onChange={handleChange}
                     value={filter.genre}
                 >
-                    <option>{formatEnum(genre)}</option>
+                    <option>All</option>
                     {GENRES.map((genre) => (
                         <option key={genre} value={genre}>
                             {formatEnum(genre)}
@@ -65,14 +53,13 @@ export default function FilterForm({selectedGenre, setSelectedGenre, handleApply
                     ))}
                 </select>
                 <label htmlFor={"rating"} className={"book-label"}>Rating</label>
-                <select name={"rating"} onChange={handleChange} value={filter.rating ? filter.rating : undefined}>
+                <select name={"rating"} onChange={handleChange} value={filter.rating}>
                     <option >All</option>
-                    <option value={0}>☆☆☆☆☆</option>
-                    <option value={1}>★☆☆☆☆</option>
-                    <option value={2}>★★☆☆☆</option>
-                    <option value={3}>★★★☆☆</option>
-                    <option value={4}>★★★★☆</option>
-                    <option value={5}>★★★★★</option>
+                    {STAR_RATINGS.map((rating, index) =>
+                        <option key={`rating-${index}`} value={index}>
+                            {rating}
+                        </option>
+                    )}
                 </select>
                 <div className={"filter-buttons"}>
                     <button

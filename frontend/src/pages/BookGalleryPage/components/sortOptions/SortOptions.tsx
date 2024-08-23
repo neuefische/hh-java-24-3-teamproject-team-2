@@ -26,16 +26,28 @@ export default function SortOptions({sortABCDesc, setSortABCDesc, sortGenreDesc,
         <>
             <div className={"sort-container"}>
                 Sort by:
-                <button className={`sort-option ${sortABCDesc && "selected-sort"}`} onClick={() => setSortABCDesc(true)}>AZ↓</button>
-                <button className={`sort-option ${sortABCDesc === false && "selected-sort"}`} onClick={() => setSortABCDesc(false)}>AZ↑</button> |
-                <button className={`sort-option ${sortGenreDesc && "selected-sort"}`} onClick={() => onSort(true, null)}>Genre AZ↓</button>
-                <button className={`sort-option ${sortGenreDesc === false && "selected-sort"}`} onClick={() => onSort(false, null)}>Genre AZ↑</button>
-                <button className={`sort-option ${sortRatingDesc && "selected-sort"}`} onClick={() => onSort(null, true)}>
-                    <span className="material-symbols-outlined">star</span>↓
-                </button>
-                <button className={`sort-option ${sortRatingDesc === false && "selected-sort"}`} onClick={() => onSort(null, false)}>
-                    <span className="material-symbols-outlined">star</span>↑
-                </button>
+                <div className={"sort-options"}>
+                    <button className={`sort-option ${sortABCDesc && "selected-sort"}`}
+                            onClick={() => setSortABCDesc(true)}>AZ↓
+                    </button>
+                    <button className={`sort-option ${sortABCDesc === false && "selected-sort"}`}
+                            onClick={() => setSortABCDesc(false)}>AZ↑
+                    </button>
+                    |
+                    <button className={`sort-option ${sortGenreDesc && "selected-sort"}`}
+                            onClick={() => onSort(true, null)}>Genre AZ↓</button>
+                    <button className={`sort-option ${sortGenreDesc === false && "selected-sort"}`}
+                            onClick={() => onSort(false, null)}>Genre AZ↑
+                    </button>
+                    <button className={`sort-option ${sortRatingDesc && "selected-sort"}`}
+                            onClick={() => onSort(null, true)}>
+                        <span className="material-symbols-outlined">star</span>↓
+                    </button>
+                    <button className={`sort-option ${sortRatingDesc === false && "selected-sort"}`}
+                            onClick={() => onSort(null, false)}>
+                        <span className="material-symbols-outlined">star</span>↑
+                    </button>
+                </div>
                 <button className={`sort-option sort-reset`} onClick={onReset}>Reset</button>
             </div>
         </>

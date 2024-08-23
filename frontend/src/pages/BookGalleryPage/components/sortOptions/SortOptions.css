@@ -7,6 +7,11 @@
     border: none;
 }
 
+.sort-options {
+    display: flex;
+    gap: 5px;
+}
+
 .selected-sort {
     color: #c44900;
 }
@@ -18,6 +23,8 @@
 .sort-container {
     display: flex;
     align-content: center;
+    place-items: center;
+    flex-wrap: wrap;
     gap: 5px;
     color: #5b84ea;
     font-size: smaller;

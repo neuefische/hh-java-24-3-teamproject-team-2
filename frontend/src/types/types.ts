@@ -30,6 +30,11 @@ export type Genre = "NONE" | "FICTION" | "MYSTERY" | "THRILLER" |
     "NOVEL" | "HISTORICAL_FICTION" | "SCIENCE_FICTION" |
     "ROMANCE" | "YOUNG_ADULT" | "ADVENTURE" | "HORROR";
 
+export type Filter = {
+    genre: string | undefined,
+    rating: number | undefined
+}
+
 export type User = {
     id: string,
     userName: string,
