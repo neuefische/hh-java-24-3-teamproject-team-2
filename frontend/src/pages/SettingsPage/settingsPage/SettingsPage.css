@@ -1,0 +1,49 @@
+.settingsPageForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 10px;
+    justify-content: stretch;
+    align-content: stretch;
+}
+
+.settingsPageForm input:disabled, select:disabled, textarea:disabled {
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+
+.settingsPageForm input, select, textarea {
+    background-color: #183A37;
+    padding: 8px 5px;
+    border: 1px solid rgba(93, 165, 45, 0.45);
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.creator-container {
+    display: flex;
+    margin-top: 250px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.creator-names {
+    display: flex;
+    color: #747bff;
+    opacity: 0.7;
+    flex-direction: row;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 14px;
+}
+
+@media only screen and (min-width: 768px) {
+    .creator-container {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
