@@ -17,9 +17,6 @@ export default function Navigation() {
                 <li>
                     <Link to={"/settings"}><span className="material-symbols-outlined">settings</span>Settings</Link>
                 </li>
-                <li><Link to={"/login"}><span className="material-symbols-outlined">
-login
-</span>Login</Link></li>
             </ul>
         </nav>
     )

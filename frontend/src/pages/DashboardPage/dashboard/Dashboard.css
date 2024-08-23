@@ -1,12 +1,12 @@
+#dashboard-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 
 @media only screen and (max-width: 768px) {
     .dashboard-goal-summary {
-        justify-content: center;
-    }
-
-    .dashboard-page {
-        display: flex;
-        align-items: center;
         justify-content: center;
     }
 
