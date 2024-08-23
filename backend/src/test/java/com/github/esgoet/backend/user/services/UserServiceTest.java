@@ -25,13 +25,13 @@ class UserServiceTest {
     @Test
     void getUsers_Test() {
         List<User> users = List.of(
-                new User("1","user1", 6, goalDate, 0),
-                new User("2","user2", 22, goalDate, 5)
+                new User("1","user1", 6, goalDate, 0,"123", "USER"),
+                new User("2","user2", 22, goalDate, 5, "123", "USER")
            );
 
         List<User> expectedUsers = List.of(
-                new User("1","user1", 6, goalDate, 0),
-                new User("2","user2", 22, goalDate, 5)
+                new User("1","user1", 6, goalDate, 0, "123", "USER"),
+                new User("2","user2", 22, goalDate, 5, "123", "USER")
         );
 
         when(userRepo.findAll()).thenReturn(users);
@@ -52,12 +52,12 @@ class UserServiceTest {
     @Test
     void getUserByIdTest_whenUserExists_thenReturnUser() {
         //GIVEN
-        User user = new User("1","user1", 6, goalDate, 0);
+        User user = new User("1","user1", 6, goalDate, 0, "123", "USER");
         when(userRepo.findById("1")).thenReturn(Optional.of(user));
         //WHEN
         User actual = userService.getUserById("1");
         //THEN
-        User expected = new User("1","user1", 6, goalDate, 0);
+        User expected = new User("1","user1", 6, goalDate, 0, "123", "USER");
         verify(userRepo).findById("1");
         assertEquals(expected, actual);
     }
@@ -75,8 +75,8 @@ class UserServiceTest {
     @Test
     void addUserTest_whenNewUserAsInput_thenReturnNewUser() {
         // GIVEN
-        UserDto userDto =  new UserDto("user1", 6, goalDate, 0);
-        User userToSave = new User("1","user1", 6, goalDate, 0);
+        UserDto userDto =  new UserDto("user1", 6, goalDate, 0, "123", "USER");
+        User userToSave = new User("1","user1", 6, goalDate, 0, "123", "USER");
         when(idService.randomId()).thenReturn("1");
         when(userRepo.save(userToSave)).thenReturn(userToSave);
 
@@ -84,7 +84,7 @@ class UserServiceTest {
         User actual = userService.saveUser(userDto);
 
         // THEN
-        User expected = new User("1","user1", 6, goalDate, 0);
+        User expected = new User("1","user1", 6, goalDate, 0, "123", "USER");
         verify(idService).randomId();
         verify(userRepo).save(userToSave);
         assertEquals(expected, actual);
@@ -102,9 +102,9 @@ class UserServiceTest {
 
         // Given
         String id = "1";
-        User existingUser = new User("1","user1", 6, goalDate, 0);
-        UserDto updatedUserDto = new UserDto("user1", 6, goalDate, 1);
-        User updatedUser = new User("1","user1", 6, goalDate, 1);
+        User existingUser = new User("1","user1", 6, goalDate, 0, "123", "USER");
+        UserDto updatedUserDto = new UserDto("user1", 6, goalDate, 1, "123", "USER");
+        User updatedUser = new User("1","user1", 6, goalDate, 1, "123", "USER");
 
         // When
         when(userRepo.findById(id)).thenReturn(Optional.of(existingUser));
@@ -113,7 +113,7 @@ class UserServiceTest {
         User actual = userService.updateUser(id, updatedUserDto);
 
         // Then
-        User expected = new User("1","user1", 6, goalDate, 1);
+        User expected = new User("1","user1", 6, goalDate, 1,"123", "USER");
         assertNotNull(actual);
         assertEquals(expected, actual);
         verify(userRepo).findById(id);
@@ -125,8 +125,8 @@ class UserServiceTest {
 
         // Given
         String id = "1";
-        UserDto updatedUserDto = new UserDto("user1", 6, goalDate, 1);
-        User updatedUser = new User("1","user1", 6, goalDate, 1);
+        UserDto updatedUserDto = new UserDto("user1", 6, goalDate, 1,"123", "USER");
+        User updatedUser = new User("1","user1", 6, goalDate, 1,"123", "USER");
         //When
         when(userRepo.findById(id)).thenReturn(Optional.empty());
 

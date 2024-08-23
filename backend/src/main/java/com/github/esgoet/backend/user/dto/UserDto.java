@@ -9,6 +9,8 @@ public record UserDto(
         String userName,
         int readingGoal,
         LocalDate goalDate,
-        int readBooks
+        int readBooks,
+        String gitHubId,
+        String role
 ) {
 }

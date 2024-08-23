@@ -10,11 +10,12 @@ import Header from "./components/header/Header.tsx";
 import Navigation from "./components/navigation/Navigation.tsx";
 import Dashboard from "./pages/DashboardPage/dashboard/Dashboard.tsx";
 import SettingsPage from "./pages/SettingsPage/settingsPage/SettingsPage.tsx";
+import LoginPage from "./pages/LoginPage/loginPage/LoginPage.tsx";
 
 export default function App() {
 
     const [data, setData] = useState<Book[]>([])
-    const [user, setUser] = useState<User>({id: "", userName: "", readingGoal: 0, goalDate: "", readBooks: 0})
+    const [user, setUser] = useState<User | null | undefined>()
 
     const fetchBooks = () => {
         axios.get("/api/books")
@@ -24,14 +25,6 @@ export default function App() {
             .catch((error) => {
                 alert(error)
             })
-    }
-
-    const fetchUser = () => {
-        axios.get("/api/users/1")
-            .then((response) => {
-                setUser(response.data)
-            })
-            .catch((error) => (console.log(error)))
     }
 
     const deleteBook = (id: string) => {
@@ -47,13 +40,19 @@ export default function App() {
     }
 
     const updateUser = (updatedProperty: string, updatedValue: number | string) => {
-        axios.put(`/api/users/${user.id}`, {...user, [updatedProperty]: updatedValue})
-            .then((response) => response.status === 200 && fetchUser())
+        axios.put(`/api/users/${user?.id}`, {...user, [updatedProperty]: updatedValue})
+            .then((response) => response.status === 200 && loadUser())
     }
+    const loadUser = () => {
+        axios.get("/api/auth/me")
+            .then((response) => setUser(response.data))
+            .catch(() => setUser(null))
+    }
+
 
     useEffect(() => {
         fetchBooks()
-        fetchUser()
+        loadUser()
     }, []);
 
     const [searchInput, setSearchInput] = useState("")
@@ -62,17 +61,33 @@ export default function App() {
         .filter((book) => book.title?.toLowerCase().includes(searchInput.toLowerCase()) ||
             book.author?.toLowerCase().includes(searchInput.toLowerCase()));
 
+    const login = () => {
+        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080': window.location.origin
+        window.open(host + '/oauth2/authorization/github', '_self')
+    }
+    const logout = () => {
+        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080': window.location.origin
+        window.open(host + "/logout", "_self")
+    }
+
+
     return (
         <>
-            <Header/>
-            <Navigation/>
+            <Header user={user} logout={logout}/>
+            {user && <Navigation/>}
             <main>
                 <Routes>
+                    <Route path={"/login"} element={<LoginPage login={login}/>}/>
                     <Route path={"/"} element={<Dashboard user={user} data={data}/>}/>
-                    <Route path={"/books"} element={<BookGalleryPage filteredBooks={filteredBooks} setSearchInput={setSearchInput}/>}/>
-                    <Route path={"/books/add"} element={<AddBookPage fetchBooks={fetchBooks} user={user} updateUser={updateUser}/>}/>
-                    <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook} updateBook={updateBook} user={user} updateUser={updateUser}/>}/>
-                    <Route path={"/settings"} element={<SettingsPage user={user} updateUser={updateUser}/>}/>
+                    <Route path={"/books"}
+                           element={<BookGalleryPage filteredBooks={filteredBooks} setSearchInput={setSearchInput}/>}/>
+
+                    {user &&<Route path={"/books/add"}
+                           element={<AddBookPage fetchBooks={fetchBooks} user={user} updateUser={updateUser}/>}/>}
+                    {user && <Route path={"/books/:id"}
+                           element={<BookDetailsPage deleteBook={deleteBook} updateBook={updateBook} user={user}
+                                                     updateUser={updateUser}/>}/>}
+                    {user && <Route path={"/settings"} element={<SettingsPage user={user} updateUser={updateUser}/>}/>}
                 </Routes>
             </main>
         </>

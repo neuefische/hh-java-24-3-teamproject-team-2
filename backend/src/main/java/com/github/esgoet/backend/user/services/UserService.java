@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public User saveUser(UserDto userDto) {
-        User userToSave = new User(idService.randomId(), userDto.userName(), userDto.readingGoal(), userDto.goalDate(), userDto.readBooks());
+        User userToSave = new User(idService.randomId(), userDto.userName(), userDto.readingGoal(), userDto.goalDate(), userDto.readBooks(), userDto.gitHubId(), userDto.role());
         return userRepository.save(userToSave);
     }
 
@@ -37,11 +37,14 @@ public class UserService {
                 .withGoalDate(updatedUser.goalDate())
                 .withReadBooks(updatedUser.readBooks())
                 .withReadingGoal(updatedUser.readingGoal());
-
         return userRepository.save(user);
     }
 
     public void deleteUser(String id) {
         userRepository.deleteById(id);
+    }
+
+    public User getUserByGitHubId(String gitHubId) {
+        return userRepository.findByGitHubId(gitHubId).orElseThrow(() -> new UserNotFoundException("No user found with GitHub id: " + gitHubId));
     }
 }

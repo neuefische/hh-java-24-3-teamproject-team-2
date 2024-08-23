@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -33,6 +34,7 @@ class BookControllerIntegrationTest {
     private final LocalDate createdDate = LocalDate.parse("2024-08-22");
 
     @Test
+    @WithMockUser
     void getAllBooks_Test_When_DbEmpty_Then_returnEmptyArray() throws Exception {
 
         mockMvc.perform(get("/api/books"))
@@ -43,6 +45,7 @@ class BookControllerIntegrationTest {
 
     @DirtiesContext
     @Test
+    @WithMockUser
     void getBook_Test_whenIdExists() throws Exception {
         //GIVEN
         bookRepository.save(new Book("1", "George Orwell", "1984", Genre.THRILLER, "this is a description", "123456isbn", "https://linkToCover", 3,localDate, ReadingStatus.TO_BE_READ, createdDate));
@@ -69,6 +72,7 @@ class BookControllerIntegrationTest {
 
     @Test
     @DirtiesContext
+    @WithMockUser
     void addABookTest_whenNewBookExists_thenReturnNewBook() throws Exception {
         // GIVEN
 
@@ -105,6 +109,7 @@ class BookControllerIntegrationTest {
 
     @DirtiesContext
     @Test
+    @WithMockUser
     void getBook_Test_whenIdDoesNotExists() throws Exception {
         //WHEN
         mockMvc.perform(get("/api/books/1"))
@@ -120,6 +125,7 @@ class BookControllerIntegrationTest {
     }
 
     @Test
+    @WithMockUser
     void deleteBook() throws Exception {
 
         bookRepository.save(new Book("1", "Simon", "HowToDeleteBooksFast", Genre.SCIENCE, "description", "12345678", "https://linkToCover", 3,localDate, ReadingStatus.TO_BE_READ, createdDate));

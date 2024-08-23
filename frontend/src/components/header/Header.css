@@ -2,6 +2,8 @@ header {
     background-color: #183A37;
     width: 100%;
     padding: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 
 header div {
@@ -12,6 +14,14 @@ header div {
     align-items: center;
     grid-template-areas: "logo heading" "tag-line tag-line";
     justify-content: start;
+}
+
+
+.profile a, .profile button {
+    display: flex;
+    align-content: center;
+    place-items: center;
+    gap: 3px;
 }
 
 #logo {
