@@ -67,23 +67,34 @@ export default function App() {
         const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080': window.location.origin
         window.open(host + '/oauth2/authorization/github', '_self')
     }
+    const logout = () => {
+        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080': window.location.origin
+        window.open(host + "/logout", "_self")
+    }
 
     const loadUser = () => {
-        axios.get("/api/users/me")
-            .then((response) => setUser(response.data))
+        axios.get("/api/auth/me")
+            .then((response) => console.log(response.data))
+            .catch((error) => console.log(error))
     }
 
     return (
         <>
             <Header/>
             <Navigation/>
+            <button onClick={loadUser}>Load User</button>
+            <button onClick={logout}>Logout</button>
             <main>
                 <Routes>
                     <Route path={"/login"} element={<LoginPage login={login}/>}/>
                     <Route path={"/"} element={<Dashboard user={user} data={data}/>}/>
-                    <Route path={"/books"} element={<BookGalleryPage filteredBooks={filteredBooks} setSearchInput={setSearchInput}/>}/>
-                    <Route path={"/books/add"} element={<AddBookPage fetchBooks={fetchBooks} user={user} updateUser={updateUser}/>}/>
-                    <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook} updateBook={updateBook} user={user} updateUser={updateUser}/>}/>
+                    <Route path={"/books"}
+                           element={<BookGalleryPage filteredBooks={filteredBooks} setSearchInput={setSearchInput}/>}/>
+                    <Route path={"/books/add"}
+                           element={<AddBookPage fetchBooks={fetchBooks} user={user} updateUser={updateUser}/>}/>
+                    <Route path={"/books/:id"}
+                           element={<BookDetailsPage deleteBook={deleteBook} updateBook={updateBook} user={user}
+                                                     updateUser={updateUser}/>}/>
                     <Route path={"/settings"} element={<SettingsPage user={user} updateUser={updateUser}/>}/>
                 </Routes>
             </main>
