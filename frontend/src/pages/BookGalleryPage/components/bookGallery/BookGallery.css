@@ -1,12 +1,28 @@
-#bookGallery {
-    display: flex;
+#book-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));;
     padding: 0;
-    flex-wrap: wrap;
     gap: 15px;
-    width: auto;
+    justify-content: center;
 }
 
-@media only screen and (min-width: 768px) {
-    #bookGallery {
-    }
+#book-gallery ul {
+    padding: 0;
+}
+
+#book-gallery li {
+    list-style: none;
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.category-title {
+    font-variant-caps: all-small-caps;
+    margin-left: 10px;
+    display: block;
+    margin-bottom: 5px;
 }

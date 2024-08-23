@@ -3,4 +3,90 @@
     flex-direction: column;
     gap: 10px;
     justify-content: center;
+    width: 90%;
+}
+
+.gallery-sort {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column-reverse;
+    margin: 10px 0 0;
+}
+
+.filter-sector {
+    margin: 10px 0;
+    padding: 15px 15px;
+    background-color: #183a37;
+    border-radius: 15px;
+    display: inline-block;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.show-filter-button {
+    float: right;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: smaller;
+}
+
+.show-filter-button:hover {
+    color: #c44900;
+}
+
+.show-filter-button:focus {
+    outline: none;
+}
+
+.filter-tag-area {
+    margin-top: 40px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.filter-tag {
+    display: flex;
+    font-size: 14px;
+    gap: 10px;
+}
+
+.filter-tag-close {
+    color: #EFD6AC;
+}
+
+.filter-tag-close:hover,
+.filter-tag-close:focus {
+    border-color: #c44900;
+    outline: none;
+}
+
+.number-of-books {
+    margin-left: auto;
+    margin-bottom: -20px;
+    font-size: 16px;
+    border-radius: 10px;
+    color: #5b84ea;
+    font-variant-caps: all-small-caps;
+
+    font-weight: bold;
+    padding: 3px 9px;
+    background-color: rgba(24, 58, 55, 0.41);
+}
+
+@media only screen and (min-width: 601px) {
+    .gallery-sort {
+        flex-direction: row;
+        padding: 6px 12px;
+        background-color: rgba(24, 58, 55, 0.41);
+        border-radius: 8px;
+    }
+
+    .number-of-books {
+        margin-left: 0;
+        margin-bottom: 0;
+        background: none;
+        padding: 0;
+    }
 }

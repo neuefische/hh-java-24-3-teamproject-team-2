@@ -8,7 +8,8 @@ export type Book = {
     cover: string,
     rating: number,
     publicationDate: string,
-    readingStatus: ReadingStatus
+    readingStatus: ReadingStatus,
+    createdDate: string
 }
 
 export type BookWithoutId = {
@@ -29,3 +30,28 @@ export type Genre = "NONE" | "FICTION" | "MYSTERY" | "THRILLER" |
     "FANTASY" | "SCIENCE" | "NON_FICTION" | "HISTORY" |
     "NOVEL" | "HISTORICAL_FICTION" | "SCIENCE_FICTION" |
     "ROMANCE" | "YOUNG_ADULT" | "ADVENTURE" | "HORROR";
+
+export type Filter = {
+    genre: string | undefined,
+    rating: number | undefined
+}
+
+export type User = {
+    id: string,
+    userName: string,
+    readingGoal: number,
+    goalDate: string,
+    readBooks: number
+}
+
+export type UserWithoutId = {
+    userName: string,
+    readingGoal: number,
+    goalDate: string,
+    readBooks: number
+}
+
+export type SummaryInfo = {
+    title: string,
+    numberOfBooks: number
+}

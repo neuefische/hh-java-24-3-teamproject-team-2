@@ -1,0 +1,41 @@
+.dashboard-recent-books {
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.dashboard-last-added-book {
+    justify-content: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px 30px;
+    background-color: rgba(24, 58, 55, 0.41);
+}
+
+.books-cover-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex: 1 1 0;
+    align-items: flex-start;
+}
+
+.books-cover-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 130px;
+}
+
+.book-cover {
+    width: 130px;
+    height: 200px;
+    border: 1px solid #5b84ea;
+    margin: 20px auto;
+}
+
+.book-title {
+    text-align: center;
+    max-width: 150px;
+}
