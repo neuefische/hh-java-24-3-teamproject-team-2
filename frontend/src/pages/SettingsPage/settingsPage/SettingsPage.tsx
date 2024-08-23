@@ -49,11 +49,15 @@ export default function SettingsPage({user, updateUser}: SettingsPageProps) {
                 />
                 <button type={"submit"}>Update</button>
             </form>
-            <h3>Created By</h3>
-            <p>Eva Goetzke</p>
-            <p>Marcel Herr</p>
-            <p>Rinae Hyun</p>
-            <p>Simon Staß</p>
+            <div className={"creator-container"}>
+                <h3>Created By</h3>
+                <div className={"creator-names"}>
+                    <p>Eva Goetzke</p>
+                    <p>Marcel Herr</p>
+                    <p>Rinae Hyun</p>
+                    <p>Simon Staß</p>
+                </div>
+            </div>
         </>
     )
 }
