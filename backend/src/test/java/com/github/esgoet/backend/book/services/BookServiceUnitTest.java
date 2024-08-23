@@ -7,6 +7,7 @@ import com.github.esgoet.backend.book.models.Genre;
 import com.github.esgoet.backend.book.models.ReadingStatus;
 import com.github.esgoet.backend.book.repositories.BookRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -82,15 +83,19 @@ class BookServiceUnitTest {
         Book bookToSave = new Book("1", bookDto.author(), bookDto.title(), bookDto.genre(), bookDto.description(), bookDto.isbn(), bookDto.cover(), bookDto.rating(), bookDto.publicationDate(), bookDto.readingStatus(), createdDate);
         when(bookRepo.save(bookToSave)).thenReturn(bookToSave);
         when(idService.randomId()).thenReturn(bookToSave.id());
+        try (MockedStatic<LocalDate> mockedLocalDate = mockStatic(LocalDate.class)) {
+            mockedLocalDate.when(LocalDate::now).thenReturn(createdDate);
 
-        // WHEN
-        Book actual = bookService.saveBook(bookDto);
+            // WHEN
+            Book actual = bookService.saveBook(bookDto);
 
-        // THEN
-        Book expected = new Book("1", bookDto.author(), bookDto.title(), bookDto.genre(), bookDto.description(), bookDto.isbn(), bookDto.cover(), bookDto.rating(), bookDto.publicationDate(), bookDto.readingStatus(), createdDate);
-        verify(bookRepo).save(bookToSave);
-        verify(idService).randomId();
-        assertEquals(expected, actual);
+            // THEN
+            Book expected = new Book("1", bookDto.author(), bookDto.title(), bookDto.genre(), bookDto.description(), bookDto.isbn(), bookDto.cover(), bookDto.rating(), bookDto.publicationDate(), bookDto.readingStatus(), createdDate);
+            verify(bookRepo).save(bookToSave);
+            verify(idService).randomId();
+            mockedLocalDate.verify(LocalDate::now);
+            assertEquals(expected, actual);
+        }
     }
 
     @Test

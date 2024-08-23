@@ -61,7 +61,8 @@ class BookControllerIntegrationTest {
                              "cover": "https://linkToCover",
                              "rating": 3,
                              "publicationDate": "2024-08-14",
-                             "readingStatus": "TO_BE_READ"
+                             "readingStatus": "TO_BE_READ",
+                             "createdDate": "2024-08-22"
                         }
                         """));
     }
@@ -98,7 +99,8 @@ class BookControllerIntegrationTest {
                 .andExpect(jsonPath("$.cover").value("https://linkToCover"))
                 .andExpect(jsonPath("$.rating").value(3))
                 .andExpect(jsonPath("$.publicationDate").value("1869-01-01"))
-                .andExpect(jsonPath("$.readingStatus").value("TO_BE_READ"));
+                .andExpect(jsonPath("$.readingStatus").value("TO_BE_READ"))
+                .andExpect(jsonPath("$.createdDate").exists());
     }
 
     @DirtiesContext
@@ -164,7 +166,8 @@ class BookControllerIntegrationTest {
                             "cover": "cover2",
                             "rating": 3,
                             "publicationDate": "2024-08-14",
-                            "readingStatus": "READING"
+                            "readingStatus": "READING",
+                            "createdDate": "2024-08-22"
                         }
                         """));
     }
