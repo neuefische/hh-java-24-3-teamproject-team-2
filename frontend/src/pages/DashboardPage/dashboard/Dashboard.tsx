@@ -1,5 +1,4 @@
-import GreetingAndGoal from "../components/greeting/GreetingAndGoal.tsx";
-import Summary from "../components/summary/Summary.tsx";
+import GreetingAndGoal from "../components/greeting/GoalAndSummary.tsx";
 
 import {Book, User} from "../../../types/types.ts";
 import LastAddedBook from "../components/lastAddedBook/LastAddedBook.tsx";
@@ -13,8 +12,8 @@ export default function Dashboard({user, data}: DashboardProps) {
 
     return (
         <div id={"DashboardPage"}>
-            <GreetingAndGoal user={user}/>
-            <Summary data={data}/>
+            <h2 className={"section-title"}>Welcome to TaleTrail, <em>{user.userName}</em>!</h2>
+            <GreetingAndGoal user={user} data={data}/>
             <LastAddedBook data={data}/>
         </div>
     );

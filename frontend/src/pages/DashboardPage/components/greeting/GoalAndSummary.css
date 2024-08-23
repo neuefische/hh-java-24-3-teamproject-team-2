@@ -1,11 +1,13 @@
-.dashboard-greeting-goal {
+.dashboard-goal-summary {
     border-radius: 10px;
     margin-top: 30px;
     margin-bottom: 20px;
     padding: 15px;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    flex-direction: row;
     align-items: center;
+    gap: 20px;
 }
 
 .section-title {
