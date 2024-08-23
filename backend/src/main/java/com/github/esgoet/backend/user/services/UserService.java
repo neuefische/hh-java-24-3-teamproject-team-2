@@ -37,7 +37,6 @@ public class UserService {
                 .withGoalDate(updatedUser.goalDate())
                 .withReadBooks(updatedUser.readBooks())
                 .withReadingGoal(updatedUser.readingGoal());
-
         return userRepository.save(user);
     }
 
@@ -46,6 +45,6 @@ public class UserService {
     }
 
     public User getUserByGitHubId(String gitHubId) {
-        return userRepository.findByGitHubId(gitHubId);
+        return userRepository.findByGitHubId(gitHubId).orElseThrow(() -> new UserNotFoundException("No user found with GitHub id: " + gitHubId));
     }
 }

@@ -59,7 +59,7 @@ public class SecurityConfig {
             OAuth2User user = delegate.loadUser(request);
             User githubUser;
             try {
-                githubUser = userService.getUserById(user.getName());
+                githubUser = userService.getUserByGitHubId(user.getName());
             } catch (UserNotFoundException e) {
                 githubUser =  userService.saveUser(new UserDto(user.getAttributes().get("login").toString(),
                         0,
