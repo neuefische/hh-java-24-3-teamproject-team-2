@@ -30,6 +30,7 @@ class BookControllerIntegrationTest {
     BookRepository bookRepository;
 
     private final LocalDate localDate = LocalDate.parse("2024-08-14");
+    private final LocalDate createdDate = LocalDate.parse("2024-08-22");
 
     @Test
     void getAllBooks_Test_When_DbEmpty_Then_returnEmptyArray() throws Exception {
@@ -44,7 +45,7 @@ class BookControllerIntegrationTest {
     @Test
     void getBook_Test_whenIdExists() throws Exception {
         //GIVEN
-        bookRepository.save(new Book("1", "George Orwell", "1984", Genre.THRILLER, "this is a description", "123456isbn", "https://linkToCover", 3,localDate, ReadingStatus.TO_BE_READ));
+        bookRepository.save(new Book("1", "George Orwell", "1984", Genre.THRILLER, "this is a description", "123456isbn", "https://linkToCover", 3,localDate, ReadingStatus.TO_BE_READ, createdDate));
         //WHEN
         mockMvc.perform(get("/api/books/1"))
                 //THEN
@@ -60,7 +61,8 @@ class BookControllerIntegrationTest {
                              "cover": "https://linkToCover",
                              "rating": 3,
                              "publicationDate": "2024-08-14",
-                             "readingStatus": "TO_BE_READ"
+                             "readingStatus": "TO_BE_READ",
+                             "createdDate": "2024-08-22"
                         }
                         """));
     }
@@ -97,7 +99,8 @@ class BookControllerIntegrationTest {
                 .andExpect(jsonPath("$.cover").value("https://linkToCover"))
                 .andExpect(jsonPath("$.rating").value(3))
                 .andExpect(jsonPath("$.publicationDate").value("1869-01-01"))
-                .andExpect(jsonPath("$.readingStatus").value("TO_BE_READ"));
+                .andExpect(jsonPath("$.readingStatus").value("TO_BE_READ"))
+                .andExpect(jsonPath("$.createdDate").exists());
     }
 
     @DirtiesContext
@@ -119,7 +122,7 @@ class BookControllerIntegrationTest {
     @Test
     void deleteBook() throws Exception {
 
-        bookRepository.save(new Book("1", "Simon", "HowToDeleteBooksFast", Genre.SCIENCE, "description", "12345678", "https://linkToCover", 3,localDate, ReadingStatus.TO_BE_READ));
+        bookRepository.save(new Book("1", "Simon", "HowToDeleteBooksFast", Genre.SCIENCE, "description", "12345678", "https://linkToCover", 3,localDate, ReadingStatus.TO_BE_READ, createdDate));
 
         mockMvc.perform(delete("/api/books/1"))
                 .andExpect(status().isOk());
@@ -133,7 +136,7 @@ class BookControllerIntegrationTest {
     @Test
     void updateBook_Test_When_IdMatches() throws Exception {
         // GIVEN
-        bookRepository.save(new Book("1", "author1", "title1", Genre.FANTASY, "description1", "12345678", "cover1", 3,localDate, ReadingStatus.TO_BE_READ));
+        bookRepository.save(new Book("1", "author1", "title1", Genre.FANTASY, "description1", "12345678", "cover1", 3,localDate, ReadingStatus.TO_BE_READ, createdDate));
 
         // WHEN
         mockMvc.perform(put("/api/books/1/update")
@@ -163,7 +166,8 @@ class BookControllerIntegrationTest {
                             "cover": "cover2",
                             "rating": 3,
                             "publicationDate": "2024-08-14",
-                            "readingStatus": "READING"
+                            "readingStatus": "READING",
+                            "createdDate": "2024-08-22"
                         }
                         """));
     }

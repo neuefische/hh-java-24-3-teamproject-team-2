@@ -68,7 +68,7 @@ export default function App() {
             <Navigation/>
             <main>
                 <Routes>
-                    <Route path={"/"} element={<Dashboard user={user}/>}/>
+                    <Route path={"/"} element={<Dashboard user={user} data={data}/>}/>
                     <Route path={"/books"} element={<BookGalleryPage filteredBooks={filteredBooks} setSearchInput={setSearchInput}/>}/>
                     <Route path={"/books/add"} element={<AddBookPage fetchBooks={fetchBooks} user={user} updateUser={updateUser}/>}/>
                     <Route path={"/books/:id"} element={<BookDetailsPage deleteBook={deleteBook} updateBook={updateBook} user={user} updateUser={updateUser}/>}/>

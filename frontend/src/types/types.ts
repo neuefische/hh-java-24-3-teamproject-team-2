@@ -8,7 +8,8 @@ export type Book = {
     cover: string,
     rating: number,
     publicationDate: string,
-    readingStatus: ReadingStatus
+    readingStatus: ReadingStatus,
+    createdDate: string
 }
 
 export type BookWithoutId = {
@@ -48,4 +49,9 @@ export type UserWithoutId = {
     readingGoal: number,
     goalDate: string,
     readBooks: number
+}
+
+export type SummaryInfo = {
+    title: string,
+    numberOfBooks: number
 }
