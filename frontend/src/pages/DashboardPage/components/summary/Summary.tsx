@@ -28,7 +28,7 @@ export default function Summary({data}: SummaryProps) {
     ]
 
     return (
-        <div className={"dashboard-statistics"}>
+        <section className={"dashboard-statistics"}>
             <h3 className={"section-title"}>Current Library Info</h3>
             <div className={"summary-box-container"}>
                 {summaryInfo.map(info => (
@@ -41,6 +41,6 @@ export default function Summary({data}: SummaryProps) {
                     )
                 )}
             </div>
-        </div>
+        </section>
     )
 }

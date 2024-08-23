@@ -12,7 +12,7 @@ export default function Dashboard({user, data}: DashboardProps) {
 
     return (
         <div id={"DashboardPage"}>
-            <h2 className={"section-title"}>Welcome to TaleTrail, <em>{user.userName}</em>!</h2>
+            <h2 style={{paddingLeft: "15px"}}>Welcome to TaleTrail, <em>{user.userName}</em>!</h2>
             <GreetingAndGoal user={user} data={data}/>
             <LastAddedBook data={data}/>
         </div>
