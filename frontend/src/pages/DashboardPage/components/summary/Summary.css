@@ -1,0 +1,35 @@
+.dashboard-statistics {
+    padding: 20px 30px;
+    background-color: rgba(24, 58, 55, 0.41);
+    border-radius: 10px;
+    width: 320px;
+    height: 378px;
+}
+
+.summary-box-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 35px;
+}
+
+.summary-box {
+    min-width: 120px;
+    min-height: 120px;
+    background-color: #183a37;
+    border-radius: 10px;
+    padding-top: 10px;
+}
+
+.summary-number {
+    font-size: 25px;
+    margin-top: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.summary-title {
+    font-size: 18px;
+    margin-top: 10px;
+    text-align: center;
+}

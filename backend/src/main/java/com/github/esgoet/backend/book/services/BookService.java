@@ -7,6 +7,7 @@ import com.github.esgoet.backend.book.repositories.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -40,7 +41,8 @@ public class BookService {
                 bookDto.cover(),
                 bookDto.rating(),
                 bookDto.publicationDate(),
-                bookDto.readingStatus()
+                bookDto.readingStatus(),
+                LocalDate.now()
         );
         return bookRepository.save(bookToSave);
     }
